@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Inertia\Inertia;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render("Home",[
+        "name"=>"Elmahdi elhjuojy",
+        "hobbies"=>[
+            "Programming",
+            "Reading",
+            "Writing",
+            "Watching movies"
+        ]
+    ]);
 });
