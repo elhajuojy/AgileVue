@@ -16,6 +16,9 @@ import {Link} from "@inertiajs/vue3"
                 <li class="mx-2">
                     <Link href="/settings" class="hover:text-purple-100">Settings</Link>
                 </li>
+                <li class="mx-2">
+                    <Link href="/logout" method="POST" as="button" :data="{userid:8798798,}" class="hover:text-purple-100">log out </Link>
+                </li>
 
             </ul>
         </nav>

@@ -1,14 +1,12 @@
 
 <script setup>
-
+import TheNavVue from "../Shared/TheNav.vue"
 </script>
 
 <template>
-    <div>
+    <div class="text-center ">
         <h1>Users</h1>
-        <ul>
-
-        </ul>
+        <TheNavVue />
 
     </div>
 </template>
