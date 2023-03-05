@@ -1,11 +1,17 @@
 <script setup>
+defineProps({
+    name: {
+        type: String,
+        required: true,
+    },
+})
 
 </script>
 
 <template>
     <div>
         <h1>
-            Welcome to your first Inertia app!
+            Welcome {{ name }}!
         </h1>
     </div>
 </template>
