@@ -1,5 +1,6 @@
 <script setup>
 import {Link} from "@inertiajs/vue3"
+import NavLink from "./NavLink.vue";
 </script>
 
 <template>
@@ -7,17 +8,26 @@ import {Link} from "@inertiajs/vue3"
         <nav>
             <ul class="flex flex-row justify-center">
                 <li class="mx-2">
-                    <Link href="/" class="hover:text-purple-100">Home</Link>
+                    <NavLink href="/" :active="$page.component === 'Home'">
+                        Home
+                    </NavLink>
                 </li>
                 <li class="mx-2">
-                    <Link href="/users" class="hover:text-purple-100">Users</Link>
+                    <NavLink href="/users" :active="$page.component === 'Users'">
+                        Users
+                    </NavLink>
                 </li>
 
                 <li class="mx-2">
-                    <Link href="/settings" class="hover:text-purple-100">Settings</Link>
+                    <NavLink href="/settings" :active="$page.component === 'setttings'">
+                        settings
+                    </NavLink>
+
                 </li>
                 <li class="mx-2">
-                    <Link href="/logout" method="POST" as="button" :data="{userid:8798798,}" class="hover:text-purple-100">log out </Link>
+                    <NavLink  href="/logout" :active="$page.component === 'logout'">
+                        logout
+                    </NavLink>
                 </li>
 
             </ul>
