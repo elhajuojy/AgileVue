@@ -14,7 +14,13 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render("Welcome",[
-        "name"=>"Elmahdi elhjuojy"
+    return Inertia::render("Home",[
+        "name"=>"Elmahdi elhjuojy",
+        "hobbies"=>[
+            "Programming",
+            "Reading",
+            "Writing",
+            "Watching movies"
+        ]
     ]);
 });

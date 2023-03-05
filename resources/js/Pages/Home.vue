@@ -4,6 +4,10 @@ defineProps({
         type: String,
         required: true,
     },
+    hobbies: {
+        type: Array,
+        required: true,
+    },
 })
 
 </script>
@@ -13,6 +17,12 @@ defineProps({
         <h1>
             Welcome {{ name }}!
         </h1>
+        <ul>
+            <li v-for="hobby in hobbies" :key="hobby">
+                {{ hobby }}
+            </li>
+        </ul>
+
     </div>
 </template>
 
