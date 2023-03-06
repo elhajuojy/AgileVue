@@ -16,6 +16,25 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignId("user_id")->constrained()->cascadeOnUpdate();
             $table->foreignId("sprint_id")->constrained()->cascadeOnUpdate();
+            $table->string("title");
+            $table->string("description");
+            $table->string("status")->default("Story");
+            $table->string("priority");
+            $table->string("type");
+            $table->string("assignee");
+            $table->string("reporter");
+            $table->string("epic");
+            $table->string("story_points");
+            $table->string("time_estimate");
+            $table->string("time_spent");
+            $table->string("time_remaining");
+            $table->string("resolution");
+            $table->string("resolution_date");
+            $table->string("due_date");
+            $table->string("created");
+            $table->string("updated");
+            $table->string("labels");
+            $table->string("components");
 
         });
     }

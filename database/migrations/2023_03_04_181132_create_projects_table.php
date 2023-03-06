@@ -15,6 +15,14 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId("user_id")->constrained()->cascadeOnUpdate();
+            $table->string("name");
+            $table->string("description");
+            $table->string("project_key");
+            $table->string("project_type");
+            $table->string("project_lead");
+            $table->string("project_url");
+            $table->string("project_avatar");
+            $table->string("project_cover");
 
 
         });
