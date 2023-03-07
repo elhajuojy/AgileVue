@@ -16,23 +16,25 @@ import {Link} from "@inertiajs/vue3"
 import { ref, watch } from 'vue';
 import { router } from '@inertiajs/vue3'
 
-const search = ref('');
+const search = ref(props.filters.search);
 
 
 watch(search, (value) => {
     console.log(value);
-    router.get('/users', {  search: value  }, { preserveState: true });
+    router.get('/users', {  search: value  }, { preserveState: true,replace: true });
 
 });
 
 
-defineProps({
+let props = defineProps({
     time: {
         type: String,
         required: true,
     },
     users : Object,
+    filters: Object,
 })
+
 
 </script>
 
