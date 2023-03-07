@@ -13,7 +13,17 @@ export default {
 <script setup>
 
 import {Link} from "@inertiajs/vue3"
+import { ref, watch } from 'vue';
+import { router } from '@inertiajs/vue3'
 
+const search = ref('');
+
+
+watch(search, (value) => {
+    console.log(value);
+    router.get('/users', {  search: value  }, { preserveState: true });
+
+});
 
 
 defineProps({
@@ -31,7 +41,10 @@ defineProps({
         <title>Users </title>
     </Head>
     <div>
-        <h1 class="font-bold text-3xl">Users</h1>
+        <div class="flex justify-between mb-6">
+            <h1 class="font-bold text-3xl">Users</h1>
+            <input type="text" v-model="search" class="border px-3 py-2 rounded-md" placeholder="search ...">
+        </div>
         <div class="flex flex-col">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
