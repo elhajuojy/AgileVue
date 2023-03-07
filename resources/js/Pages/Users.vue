@@ -12,7 +12,9 @@ export default {
 
 <script setup>
 
-import {Link} from "@inertiajs/vue3"
+import {Link, Head} from "@inertiajs/vue3"
+
+
 
 defineProps({
     time: {
@@ -24,6 +26,9 @@ defineProps({
 </script>
 
 <template>
+    <Head>
+        <title>Users </title>
+    </Head>
     <div>
         <h1 class="font-bold text-3xl">Users</h1>
         <div style="margin-top: 700px">

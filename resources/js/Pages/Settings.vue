@@ -10,9 +10,14 @@ export default {
 }
 </script>
 <script setup>
+import { Head} from "@inertiajs/vue3"
 </script>
 
+
 <template>
+    <Head>
+        <title> Settings</title>
+    </Head>
     <div>
         <div>
             <h1 class="font-bold text-3xl">Settings</h1>

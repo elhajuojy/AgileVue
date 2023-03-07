@@ -1,16 +1,6 @@
-<script>
-import Layout from "../Shared/Layout.vue";
-
-export default {
-  // Using a render function...
-  layout: (h, page) => h(Layout, [page]),
-
-  // Using shorthand syntax...
-  layout: Layout,
-}
-</script>
 
 <script setup >
+import { Head} from "@inertiajs/vue3"
 
 
 
@@ -28,6 +18,10 @@ defineProps({
 </script>
 
 <template>
+    <Head>
+        <!-- <title>AgileVue - Home</title> -->
+        <meta name="description" content="this is changes Home description" head-key="description">
+    </Head>
     <div>
         <h1 class="text-3xl font-bold">
             Home

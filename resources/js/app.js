@@ -3,6 +3,7 @@ import { createInertiaApp } from '@inertiajs/vue3'
 import layout from './Shared/Layout.vue'
 
 createInertiaApp({
+    title: title => `${title} - Agile Vue`,
     progress: {
         color: '#29d',
         // showSpinner: true,

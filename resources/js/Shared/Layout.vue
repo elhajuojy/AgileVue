@@ -2,12 +2,17 @@
 <script setup>
 import { computed } from "vue";
 import TheNav from "./TheNav.vue";
-import { usePage } from "@inertiajs/vue3";
+import { usePage,Head } from "@inertiajs/vue3";
+
 
 const user = computed(() => usePage().props.auth.user);
 </script>
 
 <template>
+    <Head>
+        <title>Home</title>
+        <meta name="description" content="this is default description" head-key="description">
+    </Head>
     <div>
         <section class="p-6 bg-gray-200">
             <header class="flex justify-between px-6">
@@ -20,8 +25,6 @@ const user = computed(() => usePage().props.auth.user);
         </section>
         <section class="p-6">
             <div class="max-w-3xl m-auto">
-                <iframe class="mb-6" width="100%" frameborder="no" scrolling="no" seamless
-                    src="https://player.simplecast.com/b83b0a3a-c934-480e-af5d-3007fccd57b6?dark=false"></iframe>
                 <slot />
             </div>
         </section>
