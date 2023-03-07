@@ -1,6 +1,7 @@
 <script setup >
+import Layout from '../Shared/Layout.vue';
 
-import TheNavVue from "../Shared/TheNav.vue"
+
 
 defineProps({
     name: {
@@ -16,12 +17,13 @@ defineProps({
 </script>
 
 <template>
-    <div class="container grid place-items-center divide-red-50  shadow-orange-50  m-auto text-center">
-        <h1 class="" >
+    <Layout>
+        <h1 class="text-3xl font-bold">
             Home
         </h1>
-        <TheNavVue />
-    </div>
+
+    </Layout>
+
 </template>
 
 <style lang="scss" scoped>

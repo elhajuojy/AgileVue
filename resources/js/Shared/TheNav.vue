@@ -6,7 +6,7 @@ import NavLink from "./NavLink.vue";
 <template>
     <div>
         <nav>
-            <ul class="flex flex-row justify-center">
+            <ul class="flex flex-row justify-end mr-6 list-inside">
                 <li class="mx-2">
                     <NavLink href="/" :active="$page.component === 'Home'">
                         Home

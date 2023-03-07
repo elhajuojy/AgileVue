@@ -1,6 +1,6 @@
 
 <script setup>
-import TheNavVue from "../Shared/TheNav.vue"
+import Layout from "../Shared/Layout.vue";
 import {Link} from "@inertiajs/vue3"
 defineProps({
     time: {
@@ -12,10 +12,9 @@ defineProps({
 </script>
 
 <template>
-    <div class="text-center ">
-        <h1>Users</h1>
-        <TheNavVue />
-        <div style="margin-top: 1440px">
+    <Layout>
+        <h1 class="font-bold text-3xl">Users</h1>
+        <div style="margin-top: 700px">
             <p>the current time {{ time  }}</p>
             <Link href="/users"
             class="hover:text-purple-100 text-blue-500"
@@ -24,8 +23,7 @@ defineProps({
             Refersh
             </Link>
         </div>
-
-    </div>
+    </Layout>
 </template>
 
 <style lang="scss" scoped>

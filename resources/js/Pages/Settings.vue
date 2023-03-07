@@ -1,15 +1,16 @@
-<template>
-    <div>
-        <h1>Settings</h1>
-        <ul>
+<script setup>
+import Layout from '../Shared/Layout.vue';
+</script>
 
-        </ul>
-    </div>
+<template>
+    <Layout>
+        <div>
+            <h1 class="font-bold text-3xl">Settings</h1>
+        </div>
+    </Layout>
 </template>
 
-<script setup>
 
-</script>
 
 <style lang="scss" scoped>
 

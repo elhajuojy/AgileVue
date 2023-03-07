@@ -3,8 +3,8 @@ import { createInertiaApp } from '@inertiajs/vue3'
 
 createInertiaApp({
     progress: {
-        color: '#F56565',
-        showSpinner: true,
+        color: '#29d',
+        // showSpinner: true,
     },
     resolve: name => {
         const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
