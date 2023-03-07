@@ -21,6 +21,7 @@ defineProps({
         type: String,
         required: true,
     },
+    users : Array,
 })
 
 </script>
@@ -31,6 +32,11 @@ defineProps({
     </Head>
     <div>
         <h1 class="font-bold text-3xl">Users</h1>
+        <ul>
+            <li v-for="user in users" :key="user.id">
+                {{ user.full_name }}
+            </li>
+        </ul>
         <div style="margin-top: 700px">
             <p>the current time {{ time  }}</p>
             <Link href="/users"

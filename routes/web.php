@@ -29,6 +29,12 @@ Route::get("/users",function(){
     sleep(1);
     return Inertia::render("Users",[
         "time"=>now()->toDateTimeString(),
+        "users"=>\App\Models\User::all()->map(fn($user)=>[
+            "id"=>$user->id,
+            "full_name"=>$user->full_name,
+            "email"=>$user->email,
+            "phone"=>$user->phone,
+        ])
     ]);
 });
 
