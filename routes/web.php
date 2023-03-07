@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\User;
+use Illuminate\Support\Facades\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +27,10 @@ Route::get('/', function () {
         ]
     ]);
 });
+
+Route::get("/login",[LoginController::class,"create"])->name("login");
+
+Route::middleware("auth")->group(function(){
 
 Route::get("/users",function(){
     // sleep(1);
@@ -50,5 +56,9 @@ Route::get("/settings",function(){
 
 Route::post("/logout",function(){
     dd(request("userid"));
+});
+
+
+
 });
 
