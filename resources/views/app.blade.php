@@ -8,7 +8,6 @@
     @vite([
         'resources/css/app.css',
         'resources/js/app.js',
-
         '/shoelace/dist/shoelace.jss',
     ] )
     @inertiaHead
