@@ -19,7 +19,7 @@ import NavLink from "./NavLink.vue";
                 </li>
 
                 <li class="mx-2">
-                    <NavLink href="/settings" :active="$page.component === 'setttings'">
+                    <NavLink href="/settings" :active="$page.component === 'Settings'">
                         settings
                     </NavLink>
 
