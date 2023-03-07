@@ -1,4 +1,7 @@
-<script setup>
+<script setup >
+
+import TheNavVue from "../Shared/TheNav.vue"
+
 defineProps({
     name: {
         type: String,
@@ -13,16 +16,11 @@ defineProps({
 </script>
 
 <template>
-    <div class="container grid place-items-center divide-red-50 bg-primary shadow-orange-50 text-purple-50 m-auto text-center">
+    <div class="container grid place-items-center divide-red-50  shadow-orange-50  m-auto text-center">
         <h1 class="" >
-            Welcome {{ name }}!
+            Home
         </h1>
-        <ul class="">
-            <li v-for="hobby in hobbies" :key="hobby">
-                {{ hobby }}
-            </li>
-        </ul>
-
+        <TheNavVue />
     </div>
 </template>
 
