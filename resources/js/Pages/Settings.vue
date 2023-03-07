@@ -1,13 +1,23 @@
+<script>
+import Layout from "../Shared/Layout.vue";
+
+export default {
+  // Using a render function...
+  layout: (h, page) => h(Layout, [page]),
+
+  // Using shorthand syntax...
+  layout: Layout,
+}
+</script>
 <script setup>
-import Layout from '../Shared/Layout.vue';
 </script>
 
 <template>
-    <Layout>
+    <div>
         <div>
             <h1 class="font-bold text-3xl">Settings</h1>
         </div>
-    </Layout>
+    </div>
 </template>
 
 

@@ -2,10 +2,9 @@
 <script setup>
 import { computed } from "vue";
 import TheNav from "./TheNav.vue";
-import { usePage } from '@inertiajs/vue3'
+import { usePage } from "@inertiajs/vue3";
 
-const user = computed(() => usePage().props.auth.user)
-
+const user = computed(() => usePage().props.auth.user);
 </script>
 
 <template>
@@ -21,6 +20,8 @@ const user = computed(() => usePage().props.auth.user)
         </section>
         <section class="p-6">
             <div class="max-w-3xl m-auto">
+                <iframe class="mb-6" width="100%" frameborder="no" scrolling="no" seamless
+                    src="https://player.simplecast.com/b83b0a3a-c934-480e-af5d-3007fccd57b6?dark=false"></iframe>
                 <slot />
             </div>
         </section>

@@ -1,5 +1,16 @@
+<script>
+import Layout from "../Shared/Layout.vue";
+
+export default {
+  // Using a render function...
+  layout: (h, page) => h(Layout, [page]),
+
+  // Using shorthand syntax...
+  layout: Layout,
+}
+</script>
+
 <script setup >
-import Layout from '../Shared/Layout.vue';
 
 
 
@@ -17,12 +28,11 @@ defineProps({
 </script>
 
 <template>
-    <Layout>
+    <div>
         <h1 class="text-3xl font-bold">
             Home
         </h1>
-
-    </Layout>
+    </div>
 
 </template>
 

@@ -1,7 +1,19 @@
+<script>
+import Layout from "../Shared/Layout.vue";
+
+export default {
+  // Using a render function...
+  layout: (h, page) => h(Layout, [page]),
+
+  // Using shorthand syntax...
+  layout: Layout,
+}
+</script>
 
 <script setup>
-import Layout from "../Shared/Layout.vue";
+
 import {Link} from "@inertiajs/vue3"
+
 defineProps({
     time: {
         type: String,
@@ -12,7 +24,7 @@ defineProps({
 </script>
 
 <template>
-    <Layout>
+    <div>
         <h1 class="font-bold text-3xl">Users</h1>
         <div style="margin-top: 700px">
             <p>the current time {{ time  }}</p>
@@ -23,7 +35,7 @@ defineProps({
             Refersh
             </Link>
         </div>
-    </Layout>
+    </div>
 </template>
 
 <style lang="scss" scoped>
