@@ -1,12 +1,28 @@
-<script setup>
+<script setup lang="ts">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from '@inertiajs/vue3';
 import '@shoelace-style/shoelace/dist/components/qr-code/qr-code.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/avatar/avatar.js';
 import '@shoelace-style/shoelace/dist/components/rating/rating.js';
-import { ref } from 'vue';
 import TextInput from "@/Components/TextInput.vue";
+import { ref } from 'vue';
+
+
+interface User {
+    name: string;
+    age: number;
+
+}
+
+let user = ref<User>({
+    name: 'John Doe',
+    age: 30,
+
+});
+
+console.log(user.value.name);
+
 
 const qrCode = ref();
 </script>
