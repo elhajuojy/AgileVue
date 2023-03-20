@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import { fileURLToPath, URL } from 'url';
+import vueJxs from '@vitejs/plugin-vue-jsx';
 
 export default defineConfig({
     base: '/public/',
@@ -10,6 +11,7 @@ export default defineConfig({
             input: 'resources/js/app.js',
             refresh: true,
         }),
+        vueJxs(),
         vue({
             template: {
                 transformAssetUrls: {
