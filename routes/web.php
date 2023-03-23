@@ -22,6 +22,8 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        "cover" => asset('storage/Home/cover.png'),
+        "main_image"=> asset('storage/Home/main_image.png'),
     ]);
 });
 
