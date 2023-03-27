@@ -4,6 +4,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {Head,router } from '@inertiajs/vue3';
 import '@shoelace-style/shoelace/dist/components/relative-time/relative-time.js';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 defineProps({
     projects:Object
@@ -20,6 +21,15 @@ const createProject = (e) => {
     console.log('create project')
     console.log(e.target)
     document.querySelector(".v-btn__content").click()
+    router.post('/projects',e.target);
+    setTimeout(()=>{
+        Swal.fire({
+            title: 'success',
+            text: 'Do you want to continue',
+            icon: 'success',
+            confirmButtonText: 'Cool'
+        })
+    },300);
 }
 
 </script>
@@ -58,21 +68,14 @@ const createProject = (e) => {
                                             </div>
                                             <div class="mb-6">
                                                 <label for="description" class=" mb-2 text-sm font-medium text-gray-900 ">description </label>
-                                                <input type="text" name="description" id="description" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="test example ..." required>
+                                                <input type="text" name="description" id="description" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Entre your description ..." required>
                                             </div>
-                                            <div class="mb-6">
-                                                <label for="description" class=" mb-2 text-sm font-medium text-gray-900 ">description </label>
-                                                <input type="text" name="description" id="description" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="test example ..." required>
-                                            </div>
-                                            <div class="mb-6">
-                                                <label for="description" class=" mb-2 text-sm font-medium text-gray-900 ">description </label>
-                                                <input type="text" name="description" id="description" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="test example ..." required>
-                                            </div>
+
 
                                             <div class="mb-6">
                                                 <label for="type" class=" mb-2 text-sm font-medium text-gray-900 ">Project type </label>
                                                 <select id="type" name="project_type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
-                                                    <option  value="Scrum">Scrum</option>
+                                                    <option selected value="Scrum">Scrum</option>
                                                     <option value="Kanban">Kanban</option>
 
                                                 </select>

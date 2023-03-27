@@ -8,6 +8,7 @@ import  TheProjectAside  from "@/Components/TheProjectAside.vue";
 import { Head } from '@inertiajs/vue3';
 import {onMounted} from "vue";
 
+
 const props = defineProps({
     project : Object
 })
