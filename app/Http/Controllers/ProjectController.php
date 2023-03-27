@@ -25,4 +25,25 @@ class ProjectController extends Controller
             "project"=>$project
         ]);
     }
+
+
+    public function store()
+    {
+       $attrs =  \request()->validate([
+            "name"=>["required", "min:3", "max:255"],
+            "description"=>["required", "min:3", "max:255"],
+            "project_type"=>["required", "min:3", "max:255"],
+        ]);
+
+        $attrs['project_lead'] = fake()->name;
+        $attrs['project_key']= fake()->name;
+        $attrs['project_avatar']='https://api.dicebear.com/6.x/initials/svg?seed='.fake()->name;
+        $attrs['project_cover']='https://api.dicebear.com/6.x/initials/svg?seed='.fake()->name;
+        $attrs['project_url'] = fake()->url;
+        $attrs['user_id'] = auth()->user()->id ;
+
+        Project::create($attrs);
+
+        return redirect()->back()->with("success","Project added successfully");
+    }
 }
