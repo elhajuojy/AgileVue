@@ -19,7 +19,22 @@ const vuetify = createVuetify({
     directives,
 })
 
+/* import the fontawesome core */
+import { library } from '@fortawesome/fontawesome-svg-core'
+
+/* import font awesome icon component */
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+/* import specific icons */
+import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+
+/* add icons to the library */
+library.add(faUserSecret)
+
+
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Agile Vue';
+
+const logo = '/storage/Home/Logo.png';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -29,6 +44,7 @@ createInertiaApp({
             .use(vuetify)
             .use(plugin)
             .use(ZiggyVue, Ziggy)
+            .component('font-awesome-icon', FontAwesomeIcon)
             .mount(el);
     },
     progress: {

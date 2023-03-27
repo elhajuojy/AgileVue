@@ -34,6 +34,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'logo' => asset('storage/Home/logo.svg'),
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
                     'location' => $request->url(),
