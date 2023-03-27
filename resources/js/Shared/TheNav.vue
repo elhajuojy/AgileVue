@@ -1,35 +1,29 @@
 <script setup>
 import {Link} from "@inertiajs/vue3"
 import NavLink from "./NavLink.vue";
+import TextInput from "@/Components/TextInput.vue";
+
+
+// console.log($page.props.logo);
 </script>
 
 <template>
     <div>
         <nav>
-            <ul class="flex flex-row justify-center">
-                <li class="mx-2">
-                    <NavLink href="/" :active="$page.component === 'Home'">
-                        Home
-                    </NavLink>
-                </li>
-                <li class="mx-2">
-                    <NavLink href="/users" :active="$page.component === 'Users'">
-                        Users
-                    </NavLink>
-                </li>
-
-                <li class="mx-2">
-                    <NavLink href="/settings" :active="$page.component === 'setttings'">
-                        settings
-                    </NavLink>
-
-                </li>
-                <li class="mx-2">
-                    <NavLink  href="/logout" :active="$page.component === 'logout'">
-                        logout
-                    </NavLink>
-                </li>
-
+            <ul class="flex align-center gap-3 ">
+                <img :src="$page.props.logo" alt="logo goes herre" class="w-12">
+                <ul class="flex gap-2">
+                    <li>AgileVue</li>
+                    <li>Projects </li>
+                    <li>filters</li>
+                    <li>Dashboard</li>
+                    <li>Apps </li>
+                    <li>Create</li>
+                </ul>
+                <input
+                    class="border-gray-300 ml-auto focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                    placeholder="Search something ... "
+                />
             </ul>
         </nav>
     </div>

@@ -7,6 +7,7 @@ import '@shoelace-style/shoelace/dist/components/avatar/avatar.js';
 import '@shoelace-style/shoelace/dist/components/rating/rating.js';
 import TextInput from "@/Components/TextInput.vue";
 import { ref } from 'vue';
+import TheNav from "../Shared/TheNav.vue";
 
 
 interface User {
@@ -31,29 +32,20 @@ const qrCode = ref();
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
-        </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">You're logged in!</div>
-                </div>
-                <div>
-                    <text-input v-model="qrCode"></text-input>
+        <main>
+            <h1>Projects </h1>
+            <section class="container">
+                <input
+                    class="border-gray-300 ml-auto focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                    placeholder="Search something ... "
+                />
 
-                    <sl-qr-code :value="qrCode"></sl-qr-code>
-                    <sl-avatar
-                        image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
-                        label="Avatar of a gray tabby kitten looking down"
-                    />
-                    <sl-rating value="3"
-                    ></sl-rating>
+            </section>
+        </main>
 
-                </div>
-            </div>
-        </div>
+
+
     </AuthenticatedLayout>
 </template>
 
