@@ -20,7 +20,7 @@ class ProjectController extends Controller
 
     public function show(Project $project)
     {
-
+        sleep(1);
         return Inertia::render('projects/show', [
             "project"=>$project
         ]);

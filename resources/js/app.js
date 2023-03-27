@@ -32,13 +32,25 @@ import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 library.add(faUserSecret)
 
 
+
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Agile Vue';
 
 const logo = '/storage/Home/Logo.png';
 
+
+
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
-    resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
+    resolve: (name) =>{
+
+    const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+    const page  = pages[`./Pages/${name}.vue`]
+    if(page.default.layout === undefined){
+        page.default.layout = page.default.layout || null
+    }
+    return page
+
+    },
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
             .use(vuetify)
