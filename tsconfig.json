@@ -3,8 +3,12 @@
       "target": "es5",
       "module": "commonjs",
       "strict": true,
-      "esModuleInterop": true
+      "esModuleInterop": true,
+        "types": [
+            "vue-sweetalert2"
+        ]
     },
+
     "include": ["src/**/*","resources/**/*"],
     "exclude": ["node_modules"],
     "paths": {

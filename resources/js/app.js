@@ -12,6 +12,9 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.3.0/dist/');
 
 const vuetify = createVuetify({
@@ -32,13 +35,25 @@ import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 library.add(faUserSecret)
 
 
+
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Agile Vue';
 
 const logo = '/storage/Home/Logo.png';
 
+
+
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
-    resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
+    resolve: (name) =>{
+
+    const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+    const page  = pages[`./Pages/${name}.vue`]
+    if(page.default.layout === undefined){
+        page.default.layout = page.default.layout || null
+    }
+    return page
+
+    },
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
             .use(vuetify)
