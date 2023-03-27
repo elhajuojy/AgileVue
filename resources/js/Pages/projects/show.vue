@@ -16,14 +16,20 @@ onMounted(() => {
     console.log(props.project)
 });
 
+</script>
 
+
+<script>
+
+export default {
+    layout : AuthenticatedLayout
+}
 
 </script>
 
 <template>
     <Head title="Project" />
     <div>
-        <AuthenticatedLayout>
 
             <section class="text-black flex m-auto">
                 <aside class="min-w-[20%] lg:min-w-[15%]  p-6 shadow h-screen bg-white">
@@ -66,7 +72,6 @@ onMounted(() => {
                     </p>
                 </main>
             </section>
-        </AuthenticatedLayout>
     </div>
 </template>
 
