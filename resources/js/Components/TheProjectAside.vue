@@ -14,6 +14,10 @@ const routes = {
 
 }
 
+
+const active  = 'active shadow bg-blue-300 text-white rounded-md p-2'
+
+
 </script>
 <template>
     <div class="">
@@ -27,18 +31,26 @@ const routes = {
             </header>
             <section class="mt-10">
                 <h3 class="text-xl font-bold mb-6">Planing</h3>
-                <ul class="grid gap-3 board-actions">
+                <ul class="grid gap-3 board-actions ">
                     <li class="">
-                        <i class="fa-regular fa-chess-board"></i>
-                        <Link :href="routes.board">Board</Link>
+
+                        <Link :class="{active:$page.component === 'projects/board' }" :href="routes.board" >
+                            <i class="fa-regular fa-chess-board"></i>
+                            Board
+                        </Link>
                     </li>
                     <li class="">
-                        <i class="fa-solid fa-file-invoice"></i>
-                        <Link href="/backlog">Backlog</Link>
+
+                        <Link :href="routes.backlog" :class="{active:$page.component === 'projects/backlog' }" >
+                            <i class="fa-solid fa-file-invoice"></i>
+                            Backlog
+                        </Link>
                     </li>
                     <li>
-                        <i class="fa-solid fa-table"></i>
-                        <Link href="/sprints">Sprints</Link>
+                        <Link :href="routes.sprint" :class="{active:$page.component === 'projects/sprint' }">
+                            <i class="fa-solid fa-table"></i>
+                            Sprints
+                        </Link>
                     </li>
                     <li>
                         <i class="fa-solid fa-clipboard-list-check"></i>
@@ -60,10 +72,6 @@ const routes = {
 
                 </ul>
 
-
-
-
-
             </section>
 
         </aside>
@@ -81,6 +89,14 @@ li{
     font-size: 0.9rem;
 }
 
+.active{
+    color: #3B82F6;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    background-color: #F3F4F6;
+
+}
 
 .aside{
     height: 100vh;
