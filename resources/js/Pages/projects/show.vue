@@ -31,8 +31,8 @@ export default {
 
 <template>
     <Head title="Project" />
-    <div>
-            <section class="text-black flex m-auto">
+    <div class="">
+            <section class="text-black flex mx-auto">
                 <TheProjectAside :project="props.project" />
                 <main class="flex-grow-1 text-center">
                     <h1 class="text-3xl font-bold">

@@ -24,4 +24,6 @@ Route::get("/projects/{project}", [ProjectController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name("projects.show");
 
-
+Route::get("/projects/{project}/board", [ProjectController::class, 'board'])
+    ->middleware(['auth', 'verified'])
+    ->name("projects.edit");

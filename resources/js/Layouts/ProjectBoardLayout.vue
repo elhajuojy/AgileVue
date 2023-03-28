@@ -17,8 +17,8 @@ defineProps({
 </script>
 
 <template>
-    <div>
-        <div class="min-h-screen bg-gray-100">
+    <div class="">
+        <div class="min-h-screen  bg-gray-100">
             <!--            <TheNav />-->
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
@@ -190,7 +190,7 @@ defineProps({
                         </section>
 
                     </aside>
-                    <main class="flex-grow-1 text-center">
+                    <main >
                         <slot />
                     </main>
                 </section>
