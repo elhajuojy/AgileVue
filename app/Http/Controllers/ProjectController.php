@@ -46,4 +46,8 @@ class ProjectController extends Controller
 
         return redirect()->back()->with("success","Project added successfully");
     }
+
+    public function board(Project $project){
+        dd($project);
+    }
 }
