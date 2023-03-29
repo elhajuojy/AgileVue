@@ -20,8 +20,8 @@ const active  = 'active shadow bg-blue-300 text-white rounded-md p-2'
 
 </script>
 <template>
-    <div class="">
-        <aside class="min-w-[20%] lg:min-w-[15%]  p-6 shadow aside   bg-white">
+    <div class="overflow-hidden">
+        <aside class="min-w-[20%] lg:min-w-[15%]  p-6 shadow aside    bg-white">
             <header class="flex gap-3 m-auto">
                 <img :src="props.project.project_cover" class="w-8 m-auto my-2 h-8 rounded-full">
                 <div class="flex-grow-1">
