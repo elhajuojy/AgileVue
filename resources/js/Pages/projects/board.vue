@@ -2,7 +2,8 @@
 
 import TheProjectAside from "@/Components/TheProjectAside.vue";
 import { Head } from '@inertiajs/vue3';
-import dragable from 'vuedraggable';
+import  {ref } from "vue";
+import draggable from "vuedraggable";
 import {reactive} from "vue";
 
 const props = defineProps({
@@ -12,6 +13,7 @@ const props = defineProps({
 
 function log(evt:any){
     console.log(evt)
+    console.log(tasks);
 }
 
 
@@ -24,21 +26,41 @@ interface Task {
 
 
 
-
-const myArray = [
+let tasks = reactive<Task[]>([
     {
-        id:1,
-        name:"mehdi"
+        id: 1,
+        description: "Complete the coding challenge",
+        completed: false
     },
     {
-        id:2,
-        name:"jamal"
+        id: 2,
+        description: "Attend the team meeting",
+        completed: true
+    },
+    {
+        id: 3,
+        description: "Reply to client emails",
+        completed: false
+    },
+    {
+        id: 4,
+        description: "Submit the monthly report",
+        completed: false
+    },
+    {
+        id: 5,
+        description: "Take a break and go for a walk",
+        completed: true
     }
-]
+])
+
+
+
 
 
 const state = reactive({
         drag: false,
+        tasks: tasks
 })
 
 </script  >
@@ -66,19 +88,39 @@ export default {
                     This is the board page
                    </h3>
 
-                    <section>
-                        <dragable :list="myArray" :draggable="state.drag" @start="state.drag = true" @end="state.drag = false"
-                                  item-key="id"
-                        @change="log"
-                        >
-                            <template #item="{ element }">
-                                <div class="list-group-item" >
-                                    {{ element.name }}
-                                </div>
-                            </template>
-                        </dragable>
+                    <section class="grid grid-cols-4 gap-6 m-6">
+                        <div class="bg-gray-200  mt-auto pt-3  min-h-[70vh] rounded border">
+                            <h3 class="text-xl font-weight-medium text-gray-700 text-left pl-6">To do </h3>
+                            <div class=" px-3 mt-6 ">
+                                <draggable
+                                    v-model="state.tasks"
+                                    group="tasks"
+                                    @start="state.drag=true"
+                                    @end="state.drag=false"
+                                    @change="log"
+                                    item-key="id"
+                                >
+                                    <template class="grid  cursor-pointer align-content-lg-space-between" #item="{element,index}" >
+                                        <div :key="element.id" class="text-center w-full border rounded my-6 ">{{element.description}} </div>
+                                    </template>
+                                    <template #header>
+                                        <div class="input flex mb-3 align-center   border-gray-300 px-3 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm bg-white">
+                                            <input type="text" class="w-full focus:ring-0 rounded" placeholder="Add something .. " />
+                                            <button type="submit" class="rounded hover:bg-blue-400 p-1 cursor-pointer">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </template>
+                                </draggable>
+                            </div>
 
-
+                        </div>
+                        <div class="bg-gray-200 mt-auto pt-3 min-h-[70vh] rounded border">
+                            <h3 class="text-xl font-weight-medium text-gray-700 text-left pl-6">In progress </h3>
+                        </div>
+                        <div class="bg-gray-200 mt-auto pt-3 min-h-[70vh] rounded border">
+                            <h3 class="text-xl font-weight-medium text-gray-700 text-left pl-6">Done</h3>
+                        </div>
 
                     </section>
 
@@ -90,5 +132,8 @@ export default {
 
 
 <style  scoped>
+
+
+
 
 </style>
