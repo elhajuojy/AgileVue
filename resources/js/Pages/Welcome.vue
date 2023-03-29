@@ -1,6 +1,7 @@
-<script setup>
+<script  setup>
 import { Head, Link } from "@inertiajs/vue3";
 import slBadge from "@shoelace-style/shoelace/dist/components/badge/badge.js";
+import { computed, onUpdated, reactive, ref } from "vue";
 
 defineProps({
   canLogin: Boolean,
@@ -10,6 +11,19 @@ defineProps({
   cover : String,
   main_image : String,
 });
+
+const state = reactive({
+    showMenu: false,
+
+})
+
+const show = ref(false);
+
+
+
+
+
+
 </script>
 
 <template>

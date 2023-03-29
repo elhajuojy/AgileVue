@@ -28,6 +28,7 @@
         "@shoelace-style/shoelace": "^2.2.0",
         "vue": "^3.2.36",
         "vue-sweetalert2": "^5.0.5",
+        "vuedraggable": "^4.1.0",
         "vuetify": "^3.1.8"
     }
 }
