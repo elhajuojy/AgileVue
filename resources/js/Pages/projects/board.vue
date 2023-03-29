@@ -53,6 +53,33 @@ let tasks = reactive<Task[]>([
         completed: true
     }
 ])
+let tasks2 = reactive<Task[]>([
+    {
+        id: 1,
+        description: "Complete the coding challenge",
+        completed: false
+    },
+    {
+        id: 2,
+        description: "Attend the team meeting",
+        completed: true
+    },
+    {
+        id: 3,
+        description: "Reply to client emails",
+        completed: false
+    },
+    {
+        id: 4,
+        description: "Submit the monthly report",
+        completed: false
+    },
+    {
+        id: 5,
+        description: "Take a break and go for a walk",
+        completed: true
+    }
+])
 
 
 
@@ -60,7 +87,8 @@ let tasks = reactive<Task[]>([
 
 const state = reactive({
         drag: false,
-        tasks: tasks
+        tasks: tasks,
+        tasks2: tasks2
 })
 
 </script  >
@@ -89,9 +117,9 @@ export default {
                    </h3>
 
                     <section class="grid grid-cols-4 gap-6 m-6">
-                        <div class="bg-gray-200  mt-auto pt-3  min-h-[70vh] rounded border">
+                        <div class="bg-gray-200  mt-auto pt-3 max-h-[70vh]   min-h-[70vh] rounded border">
                             <h3 class="text-xl font-weight-medium text-gray-700 text-left pl-6">To do </h3>
-                            <div class=" px-3 mt-6 ">
+                            <div class="px-3 mt-6 ">
                                 <draggable
                                     v-model="state.tasks"
                                     group="tasks"
@@ -117,6 +145,21 @@ export default {
                         </div>
                         <div class="bg-gray-200 mt-auto pt-3 min-h-[70vh] rounded border">
                             <h3 class="text-xl font-weight-medium text-gray-700 text-left pl-6">In progress </h3>
+                            <div class=" px-3 mt-6 ">
+                                <draggable
+                                    v-model="state.tasks2"
+                                    group="tasks"
+                                    @start="state.drag=true"
+                                    @end="state.drag=false"
+                                    @change="log"
+                                    item-key="id"
+                                >
+                                    <template class="grid  cursor-pointer align-content-lg-space-between" #item="{element,index}" >
+                                        <div :key="element.id" class="text-center w-full border rounded my-6 ">{{element.description}} </div>
+                                    </template>
+                                </draggable>
+                            </div>
+
                         </div>
                         <div class="bg-gray-200 mt-auto pt-3 min-h-[70vh] rounded border">
                             <h3 class="text-xl font-weight-medium text-gray-700 text-left pl-6">Done</h3>
