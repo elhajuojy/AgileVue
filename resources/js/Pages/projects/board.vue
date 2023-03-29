@@ -1,17 +1,49 @@
-<script setup>
+<script lang="ts" setup>
 
 import TheProjectAside from "@/Components/TheProjectAside.vue";
-
 import { Head } from '@inertiajs/vue3';
+import dragable from 'vuedraggable';
+import {reactive} from "vue";
 
 const props = defineProps({
     project: Object,
 })
 
 
+function log(evt:any){
+    console.log(evt)
+}
 
-</script>
-<script>
+
+interface Task {
+    id: number;
+    description: string;
+    completed: boolean;
+}
+
+
+
+
+
+const myArray = [
+    {
+        id:1,
+        name:"mehdi"
+    },
+    {
+        id:2,
+        name:"jamal"
+    }
+]
+
+
+const state = reactive({
+        drag: false,
+})
+
+</script  >
+
+<script lang="ts">
 
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 
@@ -33,6 +65,22 @@ export default {
                    <h3>
                     This is the board page
                    </h3>
+
+                    <section>
+                        <dragable :list="myArray" :draggable="state.drag" @start="state.drag = true" @end="state.drag = false"
+                                  item-key="id"
+                        @change="log"
+                        >
+                            <template #item="{ element }">
+                                <div class="list-group-item" >
+                                    {{ element.name }}
+                                </div>
+                            </template>
+                        </dragable>
+
+
+
+                    </section>
 
                 </main>
             </section>
