@@ -2,6 +2,7 @@
 <script setup>
 import { Link } from '@inertiajs/vue3'
 
+
 const props = defineProps({
     project : Object
 })
@@ -20,7 +21,7 @@ const active  = 'active shadow bg-blue-300 text-white rounded-md p-2'
 
 </script>
 <template>
-    <div class="overflow-hidden">
+    <div class="">
         <aside class="min-w-[20%] lg:min-w-[15%]  p-6 shadow aside    bg-white">
             <header class="flex gap-3 m-auto">
                 <img :src="props.project.project_cover" class="w-8 m-auto my-2 h-8 rounded-full">
