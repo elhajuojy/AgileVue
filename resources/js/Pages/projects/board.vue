@@ -16,6 +16,13 @@ function log(evt:any){
     console.log(tasks);
 }
 
+const add = ()=>{
+    tasks.push({
+        id: tasks.length+ 1,
+        description: input.value    ,
+        completed: true
+    })
+}
 
 interface Task {
     id: number;
@@ -80,15 +87,26 @@ let tasks2 = reactive<Task[]>([
         completed: true
     }
 ])
+let tasks3 = reactive<Task[]>([
+    {
+        id: 1,
+        description: "Complete the coding challenge",
+        completed: false
+    },
+
+])
 
 
 
+const input  = ref('')
 
 
 const state = reactive({
         drag: false,
         tasks: tasks,
-        tasks2: tasks2
+        tasks2: tasks2,
+        tasks3: tasks3,
+
 })
 
 </script  >
@@ -116,7 +134,7 @@ export default {
                     This is the board page
                    </h3>
 
-                    <section class="grid grid-cols-4 gap-6 m-6">
+                    <section class="task-section gap-6 m-6">
                         <div class="bg-gray-200  mt-auto pt-3 max-h-[70vh]   min-h-[70vh] rounded border">
                             <h3 class="text-xl font-weight-medium text-gray-700 text-left pl-6">To do </h3>
                             <div class="px-3 mt-6 ">
@@ -129,12 +147,15 @@ export default {
                                     item-key="id"
                                 >
                                     <template class="grid  cursor-pointer align-content-lg-space-between" #item="{element,index}" >
-                                        <div :key="element.id" class="text-center w-full border rounded my-6 ">{{element.description}} </div>
+
+                                        <div :key="element.id" class="text-center w-full border rounded my-3 ">
+                                            <v-card :text="element.description"   variant="outlined"></v-card>
+                                        </div>
                                     </template>
                                     <template #header>
                                         <div class="input flex mb-3 align-center   border-gray-300 px-3 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm bg-white">
-                                            <input type="text" class="w-full focus:ring-0 rounded" placeholder="Add something .. " />
-                                            <button type="submit" class="rounded hover:bg-blue-400 p-1 cursor-pointer">
+                                            <input v-model="input" type="text" class="w-full focus:ring-0 rounded" placeholder="Add something .. " />
+                                            <button @click="add" type="submit" class="rounded hover:bg-blue-400 p-1 cursor-pointer">
                                                 <i class="fa-solid fa-plus"></i>
                                             </button>
                                         </div>
@@ -155,7 +176,9 @@ export default {
                                     item-key="id"
                                 >
                                     <template class="grid  cursor-pointer align-content-lg-space-between" #item="{element,index}" >
-                                        <div :key="element.id" class="text-center w-full border rounded my-6 ">{{element.description}} </div>
+                                        <div :key="element.id" class="text-center w-full border rounded my-3">
+                                            <v-card :text="element.description"   variant="outlined"></v-card>
+                                        </div>
                                     </template>
                                 </draggable>
                             </div>
@@ -163,6 +186,25 @@ export default {
                         </div>
                         <div class="bg-gray-200 mt-auto pt-3 min-h-[70vh] rounded border">
                             <h3 class="text-xl font-weight-medium text-gray-700 text-left pl-6">Done</h3>
+                            <div class=" px-3 mt-6 ">
+                                <draggable
+                                    v-model="state.tasks3"
+                                    group="tasks"
+                                    @start="state.drag=true"
+                                    @end="state.drag=false"
+                                    @change="log"
+                                    item-key="id"
+                                >
+                                    <template class="grid  cursor-pointer align-content-lg-space-between" #item="{element,index}" >
+                                        <div :key="element.id" class="text-center w-full border rounded my-3">
+                                            <v-card :text="element.description"   variant="outlined"></v-card>
+                                        </div>
+                                    </template>
+                                </draggable>
+                            </div>
+                        </div>
+                        <div>
+
                         </div>
 
                     </section>
@@ -176,7 +218,11 @@ export default {
 
 <style  scoped>
 
-
+.task-section{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 300fr));
+    grid-gap: 1rem;
+}
 
 
 </style>
