@@ -1,5 +1,7 @@
 <script setup >
 
+// version 0.9.1
+
 import TheNavVue from "../Shared/TheNav.vue"
 import '@shoelace-style/shoelace/dist/components/qr-code/qr-code.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
