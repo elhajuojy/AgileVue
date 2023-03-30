@@ -48,8 +48,14 @@ class ProjectController extends Controller
     }
 
     public function board(Project $project){
-
         return Inertia::render('projects/board', [
+
+            "project"=>$project
+        ]);
+    }
+
+    public function backlog(Project $project){
+        return Inertia::render('projects/Backlog', [
 
             "project"=>$project
         ]);

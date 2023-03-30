@@ -12,8 +12,8 @@ const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
-    <div>
-        <div class="min-h-screen bg-gray-100">
+    <div class="">
+        <div class="max-h-screen overflow-hidden ">
 <!--            <TheNav />-->
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->

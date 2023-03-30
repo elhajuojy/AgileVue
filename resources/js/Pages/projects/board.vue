@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 
 import TheProjectAside from "@/Components/TheProjectAside.vue";
+import HeaderBoard from "../../Components/board/HeaderBoard.vue";
+import Tasks from "../../Components/board/Tasks.vue";
 import { Head } from '@inertiajs/vue3';
 import  {ref } from "vue";
 import draggable from "vuedraggable";
@@ -111,7 +113,7 @@ const state = reactive({
 
 </script  >
 
-<script lang="ts">
+<script lang="ts" >
 
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 
@@ -124,92 +126,16 @@ export default {
 </script>
 
 <template>
-    <div>
+    <div class="">
         <Head title="Project" />
         <div class="">
-            <section class="text-black flex mx-auto">
+            <section class="text-black w-full flex mx-auto">
                 <TheProjectAside :project="props.project" />
-                <main class="flex-grow-1 text-center">
-                   <h3>
-                    This is the board page
-                   </h3>
-
-                    <section class="task-section gap-6 m-6">
-                        <div class="bg-gray-200  mt-auto pt-3 max-h-[70vh]   min-h-[70vh] rounded border">
-                            <h3 class="text-xl font-weight-medium text-gray-700 text-left pl-6">To do </h3>
-                            <div class="px-3 mt-6 ">
-                                <draggable
-                                    v-model="state.tasks"
-                                    group="tasks"
-                                    @start="state.drag=true"
-                                    @end="state.drag=false"
-                                    @change="log"
-                                    item-key="id"
-                                >
-                                    <template class="grid  cursor-pointer align-content-lg-space-between" #item="{element,index}" >
-
-                                        <div :key="element.id" class="text-center w-full border rounded my-3 ">
-                                            <v-card :text="element.description"   variant="outlined"></v-card>
-                                        </div>
-                                    </template>
-                                    <template #header>
-                                        <div class="input flex mb-3 align-center   border-gray-300 px-3 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm bg-white">
-                                            <input v-model="input" type="text" class="w-full focus:ring-0 rounded" placeholder="Add something .. " />
-                                            <button @click="add" type="submit" class="rounded hover:bg-blue-400 p-1 cursor-pointer">
-                                                <i class="fa-solid fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </template>
-                                </draggable>
-                            </div>
-
-                        </div>
-                        <div class="bg-gray-200 mt-auto pt-3 min-h-[70vh] rounded border">
-                            <h3 class="text-xl font-weight-medium text-gray-700 text-left pl-6">In progress </h3>
-                            <div class=" px-3 mt-6 ">
-                                <draggable
-                                    v-model="state.tasks2"
-                                    group="tasks"
-                                    @start="state.drag=true"
-                                    @end="state.drag=false"
-                                    @change="log"
-                                    item-key="id"
-                                >
-                                    <template class="grid  cursor-pointer align-content-lg-space-between" #item="{element,index}" >
-                                        <div :key="element.id" class="text-center w-full border rounded my-3">
-                                            <v-card :text="element.description"   variant="outlined"></v-card>
-                                        </div>
-                                    </template>
-                                </draggable>
-                            </div>
-
-                        </div>
-                        <div class="bg-gray-200 mt-auto pt-3 min-h-[70vh] rounded border">
-                            <h3 class="text-xl font-weight-medium text-gray-700 text-left pl-6">Done</h3>
-                            <div class=" px-3 mt-6 ">
-                                <draggable
-                                    v-model="state.tasks3"
-                                    group="tasks"
-                                    @start="state.drag=true"
-                                    @end="state.drag=false"
-                                    @change="log"
-                                    item-key="id"
-                                >
-                                    <template class="grid  cursor-pointer align-content-lg-space-between" #item="{element,index}" >
-                                        <div :key="element.id" class="text-center w-full border rounded my-3">
-                                            <v-card :text="element.description"   variant="outlined"></v-card>
-                                        </div>
-                                    </template>
-                                </draggable>
-                            </div>
-                        </div>
-                        <div>
-
-                        </div>
-
-                    </section>
-
+                <main class="w-full overflow-y-scroll p-6 ">
+                    <HeaderBoard :search="props.project.name" />
+                    <Tasks/>
                 </main>
+
             </section>
         </div>
     </div>
@@ -218,11 +144,9 @@ export default {
 
 <style  scoped>
 
-.task-section{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 300fr));
-    grid-gap: 1rem;
-}
 
+.board{
+    height: 92vh;
+}
 
 </style>

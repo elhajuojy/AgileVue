@@ -16,13 +16,13 @@ const routes = {
 }
 
 
-const active  = 'active shadow bg-blue-300 text-white rounded-md p-2'
+const active  = 'active shadow bg-blue-300 text-white rounded-md p-2 transition shadow duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'
 
 
 </script>
 <template>
-    <div class="">
-        <aside class="min-w-[20%] lg:min-w-[15%]  p-6 shadow aside    bg-white">
+    <div class="min-w-[15%] max-w-[20%]">
+        <aside class="p-3 shadow aside    bg-white">
             <header class="flex gap-3 m-auto">
                 <img :src="props.project.project_cover" class="w-8 m-auto my-2 h-8 rounded-full">
                 <div class="flex-grow-1">
@@ -33,22 +33,21 @@ const active  = 'active shadow bg-blue-300 text-white rounded-md p-2'
             <section class="mt-10">
                 <h3 class="text-xl font-bold mb-6">Planing</h3>
                 <ul class="grid gap-3 board-actions ">
-                    <li class="">
+                    <li :class="{active:$page.component === 'projects/board' }">
 
-                        <Link :class="{active:$page.component === 'projects/board' }" :href="routes.board" >
+                        <Link  :href="routes.board" >
                             <i class="fa-regular fa-chess-board"></i>
                             Board
                         </Link>
                     </li>
-                    <li class="">
-
-                        <Link :href="routes.backlog" :class="{active:$page.component === 'projects/backlog' }" >
+                    <li :class="{active:$page.component === 'projects/Backlog' }">
+                        <Link :href="routes.backlog"  >
                             <i class="fa-solid fa-file-invoice"></i>
                             Backlog
                         </Link>
                     </li>
-                    <li>
-                        <Link :href="routes.sprint" :class="{active:$page.component === 'projects/sprint' }">
+                    <li :class="{active:$page.component === 'projects/sprint' }">
+                        <Link :href="routes.sprint" >
                             <i class="fa-solid fa-table"></i>
                             Sprints
                         </Link>
@@ -70,7 +69,6 @@ const active  = 'active shadow bg-blue-300 text-white rounded-md p-2'
                         <i class="fa-regular fa-gear"></i>
                         <Link href="/sprints">Project Settings</Link>
                     </li>
-
                 </ul>
 
             </section>
@@ -96,11 +94,14 @@ li{
     border-radius: 0.5rem;
     padding: 0.5rem;
     background-color: #F3F4F6;
+    transition: all 0.2s ease-in-out;
+
 
 }
 
 .aside{
-    height: 100vh;
+    height: 92vh;
+    overflow: hidden;
 }
 
 </style>
