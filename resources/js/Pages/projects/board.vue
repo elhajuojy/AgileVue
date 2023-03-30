@@ -126,12 +126,12 @@ export default {
 <template>
     <div class="">
         <Head title="Project" />
-        <div class="fixed">
-            <section class="text-black  flex mx-auto">
+        <div class="">
+            <section class="text-black w-full flex mx-auto">
                 <TheProjectAside :project="props.project" />
                 <main class="flex-grow-1 board text-center overflow-y-scroll">
                     <section class="task-section  gap-6 m-6">
-                        <div class="bg-gray-200  mt-auto pt-3 max-h-[70vh]   min-h-[70vh] rounded border">
+                        <div class="bg-gray-200   pt-3    min-h-[70vh] rounded border">
                             <h3 class="text-xl font-weight-medium text-gray-700 text-left pl-6">To do </h3>
                             <div class="px-3 mt-6 ">
                                 <draggable
@@ -160,7 +160,7 @@ export default {
                             </div>
 
                         </div>
-                        <div class="bg-gray-200 mt-auto pt-3 min-h-[70vh] rounded border">
+                        <div class="bg-gray-200  pt-3 min-h-[70vh] rounded border">
                             <h3 class="text-xl font-weight-medium text-gray-700 text-left pl-6">In progress </h3>
                             <div class=" px-3 mt-6 ">
                                 <draggable
@@ -180,7 +180,7 @@ export default {
                             </div>
 
                         </div>
-                        <div class="bg-gray-200 mt-auto pt-3 min-h-[70vh] rounded border">
+                        <div class="bg-gray-200 pt-3 min-h-[70vh] rounded border">
                             <h3 class="text-xl font-weight-medium text-gray-700 text-left pl-6">Done</h3>
                             <div class=" px-3 mt-6 ">
                                 <draggable
@@ -221,7 +221,7 @@ export default {
 }
 
 .board{
-    height: 91vh;
+    height: 92vh;
 }
 
 </style>

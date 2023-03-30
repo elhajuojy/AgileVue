@@ -100,7 +100,7 @@ li{
 }
 
 .aside{
-    height: 90vh;
+    height: 92vh;
     overflow: hidden;
 }
 
