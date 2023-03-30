@@ -124,17 +124,13 @@ export default {
 </script>
 
 <template>
-    <div>
+    <div class="">
         <Head title="Project" />
-        <div class="">
-            <section class="text-black flex mx-auto">
+        <div class="fixed">
+            <section class="text-black  flex mx-auto">
                 <TheProjectAside :project="props.project" />
-                <main class="flex-grow-1 text-center">
-                   <h3>
-                    This is the board page
-                   </h3>
-
-                    <section class="task-section gap-6 m-6">
+                <main class="flex-grow-1 board text-center overflow-y-scroll">
+                    <section class="task-section  gap-6 m-6">
                         <div class="bg-gray-200  mt-auto pt-3 max-h-[70vh]   min-h-[70vh] rounded border">
                             <h3 class="text-xl font-weight-medium text-gray-700 text-left pl-6">To do </h3>
                             <div class="px-3 mt-6 ">
@@ -224,5 +220,8 @@ export default {
     grid-gap: 1rem;
 }
 
+.board{
+    height: 91vh;
+}
 
 </style>
