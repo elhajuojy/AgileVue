@@ -16,7 +16,7 @@ const routes = {
 }
 
 
-const active  = 'active shadow bg-blue-300 text-white rounded-md p-2'
+const active  = 'active shadow bg-blue-300 text-white rounded-md p-2 transition shadow duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'
 
 
 </script>
@@ -33,9 +33,9 @@ const active  = 'active shadow bg-blue-300 text-white rounded-md p-2'
             <section class="mt-10">
                 <h3 class="text-xl font-bold mb-6">Planing</h3>
                 <ul class="grid gap-3 board-actions ">
-                    <li class="">
+                    <li :class="{active:$page.component === 'projects/board' }">
 
-                        <Link :class="{active:$page.component === 'projects/board' }" :href="routes.board" >
+                        <Link  :href="routes.board" >
                             <i class="fa-regular fa-chess-board"></i>
                             Board
                         </Link>
@@ -70,7 +70,6 @@ const active  = 'active shadow bg-blue-300 text-white rounded-md p-2'
                         <i class="fa-regular fa-gear"></i>
                         <Link href="/sprints">Project Settings</Link>
                     </li>
-
                 </ul>
 
             </section>
