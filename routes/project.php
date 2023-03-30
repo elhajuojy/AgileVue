@@ -27,3 +27,10 @@ Route::get("/projects/{project}", [ProjectController::class, 'show'])
 Route::get("/projects/{project}/board", [ProjectController::class, 'board'])
     ->middleware(['auth', 'verified'])
     ->name("projects.edit");
+
+
+Route::get("/projects/{project}/backlog", [ProjectController::class, 'backlog'])
+    ->middleware(['auth', 'verified'])
+    ->name("projects.backlog");
+
+

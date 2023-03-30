@@ -106,8 +106,8 @@ const state = reactive({
 
 </script  >
 <template>
-    <main class="flex-grow-1 board text-center overflow-y-scroll">
-        <section class="task-section gap-6 m-6">
+    <main class="flex-grow-1 board text-center ">
+        <section class="task-section gap-6 ">
             <div class="bg-gray-200 pt-3 min-h-[70vh] rounded border">
                 <h3 class="text-xl font-weight-medium text-gray-700 text-left pl-6">To do </h3>
                 <div class="px-3 mt-6 ">

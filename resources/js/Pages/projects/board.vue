@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 
 import TheProjectAside from "@/Components/TheProjectAside.vue";
+import HeaderBoard from "../../Components/board/HeaderBoard.vue";
 import Tasks from "../../Components/board/Tasks.vue";
 import { Head } from '@inertiajs/vue3';
 import  {ref } from "vue";
@@ -130,7 +131,10 @@ export default {
         <div class="">
             <section class="text-black w-full flex mx-auto">
                 <TheProjectAside :project="props.project" />
-                <Tasks/>
+                <main class="w-full overflow-y-scroll p-6 ">
+                    <HeaderBoard :search="props.project.name" />
+                    <Tasks/>
+                </main>
 
             </section>
         </div>
