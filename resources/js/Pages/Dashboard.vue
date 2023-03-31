@@ -33,7 +33,7 @@ const qrCode = ref();
 
     <AuthenticatedLayout>
 
-        <main>
+        <main class="min-h-screen">
             <h1>Projects </h1>
             <section class="container">
                 <input

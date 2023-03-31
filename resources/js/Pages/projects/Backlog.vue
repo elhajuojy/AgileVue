@@ -40,7 +40,8 @@ tasks: [
 <script lang="ts">
 
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import HeaderBoard from "@/Components/board/HeaderBoard.vue";
+import HeaderBoard from "../../Components/board/HeaderBoard.vue";
+
 
 export default {
 
@@ -55,7 +56,7 @@ export default {
         <section class="text-black w-full flex mx-auto">
             <TheProjectAside :project="props.project" />
             <main class="w-full overflow-y-scroll p-6 ">
-                <HeaderBoard :search="props.project.name" />
+                <HeaderBoard :search="props.project.name" :project_id="props.project.id" />
                 <!--   💕 sprint Card start -->
                 <section class="default-sprint min-h-[180px]  py-1 bg-gray-200">
                     <div class="px-3 my-2">

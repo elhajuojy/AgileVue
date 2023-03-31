@@ -9,9 +9,12 @@ import draggable from "vuedraggable";
 import {reactive} from "vue";
 
 const props = defineProps({
+    users : Object || null,
     project: Object,
 })
 
+
+console.log(props.users)
 
 function log(evt:any){
     console.log(evt)
@@ -132,8 +135,8 @@ export default {
             <section class="text-black w-full flex mx-auto">
                 <TheProjectAside :project="props.project" />
                 <main class="w-full overflow-y-scroll p-6 ">
-                    <HeaderBoard :search="props.project.name" />
-                    <Tasks/>
+                    <HeaderBoard :search="props.project.name" :users="props.users" :project_id="props.project.id" />
+                        <Tasks/>
                 </main>
 
             </section>

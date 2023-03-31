@@ -49,7 +49,7 @@ class ProjectController extends Controller
 
     public function board(Project $project){
         return Inertia::render('projects/board', [
-
+            "users"=>$project->users,
             "project"=>$project
         ]);
     }
