@@ -2,6 +2,9 @@
 
 import {reactive} from "vue";
 import { defineProps } from 'vue'
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
 import axios from "axios";
 import {Link, router, usePage} from '@inertiajs/vue3';
 const props = defineProps({
@@ -11,6 +14,12 @@ const props = defineProps({
 
 
 })
+
+const notify = (message:string) => {
+    toast(message.toString(), {
+        autoClose: 1500,
+    }); // ToastOptions
+}
 
 
 const user = usePage().props.auth.user;
@@ -40,6 +49,7 @@ function submitInviteUser(userid:number){
     }).then((response)=>{
         console.log(response)
         state.user_invite_active = userid
+        notify("User invited successfully 👌 ! ");
         console.log(state.user_invite_active)
     }).catch((error)=>{
         console.log(error)
