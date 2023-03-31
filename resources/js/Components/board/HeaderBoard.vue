@@ -99,6 +99,7 @@ let searchUsers = (event:any) => {
                 </div>
 
             </div>
+            <v-avatar v-for="user in props.users" :key="user.id" :image="user.profile_cover" size="30"></v-avatar>
             <v-avatar :image="user.profile_cover" size="30"></v-avatar>
             <div class="relative w-full">
                 <button @click="modalAddUserShow" class="rounded-full  w-8 h-8  hover:bg-gray-100 transition duration-200 ease-in">

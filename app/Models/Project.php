@@ -10,4 +10,10 @@ class Project extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+
+
+    public function users(){
+        return $this->belongsToMany(User::class,"user_projects","project_id","user_id")->withPivot("role");
+    }
 }
