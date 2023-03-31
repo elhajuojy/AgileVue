@@ -133,7 +133,7 @@ export default {
                 <TheProjectAside :project="props.project" />
                 <main class="w-full overflow-y-scroll p-6 ">
                     <HeaderBoard :search="props.project.name" />
-                    <Tasks/>
+                        <Tasks/>
                 </main>
 
             </section>

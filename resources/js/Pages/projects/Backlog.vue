@@ -40,7 +40,8 @@ tasks: [
 <script lang="ts">
 
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import HeaderBoard from "@/Components/board/HeaderBoard.vue";
+import HeaderBoard from "../../Components/board/HeaderBoard.vue";
+
 
 export default {
 

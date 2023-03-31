@@ -8,12 +8,12 @@ import {reactive} from "vue";
 
 function log(evt:any){
     console.log(evt)
-    console.log(Tasks);
+    console.log(tasks);
 }
 
 const add = ()=>{
-    Tasks.push({
-        id: Tasks.length+ 1,
+    tasks.push({
+        id: tasks.length+ 1,
         description: input.value    ,
         completed: true
     })
@@ -107,10 +107,10 @@ const state = reactive({
 </script  >
 <template>
     <main class="flex-grow-1 board text-center ">
-        <section class="task-section gap-6 ">
+        <section class="task-section gap-6  ">
             <div class="bg-gray-200 pt-3 min-h-[70vh] rounded border">
                 <h3 class="text-xl font-weight-medium text-gray-700 text-left pl-6">To do </h3>
-                <div class="px-3 mt-6 ">
+                <div class="px-3 mt-6  z-1 ">
                     <draggable
                         v-model="state.tasks"
                         group="tasks"
@@ -191,6 +191,8 @@ const state = reactive({
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 300fr));
     grid-gap: 1rem;
+
 }
+
 
 </style>

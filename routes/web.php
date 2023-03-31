@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -48,6 +49,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name(
         'profile.destroy'
     );
+
+    Route::get('/search/users/board',[UserController::class,"find"])->name("users.all");
+
+
 });
 
 require __DIR__ . '/project.php';
