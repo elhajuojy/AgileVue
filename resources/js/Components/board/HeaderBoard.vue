@@ -6,7 +6,10 @@ import axios from "axios";
 import {Link, router, usePage} from '@inertiajs/vue3';
 const props = defineProps({
     search : String || null,
-    users : Object || null
+    users : Object || null,
+    project_id : Number || null
+
+
 })
 
 
@@ -16,13 +19,32 @@ const state = reactive({
     inputSearch: "",
     adminImage : "https://upload.wikimedia.org/wikipedia/commons/5/5c/Kanye_West_at_the_2009_Tribeca_Film_Festival_%28crop_2%29.jpg",
     active : true,
+    user_invite_active : 0,
     inputSearchUser : "",
-    users : props.users
+    users : props.users,
 })
 
 const modalAddUserShow = ()=>{
     console.log("modalAddUserShow")
     state.active =  !state.active
+}
+
+
+function submitInviteUser(userid:number){
+
+    console.log(userid + "/" + props.project_id);
+
+    axios.post("/api/users/invite",{
+        user_id : userid,
+        project_id : props.project_id
+    }).then((response)=>{
+        console.log(response)
+        state.user_invite_active = userid
+        console.log(state.user_invite_active)
+    }).catch((error)=>{
+        console.log(error)
+    })
+
 }
 
 
@@ -36,7 +58,6 @@ let searchUsers = (event:any) => {
             .then((response) => {
                 //bouncing the
                 state.users = response.data
-                console.log(response)
             })
             .catch((error) => {
                 console.log(error)
@@ -84,10 +105,12 @@ let searchUsers = (event:any) => {
                               <p class="align-self-center h-full text-left mr-auto">
                                   {{ user.full_name }}
                               </p>
-                              <Link href="/user/invite" method="post" class="hover:bg-blue-600  text-sm bg-blue  rounded py-1 px-2 hover:border-gray-300" as="button" type="button">
+                              <button  :class="state.user_invite_active === user.id ? 'bg-green' : 'bg-blue'"  class="transition all duration-200 ease-in text-sm   rounded py-1 px-2 hover:border-gray-300"
+                                       @click="submitInviteUser(user.id)"
+                              >
                                   invite
                                   <i class="fa-solid fa-plus"></i>
-                              </Link>
+                              </button>
                           </li>
                       </ul>
                         <div v-else>

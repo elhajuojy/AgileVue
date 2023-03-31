@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\UserProject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -28,8 +29,17 @@ Route::get('/users', function (Request $request) {
         ->where('full_name','like','%'.$search.'%')
         ->orWhere('email','like','%'.$search.'%' )->get();
 
-
 });
 
+
+Route::post("/users/invite",function (Request $request){
+
+    UserProject::create([
+        "user_id" => $request->input("user_id"),
+        "project_id" => $request->input("project_id"),
+        "role" => "member"
+    ]);
+    return response()->json(["message"=>"Invitation sent successfully"]);
+});
 
 
