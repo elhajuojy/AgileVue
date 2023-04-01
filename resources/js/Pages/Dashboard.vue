@@ -6,6 +6,7 @@ import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/avatar/avatar.js';
 import '@shoelace-style/shoelace/dist/components/rating/rating.js';
 import TextInput from "@/Components/TextInput.vue";
+import Card from "../Components/Card.vue";
 import { ref , reactive } from 'vue';
 import TheNav from "../Shared/TheNav.vue";
 
@@ -54,8 +55,8 @@ export default {
     <Head title="Dashboard" />
 
 
-        <main class="min-h-screen container lg:m-6 m-auto mt-6">
-            <header class="flex gap-6 align-center">
+        <main class="min-h-screen  container m-auto w-full px-10">
+            <header class="flex gap-6 align-center ">
 
                 <div class="border max-w-[250px] my-auto rounded">
                     <div class="flex gap-2 align-center px-2 ">
@@ -72,6 +73,18 @@ export default {
                     ></v-autocomplete>
                 </div>
             </header>
+
+
+            <div class="invitation">
+                <h2 class="text-2xl mb-6 font-weight-medium text-grey-darken-3">
+                    Invitation
+                </h2>
+                <section class=" invite-cards ">
+                    <Card/>
+                    <Card/>
+                    <Card/>
+                </section>
+            </div>
         </main>
 
 
@@ -87,7 +100,13 @@ export default {
         outline: none;
     }
 
+    .invite-cards{
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
 
+        justify-content: center;
+    }
 
     .input-search > input {
         border: none;
