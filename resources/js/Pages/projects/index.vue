@@ -14,7 +14,7 @@ defineProps({
 const goTothisProject = (id) => {
 
     console.log(id)
-    router.visit(`/projects/${id}`)
+    router.visit(`/projects/${id}/board`)
 }
 
 const createProject = (e) => {
