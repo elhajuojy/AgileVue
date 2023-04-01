@@ -70,12 +70,14 @@ const show = ref(false);
         <img :src="cover" class="m-auto" alt="Agile Vue cover image">
     </Header>
     <section class="text-center mt-12 p-12 bg-light-blue">
-        <h2 class="text-4xl mb-6 ">All from a single source of truth</h2>
-        <sl-badge pill >Plan</sl-badge>
-        <sl-badge pill >Track</sl-badge>
-        <sl-badge pill >Release</sl-badge>
-        <sl-badge pill >Report</sl-badge>
-        <sl-badge pill >Automate</sl-badge>
+        <h2 class="text-4xl  mb-6 ">All from a single source of truth</h2>
+        <div class="flex gap-3 cursor-pointer justify-center">
+            <v-chip  >Plan</v-chip>
+            <v-chip  >Track</v-chip>
+            <v-chip  >Release</v-chip>
+            <v-chip  >Report</v-chip>
+            <v-chip  >Automate</v-chip>
+        </div>
     </section>
     <section>
         <img :src="main_image" class="w-full" alt="">

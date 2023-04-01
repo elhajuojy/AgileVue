@@ -87,7 +87,7 @@ let searchUsers = (event:any) => {
 </script>
 
 <template>
-    <div class="grid header-board gap-3 mb-6">
+    <header class="grid header-board gap-3 mb-6">
         <h2 class="text-xl font-weight-medium text-grey-darken-3">
             {{search || 'No search' }}
         </h2>
@@ -132,7 +132,7 @@ let searchUsers = (event:any) => {
             </div>
 
         </div>
-    </div>
+    </header>
 </template>
 
 
