@@ -7,6 +7,7 @@ import 'vue3-toastify/dist/index.css';
 
 import axios from "axios";
 import {Link, router, usePage} from '@inertiajs/vue3';
+import UserAvatarMenu from "../UserAvatarMenu.vue";
 const props = defineProps({
     search : String || null,
     users : Object || null,
@@ -14,6 +15,14 @@ const props = defineProps({
 
 
 })
+
+
+
+const openDialogUser = (user:Object)=>{
+    state.dialog= true
+    console.log(user)
+    console.log()
+}
 
 const notify = (message:string) => {
     toast(message.toString(), {
@@ -31,6 +40,7 @@ const state = reactive({
     user_invite_active : 0,
     inputSearchUser : "",
     users : props.users,
+    dialog: false,
 })
 
 const modalAddUserShow = ()=>{
@@ -94,13 +104,25 @@ let searchUsers = (event:any) => {
         <div class="flex gap-3 align-center">
             <div class="border max-w-[250px]  rounded">
                 <div class="flex gap-2 align-center px-2 ">
-                    <input v-model="state.inputSearch" type="text" class="w-full focus:ring-0 rounded" placeholder="Add something .. " />
+                    <input v-model="state.inputSearch" type="text" class="w-full focus:ring-0 rounded" placeholder="search something .. " />
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
 
             </div>
-            <v-avatar v-for="user in props.users" :key="user.id" :image="user.profile_cover" size="30"></v-avatar>
-            <v-avatar :image="user.profile_cover" size="30"></v-avatar>
+
+<!--            <v-avatar-->
+<!--                v-for="user in props.users" :key="user.id" :image="user.profile_cover" size="30"-->
+<!--                class="cursor-pointer"-->
+<!--                @click="openDialogUser(user)"-->
+<!--            >-->
+
+<!--            </v-avatar>-->
+
+            <UserAvatarMenu
+                v-for="user in props.users" :key="user.id" :user="user" />
+
+
+
             <div class="relative w-full">
                 <button @click="modalAddUserShow" class="rounded-full  w-8 h-8  hover:bg-gray-100 transition duration-200 ease-in">
                     <i class="fa-solid fa-plus"></i>

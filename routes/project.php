@@ -11,26 +11,27 @@ Route::get('/projects', [ProjectController::class, 'index'])
     ->name('projects');
 
 Route::post("/projects", [ProjectController::class, 'store'])
-    ->middleware(['auth', 'verified'])
     ->name("projects.store");
 
 Route::get("/projects/create", [ProjectController::class, 'create'])
-    ->middleware(['auth', 'verified'])
     ->name("projects.create");
 
 
 
 Route::get("/projects/{project}", [ProjectController::class, 'show'])
-    ->middleware(['auth', 'verified'])
     ->name("projects.show");
 
 Route::get("/projects/{project}/board", [ProjectController::class, 'board'])
-    ->middleware(['auth', 'verified'])
     ->name("projects.edit");
 
 
 Route::get("/projects/{project}/backlog", [ProjectController::class, 'backlog'])
-    ->middleware(['auth', 'verified'])
     ->name("projects.backlog");
+
+Route::post("/projects/{project}/decline-invitation", [ProjectController::class, 'declineInvitation'])
+    ->name("projects.decline-invitation");
+
+Route::post("/projects/{project}/accept-invitation", [ProjectController::class, 'acceptInvitation'])
+    ->name("projects.accept-invitation");
 
 
