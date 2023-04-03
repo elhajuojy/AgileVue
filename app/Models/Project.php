@@ -14,6 +14,6 @@ class Project extends Model
 
 
     public function users(){
-        return $this->belongsToMany(User::class,"user_projects","project_id","user_id")->withPivot("role");
+        return $this->belongsToMany(User::class,"user_projects","project_id","user_id")->withPivot("role","invitation_status");
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class ProjectController extends Controller
@@ -13,7 +14,7 @@ class ProjectController extends Controller
     public function index()
     {
         return Inertia::render('projects/index', [
-            "projects"=>Project::all()
+            "projects"=>Project::where("user_id",auth()->user()->id)->get()
         ]);
     }
 
@@ -59,5 +60,25 @@ class ProjectController extends Controller
 
             "project"=>$project
         ]);
+    }
+
+    public function declineInvitation(Project $project){
+
+            $project->users()->updateExistingPivot(auth()->user()->id,[
+                "invitation_status"=>"declined"
+            ]);
+
+            return redirect()->back()->with("success","Invitation declined successfully");
+    }
+
+    public function acceptInvitation(Project $project){
+
+
+
+        $project->users()->updateExistingPivot(auth()->user()->id,[
+            "invitation_status"=>"accepted"
+        ]);
+
+        return redirect()->back()->with("success","Invitation accepted successfully");
     }
 }

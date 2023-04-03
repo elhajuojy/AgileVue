@@ -1,6 +1,8 @@
 <script setup lang="ts">
 
-import { Head } from '@inertiajs/vue3';
+import { Head  } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/vue3';
+
 import '@shoelace-style/shoelace/dist/components/qr-code/qr-code.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
 import '@shoelace-style/shoelace/dist/components/avatar/avatar.js';
@@ -11,19 +13,28 @@ import { ref , reactive } from 'vue';
 import TheNav from "../Shared/TheNav.vue";
 
 
+let  user = usePage().props.auth.user;
+
+const props = defineProps({
+    sharedProjects: Object,
+    others_projects: Object,
+});
+
+
+
+
+console.log(props.sharedProjects);
+
+
+
 interface User {
     name: string;
     age: number;
 
 }
 
-let user = ref<User>({
-    name: 'John Doe',
-    age: 30,
 
-});
 
-console.log(user.value.name);
 
 
 const qrCode = ref();
@@ -35,6 +46,9 @@ const state = reactive({
     user_invite_active: 0,
     inputSearchUser: "",
 });
+
+
+
 </script>
 
 
@@ -77,12 +91,10 @@ export default {
 
             <div class="invitation">
                 <h2 class="text-2xl mb-6 font-weight-medium text-grey-darken-3">
-                    Invitation
+                    Shard Projects with you
                 </h2>
                 <section class=" invite-cards ">
-                    <Card/>
-                    <Card/>
-                    <Card/>
+                    <Card v-for="project in props.sharedProjects" :key="project.id" :project="project" />
                 </section>
             </div>
         </main>
@@ -104,8 +116,6 @@ export default {
         display: flex;
         gap: 16px;
         flex-wrap: wrap;
-
-        justify-content: center;
     }
 
     .input-search > input {

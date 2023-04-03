@@ -33,7 +33,15 @@ Route::get('/inbox', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+
+
+
+
+    return Inertia::render('Dashboard',[
+        "sharedProjects"=>auth()->user()->projects
+
+
+    ]);
 })
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
@@ -52,8 +60,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/search/users/board',[UserController::class,"find"])->name("users.all");
 
+    require __DIR__ . '/project.php';
 
 });
 
-require __DIR__ . '/project.php';
 require __DIR__ . '/auth.php';
