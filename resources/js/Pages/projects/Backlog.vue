@@ -2,9 +2,11 @@
 <script lang="ts" setup>
 import {Head, Link} from "@inertiajs/vue3";
 import TheProjectAside from "@/Components/TheProjectAside.vue";
-import {defineProps, reactive} from "vue";
+import {defineProps, reactive, ref} from "vue";
 import draggable from "vuedraggable";
+import created from "vue";
 import BacklogSprintCard from "../../Components/BacklogSprintCard.vue";
+import {onMounted} from "vue";
 
 const props = defineProps({
     project: Object,
@@ -25,12 +27,26 @@ const state = reactive({
     issuesLength: 0,
 })
 
+
+
+const boardHeight = ref(0);
+
+
+onMounted(() => {
+
+    boardHeight.value = window.innerHeight ;
+console.log(boardHeight.value);
+
+});
+
+
 </script>
 
 <script lang="ts">
 
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import HeaderBoard from "../../Components/board/HeaderBoard.vue";
+import  {ref } from "vue";
 
 
 export default {
@@ -38,14 +54,17 @@ export default {
     layout: AuthenticatedLayout,
 
 }
+
+
 </script>
 
 <template>
     <div >
        <Head title="Backlog" />
-        <section class="text-black w-full flex mx-auto">
+        <section class="text-black w-full flex mx-auto"
+        >
             <TheProjectAside :project="props.project" />
-            <main class="w-full  overflow-y-auto p-6 ">
+            <main class="overflow-y-auto board w-full grid p-6 ">
                 <HeaderBoard :search="props.project.name" :project_id="props.project.id" />
                 <!--   💕 sprint Card start -->
                 <BacklogSprintCard v-for="sprint in props.sprints" key="sprint.id"  :project="sprint" />
