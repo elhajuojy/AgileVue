@@ -41,7 +41,6 @@ export default {
                     <p class="text-gray-500">
                         {{ props.project.description }}
                     </p>
-
                 </main>
             </section>
     </div>
