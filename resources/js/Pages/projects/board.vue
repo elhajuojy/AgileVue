@@ -148,8 +148,5 @@ export default {
 <style  scoped>
 
 
-.board{
-    height: 92vh;
-}
 
 </style>

@@ -21,7 +21,18 @@ class SprintController extends Controller
             "goal"=>fake()->name,
             "project_key"=>fake()->name,
         ]);
-        return redirect()->back()->with("success","Sprint added successfully");
+        return redirect()->back()->with("success","Sprint added successfully")->with('inertia',[
+            'success' => session('success')
+        ])->with('flash', [
+            'success' => session('success')
+        ]);
 
+    }
+
+
+    public function destroy($project,$sprint){
+        $sprint = Sprint::find($sprint);
+        $sprint->delete();
+        return redirect()->back()->with("success","Sprint deleted successfully");
     }
 }
