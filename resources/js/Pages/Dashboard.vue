@@ -11,6 +11,7 @@ import TextInput from "@/Components/TextInput.vue";
 import Card from "../Components/Card.vue";
 import { ref , reactive } from 'vue';
 import TheNav from "../Shared/TheNav.vue";
+import DashboardRecentTabs from "../Components/DashboardRecentTabs.vue";
 
 
 let  user = usePage().props.auth.user;
@@ -95,6 +96,14 @@ export default {
                 </h2>
                 <section class=" invite-cards ">
                     <Card v-for="project in props.sharedProjects" :key="project.id" :project="project" />
+                </section>
+
+                <section class="mt-6">
+                    <h2 class="text-h4 mb-2">
+                        Recent
+                    </h2>
+
+                    <DashboardRecentTabs />
                 </section>
             </div>
         </main>

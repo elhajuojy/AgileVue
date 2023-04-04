@@ -22,6 +22,7 @@ console.log(data.user)
                 <v-menu
                     min-width="23px"
                     rounded
+                    
                 >
                     <template v-slot:activator="{ props }">
                         <v-btn
@@ -47,25 +48,31 @@ console.log(data.user)
                                 <v-avatar
                                     color="brown"
                                 >
-                                    <span class="text-h5">mehdi </span>
+                                    <span class="text-h5">
+                                        <img :src="data.user.profile_cover" class="w-full">
+                                    </span>
                                 </v-avatar>
-                                <h3>mehdi </h3>
+                                <h3>
+                                    {{ data.user.full_name }}
+                                </h3>
                                 <p class="text-caption mt-1">
-                                    mehdi@gmail.com
+                                    {{ data.user.email }}
                                 </p>
+
                                 <v-divider class="my-3"></v-divider>
                                 <v-btn
                                     rounded
                                     variant="text"
+                                    size="small"
                                 >
                                     Edit Account
                                 </v-btn>
-                                <v-divider class="my-3"></v-divider>
                                 <v-btn
                                     rounded
                                     variant="text"
+                                    size="small"
                                 >
-                                    Disconnect
+                                    remove
                                 </v-btn>
                             </div>
                         </v-card-text>
