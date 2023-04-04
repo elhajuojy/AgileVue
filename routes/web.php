@@ -61,6 +61,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/search/users/board',[UserController::class,"find"])->name("users.all");
 
     require __DIR__ . '/project.php';
+    require __DIR__ . '/sprint.php';
+
 
 });
 

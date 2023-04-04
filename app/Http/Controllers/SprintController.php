@@ -2,9 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sprint;
 use Illuminate\Http\Request;
 
 class SprintController extends Controller
 {
     //
+
+
+    public function store(Request $request){
+        Sprint::create([
+            "name"=>fake()->name,
+            "description"=>fake()->name,
+            "project_id"=>$request->input("project_id"),
+            "start_date"=>fake()->date,
+            "end_date"=>fake()->date ,
+            "status"=>fake()->name,
+            "goal"=>fake()->name,
+            "project_key"=>fake()->name,
+        ]);
+        return redirect()->back()->with("success","Sprint added successfully");
+
+    }
 }
