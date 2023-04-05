@@ -6,6 +6,8 @@ import {reactive, ref} from 'vue'
 import draggable from "vuedraggable";
 import {router} from "@inertiajs/vue3";
 import {toast} from "vue3-toastify";
+import "@shoelace-style/shoelace/dist/components/select/select";
+import "@shoelace-style/shoelace/dist/components/option/option";
 
 const props = defineProps({
     project: Object,
@@ -35,7 +37,8 @@ const state = reactive({
             completed: true,
         }
     ],
-    dialog : false
+    DeleteDialog : false,
+    EditDialog : false,
 
 })
 
@@ -114,22 +117,75 @@ const editSprint = ()=>{
                                         </button>
                                     </template>
                                     <v-list
-
                                     >
-
-                                        <v-list-item
-                                        @click="editSprint"
-                                        >
-                                            <v-list-item-subtitle>
-                                            Edit </v-list-item-subtitle>
-                                        </v-list-item>
-
-                                        <v-list-item
-                                            class=""
+<!--                                        Edit Sprint Dialog Start -->
+                                        <v-dialog
+                                            v-model="state.EditDialog"
+                                            width="555"
 
                                         >
+                                            <template v-slot:activator="{ props }">
+                                                <v-list-item
+                                                    v-bind="props"
+                                                    class="cursor-pointer text-red  "
+                                                >
+                                                    <v-list-item-subtitle>
+                                                        Edit
+                                                    </v-list-item-subtitle>
+                                                </v-list-item>
+                                            </template>
+                                            <v-card>
+                                                <v-card-title>
+                                                    Edit sprint {{  }}
+                                                </v-card-title>
+                                                <v-card-subtitle>
+                                                    Are you sure you want to edit sprint AG Sprint 1?
+                                                </v-card-subtitle>
+                                                <v-card-actions>
+                                                    <div class="flex-grow-1">
+                                                        <v-text-field label="Sprint Name"></v-text-field>
+                                                        <sl-select filled
+                                                                   size="medium"
+                                                                   placeholder="Select Duration"
+                                                        class="mb-4"
+                                                        >
+                                                            <sl-option value="1">1</sl-option>
+
+                                                            <sl-option value="2">2</sl-option>
+                                                            <sl-option value="3">3</sl-option>
+
+                                                        </sl-select>
+                                                        <v-text-field label="Start Date"></v-text-field>
+                                                        <v-text-field label="End Date"></v-text-field>
+                                                        <v-textarea label="Sprint Goal"></v-textarea>
+                                                        <div class="flex gap-2 justify-end">
+                                                            <v-btn
+                                                                variant="tonal"
+                                                                color=""
+                                                                class="bg-blue"
+                                                                @click="editSprint"
+                                                            >
+                                                                Edit
+                                                            </v-btn>
+                                                            <v-btn
+                                                                @click="state.EditDialog=false"
+                                                            >
+                                                                Cancel
+                                                            </v-btn>
+                                                        </div>
+                                                    </div>
+
+
+                                                </v-card-actions>
+                                            </v-card>
+
+                                        </v-dialog>
+<!--                                        Edit Sprint Dialog End -->
+<!--                                            Delete Sprint start-->
+                                        <v-list-item
+                                            class="">
                                            <v-dialog
-                                           v-model="state.dialog"
+                                           v-model="state.DeleteDialog"
                                            width="auto"
                                            >
                                                 <template v-slot:activator="{ props }">
@@ -157,7 +213,7 @@ const editSprint = ()=>{
                                                            Delete
                                                        </v-btn>
                                                        <v-btn
-                                                       @click="state.dialog=false"
+                                                       @click="state.DeleteDialog=false"
                                                        >
                                                            Cancel
                                                        </v-btn>
@@ -166,6 +222,7 @@ const editSprint = ()=>{
                                                </v-card>
                                            </v-dialog>
                                         </v-list-item>
+<!--                                            Delete Sprint end-->
                                     </v-list>
                                 </v-menu>
                             </div>
