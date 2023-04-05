@@ -8,6 +8,20 @@ import created from "vue";
 import BacklogSprintCard from "../../Components/BacklogSprintCard.vue";
 import {onMounted} from "vue";
 
+
+const addIssue = (e:HTMLFormElement)=>{
+    console.log("add issue")
+    console.log(e.target[0].value);
+    state.tasks2.push({
+        id: state.tasks2.length+ 1,
+        description: e.target[0].value,
+        completed: true
+    })
+
+
+
+}
+
 const props = defineProps({
     project: Object,
     sprints: Object,
@@ -103,11 +117,11 @@ export default {
                                 </div>
                             </template>
                             <template #footer class="my-auto mt-6">
-                                <section class="sprint-footer  flex bg-gray-100 rounded px-3 py-2 mt-auto gap-2 ">
+                                <section class="sprint-footer flex bg-gray-100 rounded px-3 py-2 mt-auto gap-2 ">
                                     <i class="fa-duotone fa-plus"></i>
-                                    <p>
-                                        Create issues
-                                    </p>
+                                   <form @submit.prevent="addIssue" class="flex-grow-1">
+                                       <input class=" active:ring-0 w-full border-none active:border-none focus:border-none focus:ring-0" placeholder="Create issues">
+                                   </form>
                                 </section>
                             </template>
                         </draggable>
@@ -121,5 +135,9 @@ export default {
 
 <style scoped>
 
+
+textarea:focus, input:focus{
+    outline: none;
+}
 
 </style>
