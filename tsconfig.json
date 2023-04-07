@@ -2,7 +2,11 @@
     "compilerOptions": {
       "target": "es6",
       "module": "commonjs",
-      "strict": true,
+        "baseUrl": "./resources/js/",
+        "paths": {
+            "@/*": ["./*"]
+        },
+        "strict": true,
       "esModuleInterop": true,
         "types": [
             "vue-sweetalert2"
