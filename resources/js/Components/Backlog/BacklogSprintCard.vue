@@ -2,42 +2,45 @@
 
 <script lang="ts" setup>
 
-import {reactive, ref} from 'vue'
-import draggable from "vuedraggable";
-import {router} from "@inertiajs/vue3";
-import {toast} from "vue3-toastify";
+import { onMounted, reactive} from 'vue'
 import "@shoelace-style/shoelace/dist/components/select/select";
 import "@shoelace-style/shoelace/dist/components/option/option";
+import draggable from "vuedraggable";
 import SprintCardMenu from "./SprintCardMenu.vue";
 import IssueCard from "./IssueCard.vue";
+import axios from "axios";
 
 const props = defineProps({
-    project: Object,
+    sprint: Object,
 
 })
 
 
+console.log("sprint");
+console.log(props.sprint)
+
+
+function fetchSprintIssues(){
+    //@ts-ignore
+    axios.get("/api/sprints/" + props.sprint.id + "/issues").then((response)=>{
+        console.log(response.data)
+        state.issues = response.data
+    })
+}
+
+
+onMounted(()=>{
+    fetchSprintIssues()
+})
 
 const state = reactive({
-    tasks: [
-        {
-            id: 1,
-            description: "Complete the coding challenge",
-            completed: false
-        },
-        {
-            id :2,
-            description: "never forget your bed",
-            completed: true,
-        }
-    ],
+    issues: null ,
     DeleteDialog : false,
     EditDialog : false,
 
 })
 
 
-console.log(props.project)
 
 </script>
 
@@ -54,7 +57,7 @@ console.log(props.project)
     <section class="default-sprint mb-6 min-h-[180px] rounded  py-1 bg-gray-200">
         <div class="px-3 my-2">
             <draggable
-                v-model="state.tasks"
+                v-model="state.issues"
                 group="tasks"
                 @start="state.drag=true"
                 @end="state.drag=false"
@@ -73,7 +76,7 @@ console.log(props.project)
                         <div class="flex gap-3 ">
                             <i class="fa-duotone fa-angle-down"></i>
                             <p>
-                                {{ props.project.project_key }}
+                                {{ props.sprint.project_key }}
                                 <span>sprint 1</span>
                             </p>
                             <div class="sprint-action flex">
@@ -87,7 +90,7 @@ console.log(props.project)
                             <button class="bg-gray-100 mr-2 hover:bg-gray-50 px-2 py-1 rounded ">
                                 Start Sprint
                             </button>
-                            <SprintCardMenu :project="props.project" />
+                            <SprintCardMenu :project="props.sprint" />
                         </div>
 
                     </div>

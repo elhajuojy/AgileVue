@@ -30,6 +30,10 @@ class SprintController extends Controller
     }
 
 
+    public function issues(Sprint $sprint){
+        return $sprint->issues->toJson();
+    }
+
     public function destroy($project,$sprint){
         $sprint = Sprint::find($sprint);
         $sprint->delete();

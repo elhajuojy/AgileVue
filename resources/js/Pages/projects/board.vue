@@ -7,6 +7,12 @@ import { Head } from '@inertiajs/vue3';
 import  {ref } from "vue";
 import draggable from "vuedraggable";
 import {reactive} from "vue";
+import {useIssueStore} from "@/stores/issue";
+
+
+
+const issueStore = useIssueStore();
+issueStore.showIssueDetails = false;
 
 const props = defineProps({
     users : Object || null,
@@ -14,20 +20,11 @@ const props = defineProps({
 })
 
 
-console.log(props.users)
 
-function log(evt:any){
-    console.log(evt)
-    console.log(tasks);
-}
 
-const add = ()=>{
-    tasks.push({
-        id: tasks.length+ 1,
-        description: input.value    ,
-        completed: true
-    })
-}
+
+
+
 
 interface Task {
     id: number;
@@ -38,87 +35,17 @@ interface Task {
 
 
 
-let tasks = reactive<Task[]>([
-    {
-        id: 1,
-        description: "Complete the coding challenge",
-        completed: false
-    },
-    {
-        id: 2,
-        description: "Attend the team meeting",
-        completed: true
-    },
-    {
-        id: 3,
-        description: "Reply to client emails",
-        completed: false
-    },
-    {
-        id: 4,
-        description: "Submit the monthly report",
-        completed: false
-    },
-    {
-        id: 5,
-        description: "Take a break and go for a walk",
-        completed: true
-    }
-])
-let tasks2 = reactive<Task[]>([
-    {
-        id: 1,
-        description: "Complete the coding challenge",
-        completed: false
-    },
-    {
-        id: 2,
-        description: "Attend the team meeting",
-        completed: true
-    },
-    {
-        id: 3,
-        description: "Reply to client emails",
-        completed: false
-    },
-    {
-        id: 4,
-        description: "Submit the monthly report",
-        completed: false
-    },
-    {
-        id: 5,
-        description: "Take a break and go for a walk",
-        completed: true
-    }
-])
-let tasks3 = reactive<Task[]>([
-    {
-        id: 1,
-        description: "Complete the coding challenge",
-        completed: false
-    },
-
-])
 
 
 
 const input  = ref('')
-
-
-const state = reactive({
-        drag: false,
-        tasks: tasks,
-        tasks2: tasks2,
-        tasks3: tasks3,
-
-})
 
 </script  >
 
 <script lang="ts" >
 
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+
 
 export default {
 

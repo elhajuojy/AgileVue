@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\IssueController;
+use App\Http\Controllers\SprintController;
 use App\Models\User;
 use App\Models\UserProject;
 use Illuminate\Http\Request;
@@ -43,3 +45,6 @@ Route::post("/users/invite",function (Request $request){
 });
 
 
+
+Route::get("/sprints/{sprint}/issues",[SprintController::class, 'issues']);
+Route::get("/issue/{issue}/delete",[IssueController::class,"destroy"]);

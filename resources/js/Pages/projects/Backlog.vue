@@ -54,16 +54,6 @@ const state = reactive({
 
 
 
-const boardHeight = ref(0);
-
-
-onMounted(() => {
-
-    boardHeight.value = window.innerHeight ;
-console.log(boardHeight.value);
-
-});
-
 
 </script>
 
@@ -95,7 +85,7 @@ export default {
                     <section class=" grid-cols-3 gap-2" :class="issueStore.showIssueDetails?'grid':''">
                         <div class="col-span-2">
                             <!--   💕 sprint Card start -->
-                            <BacklogSprintCard v-for="sprint in props.sprints" key="sprint.id"  :project="sprint" />
+                            <BacklogSprintCard v-for="sprint in props.sprints" key="sprint.id"  :sprint="sprint" />
                             <!--  😍 sprint Card end -->
                             <!-- add sprint or backlog issues  -->
                             <section class="default-sprint mt-6 min-h-[180px]  py-1 ">
@@ -142,7 +132,6 @@ export default {
                                 </div>
                             </section>
                         </div>
-
                         <IssueDetailsCard  v-if="issueStore.showIssueDetails" />
                     </section>
 
