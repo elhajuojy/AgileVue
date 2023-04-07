@@ -4,17 +4,35 @@ export const useIssueStore = defineStore('issue',{
     state:()=>{
         return {
             showIssueDetails : false,
-            issue:Object
+            issue:Object,
+            todos:Array,
+            doing:Array,
+            done:Array,
+            backlog:Array
         }
     },
     actions:{
-        update:{
+        fromArrayToAnotherOne(){
+        },
+        delete(){
 
         },
-        delete:{
+        add(){
 
         },
-        add:{
+        update(){
+
+        },
+        log(){
+            console.log("Todos=>")
+            console.log(this.todos)
+            console.log("============================")
+            console.log("doing=>")
+            console.log(this.doing)
+            console.log("============================")
+            console.log("done=>")
+            console.log(this.done)
+            console.log("============================")
 
         }
     }

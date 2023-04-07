@@ -56,6 +56,7 @@ class ProjectController extends Controller
     }
 
     public function backlog(Project $project){
+        
         return Inertia::render('projects/Backlog', [
             "sprints"=>$project->sprints,
             "project"=>$project

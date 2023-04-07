@@ -11,4 +11,9 @@ class Sprint extends Model
 
 
     protected $guarded = [];
+
+
+    public function issues(){
+        return $this->hasMany(Issue::class);
+    }
 }

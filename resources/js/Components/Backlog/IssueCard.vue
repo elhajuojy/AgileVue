@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 
 import {useIssueStore} from "@/stores/issue";
+import SprintCardMenu from "@/Components/Backlog/SprintCardMenu.vue";
+import IssueMenu from "@/Components/issue/issueMenu.vue";
 
 const props = defineProps({
     issue:Object
@@ -9,7 +11,6 @@ const props = defineProps({
 const issueStore = useIssueStore();
 
 
-console.log(props.issue)
 
 </script>
 
@@ -30,7 +31,7 @@ console.log(props.issue)
                 </div>
                 <p>
 
-                    {{props.issue.description}}
+                    {{props.issue.description.substring(1,30)}} ...
                 </p>
 
             </div>
@@ -43,10 +44,7 @@ console.log(props.issue)
                               size="25"
                     ></v-avatar>
                 </div>
-                <button
-                    class="bg-gray-100 text-black px-2 py-1  rounded ">
-                    <i class="fa-regular fa-ellipsis"></i>
-                </button>
+                <IssueMenu :issue="props.issue" />
             </div>
         </div>
 

@@ -4,7 +4,7 @@ import {reactive} from "vue";
 import { defineProps } from 'vue'
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
-
+import {useGlobalStateStore} from "@/stores/globalState";
 import axios from "axios";
 import {Link, router, usePage} from '@inertiajs/vue3';
 import UserAvatarMenu from "../UserAvatarMenu.vue";
@@ -30,8 +30,9 @@ const notify = (message:string) => {
     }); // ToastOptions
 }
 
+const globalStore = useGlobalStateStore()
 
-const user = usePage().props.auth.user;
+const user =globalStore.user;
 
 const state = reactive({
     inputSearch: "",

@@ -12,14 +12,15 @@ import Card from "../Components/Card.vue";
 import { ref , reactive } from 'vue';
 import TheNav from "../Shared/TheNav.vue";
 import DashboardRecentTabs from "../Components/DashboardRecentTabs.vue";
-
-
-let  user = usePage().props.auth.user;
+import {useGlobalStateStore} from "@/stores/globalState";
+let  user = useGlobalStateStore().user;
 
 const props = defineProps({
     sharedProjects: Object,
     others_projects: Object,
 });
+
+
 
 
 
