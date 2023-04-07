@@ -13,6 +13,7 @@ import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path';
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
+import {createPinia} from 'pinia'
 import * as directives from 'vuetify/directives'
 
 
@@ -25,6 +26,8 @@ const vuetify = createVuetify({
     components,
     directives,
 })
+
+const pinia = createPinia()
 
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -63,6 +66,7 @@ createInertiaApp({
             .use(vuetify)
             .use(plugin)
             .use(ZiggyVue, Ziggy)
+            .use(pinia)
             .component('font-awesome-icon', FontAwesomeIcon)
             .mount(el);
     },

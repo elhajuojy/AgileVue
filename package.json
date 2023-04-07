@@ -26,6 +26,7 @@
         "@fortawesome/vue-fontawesome": "^3.0.3",
         "@inertiajs/vue3": "^1.0.2",
         "@shoelace-style/shoelace": "^2.2.0",
+        "pinia": "^2.0.33",
         "vue": "^3.2.36",
         "vue-sweetalert2": "^5.0.5",
         "vue3-toastify": "^0.1.6",
