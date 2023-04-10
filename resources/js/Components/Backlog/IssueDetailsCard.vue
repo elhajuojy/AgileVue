@@ -18,7 +18,7 @@ console.log(issueStore.issue)
 <template>
     <section
         v-if="issueStore.showIssueDetails"
-        class="h-full overflow-x-hidden overflow-y-scroll ">
+        class="h-full  ">
         <div class=" flex mb-3 gap-2 justify-between mx-2 items-center">
             <div>
                 <h2 class="text-body-2">

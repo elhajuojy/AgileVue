@@ -62,6 +62,7 @@ Route::middleware('auth')->group(function () {
 
     require __DIR__ . '/project.php';
     require __DIR__ . '/sprint.php';
+    require __DIR__."/backlog.php";
 
 
 });

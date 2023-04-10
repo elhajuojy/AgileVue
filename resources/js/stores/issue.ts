@@ -8,7 +8,7 @@ export const useIssueStore = defineStore('issue',{
             todos:Array,
             doing:Array,
             done:Array,
-            backlog:Array
+            backlog:[Object]
         }
     },
     actions:{
