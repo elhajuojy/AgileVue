@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+
 Route::get('/users', function (Request $request) {
     $search = $request->input("search");
 

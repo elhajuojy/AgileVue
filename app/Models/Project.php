@@ -20,4 +20,9 @@ class Project extends Model
     public function sprints(){
         return $this->hasMany(Sprint::class);
     }
+
+
+    public function issues(){
+        return $this->hasMany(Issue::class);
+    }
 }
