@@ -4,6 +4,7 @@ import {useIssueStore} from "@/stores/issue";
 import SprintCardMenu from "@/Components/Backlog/SprintCardMenu.vue";
 import IssueMenu from "@/Components/issue/issueMenu.vue";
 import {useProjectStore} from "@/stores/projectStore";
+import UserAvatarMenu from "@/Components/UserAvatarMenu.vue";
 
 const props = defineProps({
     issue:Object
@@ -13,8 +14,13 @@ const props = defineProps({
 
 const issueStore = useIssueStore();
 const projectStore = useProjectStore()
-console.log(projectStore.users)
 console.log(props.issue?.user_id)
+
+let assigneeUser =projectStore.users.filter((user)=>{
+    return user.id == 3
+})
+console.log(assigneeUser)
+
 
 </script>
 
@@ -40,12 +46,7 @@ console.log(props.issue?.user_id)
 
             </div>
             <div class="flex gap-2 align-center">
-                    <v-avatar color="surface-variant"
-                              size="25"
-                              image=""
-                    >
-
-                    </v-avatar>
+                   <UserAvatarMenu v-if="assigneeUser.length > 0" :user="assigneeUser[0]"/>
                 <IssueMenu :issue="props.issue" />
             </div>
         </div>

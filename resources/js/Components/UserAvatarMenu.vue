@@ -9,6 +9,7 @@ const data = defineProps({
 })
 
 console.log(data.user)
+
 </script>
 
 <template>
@@ -22,7 +23,7 @@ console.log(data.user)
                 <v-menu
                     min-width="23px"
                     rounded
-                    
+
                 >
                     <template v-slot:activator="{ props }">
                         <v-btn

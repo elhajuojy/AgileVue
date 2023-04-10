@@ -24,6 +24,10 @@ export const useProjectStore = defineStore('projectStore',{
         },
         async fetchProject(){
             return "nothing now"
+        },
+        findUser(id:Number){
+             // @ts-ignore
+            return  this.users.filter((e)=>e.user_id = id)
         }
 
     }
