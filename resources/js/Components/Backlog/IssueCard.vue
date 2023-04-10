@@ -3,19 +3,23 @@
 import {useIssueStore} from "@/stores/issue";
 import SprintCardMenu from "@/Components/Backlog/SprintCardMenu.vue";
 import IssueMenu from "@/Components/issue/issueMenu.vue";
+import {useProjectStore} from "@/stores/projectStore";
 
 const props = defineProps({
     issue:Object
 });
 
+
+
 const issueStore = useIssueStore();
-
-
+const projectStore = useProjectStore()
+console.log(projectStore.users)
+console.log(props.issue?.user_id)
 
 </script>
 
 <template>
-    <div class="flex gap-1 cursor-pointer  w-full"
+    <v-card class="flex gap-1 cursor-pointer  w-full"
     @click="issueStore.showIssueDetails=true;issueStore.issue=props.issue"
     >
 
@@ -31,24 +35,22 @@ const issueStore = useIssueStore();
                 </div>
                 <p>
 
-                    {{props.issue.description.substring(1,30)}} ...
+                    {{props.issue.description.substring(0,30)}} ...
                 </p>
 
             </div>
             <div class="flex gap-2 align-center">
-                <div>
-                    TODO
-                </div>
-                <div>
                     <v-avatar color="surface-variant"
                               size="25"
-                    ></v-avatar>
-                </div>
+                              image=""
+                    >
+
+                    </v-avatar>
                 <IssueMenu :issue="props.issue" />
             </div>
         </div>
 
-    </div>
+    </v-card>
 </template>
 
 

@@ -16,14 +16,11 @@ const props = defineProps({
 })
 
 
-console.log("sprint");
-console.log(props.sprint)
 
 
 function fetchSprintIssues(){
     //@ts-ignore
     axios.get("/api/sprints/" + props.sprint.id + "/issues").then((response)=>{
-        console.log(response.data)
         state.issues = response.data
     })
 }
@@ -54,14 +51,14 @@ const state = reactive({
 
 
 <!--    backlog Create Section start  -->
-    <section class="default-sprint mb-6 min-h-[180px] rounded  py-1 bg-gray-200">
+    <section class="default-sprint mb-6  rounded  py-1 bg-gray-200">
         <div class="px-3 my-2">
             <draggable
                 v-model="state.issues"
                 group="tasks"
                 @start="state.drag=true"
                 @end="state.drag=false"
-                @change="console.log('change')"
+                @change=""
                 item-key="id"
             >
                 <template class="grid  border-dotted border-gray-700 cursor-pointer border-3  align-content-lg-space-between" #item="{element,index}" >
@@ -96,7 +93,7 @@ const state = reactive({
                     </div>
                 </template>
                 <template #footer class="my-auto">
-                    <section class="sprint-footer flex bg-gray-100 rounded px-3 py-2 mt-auto gap-2 ">
+                    <section class="sprint-footer  flex bg-gray-100 rounded px-3 py-2 mt-3 gap-2 ">
                         <i class="fa-duotone fa-plus"></i>
                         <p>
                             Create issues

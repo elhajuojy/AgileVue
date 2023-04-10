@@ -8,19 +8,22 @@ import  {ref } from "vue";
 import draggable from "vuedraggable";
 import {reactive} from "vue";
 import {useIssueStore} from "@/stores/issue";
+import {useProjectStore} from "@/stores/projectStore";
 
 
 
 const issueStore = useIssueStore();
 issueStore.showIssueDetails = false;
 
+
 const props = defineProps({
     users : Object || null,
     project: Object,
 })
 
-
-
+const projectStore = useProjectStore();
+//@ts-ignore
+projectStore.users = props.users
 
 
 
@@ -62,7 +65,7 @@ export default {
             <section class="text-black mt-16 w-full flex mx-auto">
                 <TheProjectAside :project="props.project" />
                 <main class="w-full   p-6 ">
-                    <HeaderBoard :search="props.project.name" :users="props.users" :project_id="props.project.id" />
+                    <HeaderBoard :search="props.project?.name" :users="props.users" :project_id="props.project?.id" />
                     <Tasks/>
                 </main>
 

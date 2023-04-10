@@ -20,17 +20,6 @@ const issueStore = useIssueStore();
 const backlogStore = useBacklogStore();
 
 
-const addIssue = (e:HTMLFormElement)=>{
-    console.log("add issue")
-    console.log(e.target[0].valueOf());
-    state.tasks2.push({
-        id: state.tasks2.length+ 1,
-        description: e.target[0].valueOf(),
-        completed: true
-    })
-
-
-}
 
 const props = defineProps({
     project: Object,
