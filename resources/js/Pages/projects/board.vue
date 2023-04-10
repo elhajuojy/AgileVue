@@ -59,9 +59,9 @@ export default {
     <div class="">
         <Head title="Project" />
         <div class="">
-            <section class="text-black w-full flex mx-auto">
+            <section class="text-black mt-16 w-full flex mx-auto">
                 <TheProjectAside :project="props.project" />
-                <main class="w-full overflow-y-auto p-6 ">
+                <main class="w-full   p-6 ">
                     <HeaderBoard :search="props.project.name" :users="props.users" :project_id="props.project.id" />
                     <Tasks/>
                 </main>

@@ -16,13 +16,13 @@ const routes = {
 }
 
 
-const active  = 'active shadow bg-blue-300 text-white rounded-md p-2 transition shadow duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'
+const active  = 'active  shadow bg-blue-300 text-white rounded-md p-2 transition shadow duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'
 
 
 </script>
 <template>
-    <div class="min-w-[15%] max-w-[20%]">
-        <aside class="p-3 shadow aside    bg-white">
+    <div class="min-w-[15%] relative  max-w-[20%]">
+        <aside class="p-3 shadow aside fixed z-50   bg-white">
             <header class="flex gap-3 m-auto">
                 <img :src="props.project.project_cover" class="w-8 m-auto my-2 h-8 rounded-full">
                 <div class="flex-grow-1">
