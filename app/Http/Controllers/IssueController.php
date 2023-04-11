@@ -34,4 +34,9 @@ class IssueController extends Controller
 
         return redirect()->back()->with("success","Comment Added");
     }
+
+    public function issueComments(Issue $issue){
+
+        return $issue->comments ;
+    }
 }

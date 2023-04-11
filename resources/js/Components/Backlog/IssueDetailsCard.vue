@@ -11,6 +11,7 @@ const userStore = useGlobalStateStore();
 import {ref} from "vue";
 
 let commentarea = ref("")
+let comments = ref([])
 const addComment = (e) => {
 
     const formData = new FormData(e.target);
@@ -41,6 +42,8 @@ const addComment = (e) => {
 
 
     commentarea.value = ""
+    fetchComment()
+
 
 
 
@@ -49,8 +52,23 @@ const addComment = (e) => {
 
 }
 
+const fetchComment = ()=>{
+
+    const url  = `/api/issues/${issueStore.issue.id}/comments`
+
+    axios.get(url).then((data)=>{
+        console.log(data)
+        comments.value = data.data
+    }).catch((error)=>{
+        console.log(error)
+    })
+}
+
+fetchComment();
+
 
 </script>
+
 
 <template>
     <section
@@ -175,7 +193,37 @@ const addComment = (e) => {
                                 save
                             </v-btn>
                         </form>
+
                 </div>
+                <table class="w-full mt-6">
+                    <v-card key="comment.id" v-for="comment in comments"
+                    variant="text"
+                            class="flex  gap-3"
+                    >
+                       <div class="flex gap-3">
+                           <v-avatar>
+                               <v-img
+                                   src="https://api.dicebear.com/6.x/lorelei/svg?seed=nouhila"
+                               >
+
+                               </v-img>
+                           </v-avatar>
+
+                           <div class="my-2">
+                               <p>
+                                   {{ comment.body }}
+                               </p>
+                               <v-btn variant="flat" size="x-small">
+                                   Edit
+                               </v-btn>
+                               <v-btn variant="flat" size="x-small">
+                                   Delete
+                               </v-btn>
+                           </div>
+                       </div>
+                    </v-card>
+
+                </table>
             </div>
         </div>
     </section>
