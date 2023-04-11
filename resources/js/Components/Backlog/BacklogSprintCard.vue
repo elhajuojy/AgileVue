@@ -16,7 +16,18 @@ const props = defineProps({
 })
 
 
-
+const changeIssueSprintId = (event: any) => {
+    //@ts-ignore
+    console.log(event)
+    if (event.added) {
+        console.log(props.sprint?.id)
+        console.log(event.added.element.id)
+        //@ts-ignore
+        axios.post("/api/sprints/" + props.sprint.id + "/issues/" + event.added.element.id).then((response) => {
+            fetchSprintIssues()
+        })
+    }
+}
 
 function fetchSprintIssues(){
     //@ts-ignore
@@ -58,7 +69,7 @@ const state = reactive({
                 group="tasks"
                 @start="state.drag=true"
                 @end="state.drag=false"
-                @change=""
+                @change="changeIssueSprintId"
                 item-key="id"
             >
                 <template class="grid  border-dotted border-gray-700 cursor-pointer border-3  align-content-lg-space-between" #item="{element,index}" >

@@ -55,12 +55,10 @@ const addComment = (e) => {
 const fetchComment = ()=>{
 
     const url  = `/api/issues/${issueStore.issue.id}/comments`
-
     axios.get(url).then((data)=>{
-        console.log(data)
         comments.value = data.data
     }).catch((error)=>{
-        console.log(error)
+        console.error(error)
     })
 }
 

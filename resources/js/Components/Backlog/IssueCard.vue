@@ -16,15 +16,21 @@ const issueStore = useIssueStore();
 const projectStore = useProjectStore()
 
 let assigneeUser =projectStore.users.filter((user)=>{
+    //@ts-ignore
     return user.id == 3
 })
 
-
+const issueClick  = ()=>{
+    issueStore.showIssueDetails=true;
+    //@ts-ignore
+    issueStore.issue=props.issue
+}
 </script>
 
 <template>
     <v-card class="flex gap-1 cursor-pointer  w-full"
-    @click="issueStore.showIssueDetails=true;issueStore.issue=props.issue"
+
+    @click="issueClick"
     >
 
         <div

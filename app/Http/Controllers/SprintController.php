@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Issue;
 use App\Models\Sprint;
 use Illuminate\Http\Request;
 
@@ -38,5 +39,13 @@ class SprintController extends Controller
         $sprint = Sprint::find($sprint);
         $sprint->delete();
         return redirect()->back()->with("success","Sprint deleted successfully");
+    }
+
+
+    public function updateIssueSprint(Sprint $sprint, Issue $issue){
+
+        $issue->sprint_id = $sprint->id;
+        $issue->save();
+        return redirect()->back()->with("success","Issue removed from sprint successfully");
     }
 }
