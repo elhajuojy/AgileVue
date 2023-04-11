@@ -35,6 +35,15 @@ const state = reactive({
 
 
 
+const moveIssueToBacklog = (e) => {
+   if (e.added) {
+    const url = `/api/issues/${e.added.element.id}/backlog`
+       axios.post(url).then((response) => {
+           fetchIssuesBacklog()
+       })
+   }
+}
+
 </script>
 
 <template>
@@ -45,7 +54,7 @@ const state = reactive({
                 group="tasks"
                 @start="state.drag=true"
                 @end="state.drag=false"
-                @change=""
+                @change="moveIssueToBacklog"
                 item-key="id"
             >
                 <template class="grid  border-dotted border-gray-700 cursor-pointer border-3  align-content-lg-space-between" #item="{element,index}" >
