@@ -3,14 +3,51 @@
 <script setup>
 import {useIssueStore} from "@/stores/issue";
 import IconButton from "@/Components/IconButton.vue";
+import {useGlobalStateStore} from "@/stores/globalState";
+import axios from "axios";
+import { router } from '@inertiajs/vue3'
 const issueStore = useIssueStore();
+const userStore = useGlobalStateStore();
+import {ref} from "vue";
+
+let commentarea = ref("")
+const addComment = (e) => {
+
+    const formData = new FormData(e.target);
 
 
-console.log(issueStore.issue)
+
+
+    formData.append('user_id', userStore.user.id);
+    formData.append('issue_id', issueStore.issue.id);
+    formData.append("body",formData.get("comment"));
+
+    const url = "/api/issues/add-comment";
+
+    router.visit(url,
+        {
+        method: 'post',
+        data: formData,
+        preserveState: true,
+        preserveScroll: true,
+        only: ['comments'],
+        onSuccess: () => {
+            console.log('success')
+        },
+        onError: () => {
+            console.log('error')
+        }
+    });
+
+
+    commentarea.value = ""
 
 
 
 
+
+
+}
 
 
 </script>
@@ -93,7 +130,7 @@ console.log(issueStore.issue)
                 <h4 class="text-base">
                     Description
                 </h4>
-                <textarea class="w-full h-40 outline-none border-2 border-gray-300 rounded p-2" placeholder="Add a more detailed description..."></textarea>
+                <v-text-field label="Add a more detailed description..."></v-text-field>
             </div>
             <div>
                 <h4>
@@ -106,17 +143,38 @@ console.log(issueStore.issue)
                 </sl-select>
             </div>
             <div>
-                <p class="mb-3">
+                <p class="my-3">
                     Comments
                 </p>
                 <div class="mt-3 flex gap-2">
 
-                    <v-avatar color="surface-variant"
-                              size="25"
-                    ></v-avatar>
-                    <div contenteditable="true" class="bg-white w-75">
-                        Add Comment ...
-                    </div>
+                    <v-avatar
+
+                        size="25"
+                    >
+
+                        <v-img :src="userStore.user.profile_image">
+
+                        </v-img>
+                    </v-avatar>
+                        <form class="w-full" @submit.prevent="addComment" method="post">
+
+                        <v-textarea label="Add Comment ... " name="comment"
+                                    v-model="commentarea"
+
+                        >
+                        </v-textarea>
+                            <v-btn
+                                color="primary"
+                                size="small"
+                                type="submit"
+
+
+                            variant="tonal"
+                            >
+                                save
+                            </v-btn>
+                        </form>
                 </div>
             </div>
         </div>

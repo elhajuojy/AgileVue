@@ -14,12 +14,10 @@ const props = defineProps({
 
 const issueStore = useIssueStore();
 const projectStore = useProjectStore()
-console.log(props.issue?.user_id)
 
 let assigneeUser =projectStore.users.filter((user)=>{
     return user.id == 3
 })
-console.log(assigneeUser)
 
 
 </script>
