@@ -9,8 +9,26 @@ import { router } from '@inertiajs/vue3'
 const issueStore = useIssueStore();
 const userStore = useGlobalStateStore();
 import {onUpdated, ref} from "vue";
+import {useProjectStore} from "@/stores/projectStore";
 
 let commentarea = ref("")
+const projectStore  = useProjectStore();
+
+
+
+const assigneIssue  = () =>{
+    //i need just id of the user and the id of the issue to assigne the issue to the user
+    //@ts-ignore
+    console.log("user id")
+    const idIssue = issueStore.issue.id ;
+    //
+    // router.post("/api/issues/assigne-issue",{
+    //     issue_id:idIssue,
+    //     user_id:
+    // })
+
+
+}
 
 
 let comments = ref([])
@@ -44,7 +62,7 @@ const addComment = (e) => {
 
 
     commentarea.value = ""
-    fetchComment()
+    issueStore.fetchComments();
 
 
 
@@ -56,6 +74,26 @@ const addComment = (e) => {
 
 issueStore.fetchComments();
 
+
+function deleteComment(id) {
+    const url = "/api/issues/remove-comment/"+id;
+
+    router.visit(url,
+        {
+            method: 'delete',
+            preserveState: true,
+            preserveScroll: true,
+            only: ['comments'],
+            onSuccess: () => {
+                console.log('success')
+            },
+            onError: () => {
+                console.log('error')
+            }
+        });
+
+    issueStore.fetchComments();
+}
 
 // i want to call the change when the issueStore.issue change but it doesn't work
 
@@ -144,9 +182,11 @@ issueStore.fetchComments();
                 <h4>
                     Assignee
                 </h4>
-                <sl-select>
-                    <sl-option>
-                        elmahdi elhjuojy
+                <sl-select
+                @change="assigneIssue"
+                >
+                    <sl-option   v-for="user in projectStore.users" >
+                        {{ user.full_name }}
                     </sl-option>
                 </sl-select>
             </div>
@@ -206,7 +246,9 @@ issueStore.fetchComments();
                                <v-btn variant="flat" size="x-small">
                                    Edit
                                </v-btn>
-                               <v-btn variant="flat" size="x-small">
+                               <v-btn variant="flat" size="x-small"
+                               @click="deleteComment(comment.id)"
+                               >
                                    Delete
                                </v-btn>
                            </div>

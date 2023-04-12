@@ -39,4 +39,9 @@ class IssueController extends Controller
 
         return $issue->comments ;
     }
+
+    public function deleteComment(Comment $comment){
+        $comment->delete();
+        return redirect()->back()->with("success","Comment Deleted");
+    }
 }

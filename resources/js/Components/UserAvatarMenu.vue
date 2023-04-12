@@ -8,7 +8,6 @@ const data = defineProps({
     },
 })
 
-console.log(data.user)
 
 </script>
 

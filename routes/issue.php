@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Route;
 Route::post("/api/issues/add-comment",[IssueController::class,"addComment"])->name("addComment");
 Route::get("/api/issues/{issue}/comments",[IssueController::class,"issueComments"])->name("issueComments");
 Route::delete("/api/issues/{issue}/comments/{comment}",[IssueController::class,"deleteComment"])->name("deleteComment");
+///api/issues/remove-comment/
+Route::delete("/api/issues/remove-comment/{comment}",[IssueController::class,"deleteComment"])->name("deleteComment");
+
 
 
 Route::delete("/api/issues/{issue}/delete",[IssueController::class,"destroy"])->name("deleteIssue");

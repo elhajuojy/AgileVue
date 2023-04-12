@@ -13,6 +13,7 @@ import {useProjectStore} from "@/stores/projectStore";
 
 
 const issueStore = useIssueStore();
+
 issueStore.showIssueDetails = false;
 
 
@@ -22,6 +23,9 @@ const props = defineProps({
 })
 
 const projectStore = useProjectStore();
+//@ts-ignore
+projectStore.users = props.users;
+
 //@ts-ignore
 projectStore.users = props.users
 

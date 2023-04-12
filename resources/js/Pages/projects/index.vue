@@ -22,6 +22,7 @@ const createProject = (e) => {
     console.log(e.target)
     document.querySelector(".v-btn__content").click()
     router.post('/projects',e.target);
+
     setTimeout(()=>{
         Swal.fire({
             title: 'success',

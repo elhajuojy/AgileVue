@@ -34,7 +34,6 @@ function fetchSprintIssues(){
     //@ts-ignore
     axios.get("/api/sprints/" + props.sprint.id + "/issues").then((response)=>{
         state.issues = response.data
-        console.log(state.issues)
     })
 
 
