@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import axios from "axios";
 
 export const useIssueStore = defineStore('issue',{
     state:()=>{
@@ -8,7 +9,8 @@ export const useIssueStore = defineStore('issue',{
             todos:Array,
             doing:Array,
             done:Array,
-            backlog:[Object]
+            backlog:[Object],
+            comments : Array
         }
     },
     actions:{
@@ -17,6 +19,15 @@ export const useIssueStore = defineStore('issue',{
         delete(){
 
         },
+        fetchComments  () {
+            // @ts-ignore
+            const url  = `/api/issues/${ this.issue.id }/comments`
+            axios.get(url).then((data)=>{
+                this.comments = data.data
+            }).catch((error)=>{
+                console.error(error)
+            })
+        },
         add(){
 
         },
@@ -24,15 +35,7 @@ export const useIssueStore = defineStore('issue',{
 
         },
         log(){
-            console.log("Todos=>")
-            console.log(this.todos)
-            console.log("============================")
-            console.log("doing=>")
-            console.log(this.doing)
-            console.log("============================")
-            console.log("done=>")
-            console.log(this.done)
-            console.log("============================")
+
 
         }
     }

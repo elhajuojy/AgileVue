@@ -9,6 +9,7 @@ import draggable from "vuedraggable";
 import SprintCardMenu from "./SprintCardMenu.vue";
 import IssueCard from "./IssueCard.vue";
 import axios from "axios";
+import { ref } from 'vue';
 
 const props = defineProps({
     sprint: Object,
@@ -33,20 +34,27 @@ function fetchSprintIssues(){
     //@ts-ignore
     axios.get("/api/sprints/" + props.sprint.id + "/issues").then((response)=>{
         state.issues = response.data
+        console.log(state.issues)
     })
+
+
+
 }
 
 
 onMounted(()=>{
     fetchSprintIssues()
+
 })
 
 const state = reactive({
     issues: null ,
     DeleteDialog : false,
     EditDialog : false,
+    startSprint : false,
 
 })
+
 
 
 
@@ -65,7 +73,7 @@ const state = reactive({
     <section class="default-sprint mb-6  rounded  py-1 bg-gray-200">
         <div class="px-3 my-2">
             <draggable
-                v-model="state.issues"
+                v-model="state.issues "
                 group="tasks"
                 @start="state.drag=true"
                 @end="state.drag=false"
@@ -75,7 +83,7 @@ const state = reactive({
                 <template class="grid  border-dotted border-gray-700 cursor-pointer border-3  align-content-lg-space-between" #item="{element,index}" >
 
                     <div :key="element.id" class="text-center  w-full  rounded my-3 ">
-                        <IssueCard :issue="element"/>
+                        <IssueCard :issue="element" />
 
                     </div>
                 </template>
@@ -95,8 +103,10 @@ const state = reactive({
                             </div>
                         </div>
                         <div class="flex gap-1">
-                            <button class="bg-gray-100 mr-2 hover:bg-gray-50 px-2 py-1 rounded ">
-                                Start Sprint
+                            <button class="bg-gray-100 mr-2 hover:bg-gray-50 px-2 py-1 rounded "
+                            @click="state.startSprint = !state.startSprint"
+                            >
+                                {{ !state.startSprint ? 'Start sprint' : 'Stop sprint' }}
                             </button>
                             <SprintCardMenu :project="props.sprint" />
                         </div>

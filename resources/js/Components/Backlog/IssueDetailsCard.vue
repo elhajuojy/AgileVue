@@ -8,9 +8,11 @@ import axios from "axios";
 import { router } from '@inertiajs/vue3'
 const issueStore = useIssueStore();
 const userStore = useGlobalStateStore();
-import {ref} from "vue";
+import {onUpdated, ref} from "vue";
 
 let commentarea = ref("")
+
+
 let comments = ref([])
 const addComment = (e) => {
 
@@ -52,18 +54,10 @@ const addComment = (e) => {
 
 }
 
-const fetchComment = ()=>{
+issueStore.fetchComments();
 
-    const url  = `/api/issues/${issueStore.issue.id}/comments`
-    axios.get(url).then((data)=>{
-        comments.value = data.data
-    }).catch((error)=>{
-        console.error(error)
-    })
-}
 
-fetchComment();
-
+// i want to call the change when the issueStore.issue change but it doesn't work
 
 </script>
 
@@ -79,9 +73,7 @@ fetchComment();
                 </h2>
             </div>
             <div class="flex gap-2">
-                <IconButton
-
-                >
+                <IconButton>
                     <i class="fa-solid fa-lock"></i>
                 </IconButton>
                 <IconButton>
@@ -194,7 +186,7 @@ fetchComment();
 
                 </div>
                 <table class="w-full mt-6">
-                    <v-card key="comment.id" v-for="comment in comments"
+                    <v-card key="comment.id" v-for="comment in issueStore.comments"
                     variant="text"
                             class="flex  gap-3"
                     >

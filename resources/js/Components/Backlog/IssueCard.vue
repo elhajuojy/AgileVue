@@ -24,12 +24,12 @@ const issueClick  = ()=>{
     issueStore.showIssueDetails=true;
     //@ts-ignore
     issueStore.issue=props.issue
+    issueStore.fetchComments()
 }
 </script>
 
 <template>
     <v-card class="flex gap-1 cursor-pointer  w-full"
-
     @click="issueClick"
     >
 
