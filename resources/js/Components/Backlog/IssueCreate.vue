@@ -24,8 +24,6 @@ const state = reactive({
 
     //@ts-ignore
 const addIssue = (e:HTMLFormElement)=>{
-    console.log("add issue")
-    console.log(state.title);
     //@ts-ignore
     router.visit(`/api/issues/${projectStore.project?.id}/create`,{
         // title : e.target[0].value
