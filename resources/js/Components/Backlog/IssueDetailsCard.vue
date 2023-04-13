@@ -103,7 +103,7 @@ function deleteComment(id) {
 <template>
     <section
         v-if="issueStore.showIssueDetails"
-        class="h-full  ">
+        class="max-h-fit">
         <div class=" flex mb-3 gap-2 justify-between mx-2 items-center">
             <div>
                 <h2 class="text-body-2">

@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import {usePage} from "@inertiajs/vue3";
 
+// @ts-ignore
 export const useGlobalStateStore = defineStore('globalState',{
     state:()=>{
         return {
@@ -9,6 +10,7 @@ export const useGlobalStateStore = defineStore('globalState',{
 
         }
     },
+    persist: true,
     actions:{
         logOut(){
             console.log("UserlogOut");
@@ -18,5 +20,7 @@ export const useGlobalStateStore = defineStore('globalState',{
             console.log("is login ")
         },
 
-    }
+    },
+
+
 })

@@ -1,12 +1,11 @@
 import { defineStore } from "pinia";
 
+//@ts-ignore
 export const useProjectStore = defineStore('projectStore',{
     state:()=>{
         return {
-            //@ts-ignore
             project:Object,
             users:[]
-
         }
     },
     actions:{
@@ -30,5 +29,6 @@ export const useProjectStore = defineStore('projectStore',{
             return  this.users.filter((e)=>e.user_id = id)
         }
 
-    }
+    },
+    persist: true,
 })

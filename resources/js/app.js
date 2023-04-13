@@ -14,6 +14,8 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import {createPinia} from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
 import * as directives from 'vuetify/directives'
 
 
@@ -28,6 +30,7 @@ const vuetify = createVuetify({
 })
 
 const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
 
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
