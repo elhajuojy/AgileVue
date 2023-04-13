@@ -25,6 +25,8 @@ const props = defineProps({
 const projectStore = useProjectStore();
 //@ts-ignore
 projectStore.users = props.users;
+//@ts-ignore
+projectStore.project = props.project
 
 //@ts-ignore
 projectStore.users = props.users

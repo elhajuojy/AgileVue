@@ -45,7 +45,7 @@ const issueClick  = ()=>{
                 </div>
                 <p>
 
-                    {{props.issue.description.substring(0,30)}} ...
+                    {{props.issue.title.substring(0,30)}} ...
                 </p>
 
             </div>

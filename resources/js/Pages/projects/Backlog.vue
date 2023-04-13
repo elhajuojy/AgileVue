@@ -15,9 +15,11 @@ import {useBacklogStore} from "@/stores/BacklogStore";
 import { useIssueStore} from "@/stores/issue";
 import IssueDetailsCard from "@/Components/Backlog/IssueDetailsCard.vue";
 import BacklogCreateCard from "@/Components/Backlog/BacklogCreateCard.vue";
+import {useProjectStore} from "@/stores/projectStore";
 
 const issueStore = useIssueStore();
 const backlogStore = useBacklogStore();
+const projectStore = useProjectStore()
 
 
 
@@ -75,7 +77,7 @@ export default {
             <TheProjectAside :project="props.project" />
 
                 <main class="overflow-y-auto board col-span-2 w-full grid p-6 ">
-                    <HeaderBoard :search="backlogStore.project?.name" :project_id="backlogStore.project?.id" />
+                    <HeaderBoard :users="projectStore.users" :search="backlogStore.project?.name" :project_id="backlogStore.project?.id" />
                     <section class=" grid-cols-3 gap-2" :class="issueStore.showIssueDetails?'grid':''">
                         <div class="col-span-2 overflow-y-scroll pr-6">
                             <!--   💕 sprint Card start -->

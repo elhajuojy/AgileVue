@@ -9,7 +9,7 @@ import draggable from "vuedraggable";
 import SprintCardMenu from "./SprintCardMenu.vue";
 import IssueCard from "./IssueCard.vue";
 import axios from "axios";
-import { ref } from 'vue';
+import IssueCreate from "@/Components/Backlog/IssueCreate.vue";
 
 const props = defineProps({
     sprint: Object,
@@ -113,12 +113,7 @@ const state = reactive({
                     </div>
                 </template>
                 <template #footer class="my-auto">
-                    <section class="sprint-footer  flex bg-gray-100 rounded px-3 py-2 mt-3 gap-2 ">
-                        <i class="fa-duotone fa-plus"></i>
-                        <p>
-                            Create issues
-                        </p>
-                    </section>
+                    <issue-create :id_sprint="props.sprint.id" @getIssues="fetchSprintIssues" />
                 </template>
             </draggable>
         </div>

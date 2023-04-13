@@ -35,8 +35,7 @@ export const useIssueStore = defineStore('issue',{
 
         },
         log(){
+        },
 
-
-        }
     }
 })

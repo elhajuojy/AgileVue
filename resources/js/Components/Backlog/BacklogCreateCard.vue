@@ -80,7 +80,7 @@ const moveIssueToBacklog = (e) => {
                     </div>
                 </template>
                 <template #footer class="my-auto mt-6">
-                    <IssueCreate/>
+                    <IssueCreate :id_sprint="0"  @getIssues="fetchIssuesBacklog"/>
                 </template>
             </draggable>
         </div>
