@@ -18,8 +18,6 @@ const props = defineProps({
 
 })
 const deleteSprint = ()=>{
-    console.log("delete sprint")
-    console.log(props.issue?.id)
     // /issue/{issue}/delete
     router.visit(`/api/issue/${props.issue?.id}/delete`,{
     })
