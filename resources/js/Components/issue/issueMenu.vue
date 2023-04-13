@@ -16,6 +16,7 @@ const state = reactive({
 const props = defineProps({
     issue: Object,
 
+
 })
 const deleteSprint = ()=>{
     // /issue/{issue}/delete
