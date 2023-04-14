@@ -3,7 +3,7 @@
 
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {Head,router } from '@inertiajs/vue3';
-import '@shoelace-style/shoelace/dist/components/relative-time/relative-time.js';
+import '@shoelace-style/shoelace/dist/components/format-date/format-date';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 defineProps({
@@ -96,7 +96,7 @@ const createProject = (e) => {
                     </v-col>
                 </v-row>
                 <div class="project mt-6 w-full">
-                    <table class="w-full overflow-auto">
+                    <v-table class="w-full overflow-auto">
                         <thead class="mb-6 text-center">
                             <tr>
                                 <th class="px-6">Project Name</th>
@@ -106,16 +106,16 @@ const createProject = (e) => {
                             </tr>
                         </thead>
                         <tbody class="mt-6">
-                            <tr @click="goTothisProject(project.id)" class=" border-b-2 border-gray-200 hover:bg-gray-200 cursor-pointer" v-for="project in projects" :key="project.id">
-                                <td >{{ project.name }}</td>
+                            <tr @click="goTothisProject(project.id)" class=" rounded border-b-2 border-gray-200 hover:bg-gray-200 cursor-pointer" v-for="project in projects" :key="project.id">
+                                <td class="pl-2">{{ project.name }}</td>
                                 <td class="text-gray-500">{{ project.description.substring(1,60) }}...</td>
                                 <td><img :src="project.project_cover" class="w-10 m-auto my-2 h-10 rounded-full"></td>
                                 <td class="text-center">
-                                    <sl-relative-time :datetime="project.created_at" />
+                                    <sl-format-date month="long" day="numeric" year="numeric" :date="project.created_at" />
                                 </td>
                             </tr>
                         </tbody>
-                    </table>
+                    </v-table>
                 </div>
 
             </section>
