@@ -20,6 +20,13 @@ class IssueController extends Controller
     }
 
 
+    public function assignIssue(){
+        $issue = Issue::find(request()->input("issue_id"));
+        $issue->assigned_id = request()->input("assigned_id");
+        $issue->save();
+        return redirect()->back()->with("success","Assigned");
+    }
+
     public function store(Project $project){
         //dd(request()->all());
        $attrs =  [

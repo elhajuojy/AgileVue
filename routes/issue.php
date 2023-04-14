@@ -11,7 +11,8 @@ Route::delete("/api/issues/{issue}/comments/{comment}",[IssueController::class,"
 ///api/issues/remove-comment/
 Route::delete("/api/issues/remove-comment/{comment}",[IssueController::class,"deleteComment"])->name("deleteComment");
 
-
+//http://127.0.0.1:8000/api/issues/assigne-issue
+Route::patch("/api/issues/assign-issue" , [IssueController::class,"assignIssue"])->name("assignIssue");
 
 Route::delete("/api/issues/{issue}/delete",[IssueController::class,"destroy"])->name("deleteIssue");
 Route::get("/api/issues/{issue}/edit",[IssueController::class,"edit"])->name("editIssue");

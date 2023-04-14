@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('issues', function (Blueprint $table) {
             //
-            
-            $table->foreignId("project_id")->constrained();
+            $table->foreignId("assigned_id")->nullable()->constrained("users")->cascadeOnUpdate()->cascadeOnDelete();
+
         });
     }
 
@@ -25,7 +25,7 @@ return new class extends Migration
     {
         Schema::table('issues', function (Blueprint $table) {
             //
-            $table->dropForeign("project_id");
+            $table->dropForeign("assigned_id");
         });
     }
 };

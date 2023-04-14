@@ -16,16 +16,23 @@ const projectStore  = useProjectStore();
 
 
 
-const assigneIssue  = () =>{
-    //i need just id of the user and the id of the issue to assigne the issue to the user
+const assigneIssue  = (e) =>{
+    //todo : I need just id of the user and the id of the issue to assigne the issue to the user
+
     //@ts-ignore
-    console.log("user id")
+    let userAssignedToId= e.target.value ;
     const idIssue = issueStore.issue.id ;
-    //
-    // router.post("/api/issues/assigne-issue",{
-    //     issue_id:idIssue,
-    //     user_id:
-    // })
+
+    router.visit("/api/issues/assign-issue",{
+        method :"patch",
+        data:{
+            issue_id:idIssue,
+            assigned_id:userAssignedToId
+        },
+        preserveState: true,
+        preserveScroll: true,
+
+    })
 
 
 }
@@ -182,13 +189,18 @@ function deleteComment(id) {
                 <h4>
                     Assignee
                 </h4>
-                <sl-select
-                @change="assigneIssue"
-                >
-                    <sl-option   v-for="user in projectStore.users" >
+                <select
+                    @change="assigneIssue"
+                    id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                    <option selected disabled>
+                        Select user
+                    </option>
+                    <option v-for="user in projectStore.users" :key="user.id" :value="user.id"  :selected="user.id === issueStore.issue.assigned_id">
                         {{ user.full_name }}
-                    </sl-option>
-                </sl-select>
+                    </option>
+
+
+                </select>
             </div>
             <div>
                 <p class="my-3">
