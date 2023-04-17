@@ -17,7 +17,7 @@ const projectStore = useProjectStore()
 
 let assigneeUser =projectStore.users.filter((user)=>{
     //@ts-ignore
-    return user.id == 3
+    return user.id == issueStore.issue.assigned_id
 })
 
 const issueClick  = ()=>{
@@ -50,7 +50,7 @@ const issueClick  = ()=>{
 
             </div>
             <div class="flex gap-2 align-center">
-                   <UserAvatarMenu v-if="assigneeUser.length > 0" :user="assigneeUser[0]"/>
+                <UserAvatarMenu v-if="assigneeUser.length > 0" :user="assigneeUser[0]"/>
                 <IssueMenu :issue="props.issue" />
             </div>
         </div>

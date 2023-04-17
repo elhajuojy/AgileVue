@@ -9,6 +9,7 @@ const data = defineProps({
 })
 
 
+
 </script>
 
 <template>
@@ -25,6 +26,7 @@ const data = defineProps({
 
                 >
                     <template v-slot:activator="{ props }">
+
                         <v-btn
                             icon
                             v-bind="props"
@@ -44,12 +46,13 @@ const data = defineProps({
                     </template>
                     <v-card>
                         <v-card-text>
+
                             <div class="mx-auto text-center">
                                 <v-avatar
                                     color="brown"
                                 >
                                     <span class="text-h5">
-                                        <img :src="data.user.profile_cover" class="w-full">
+                                        <img :src="data.user.profile_image" class="w-full">
                                     </span>
                                 </v-avatar>
                                 <h3>

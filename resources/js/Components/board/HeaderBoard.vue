@@ -8,6 +8,7 @@ import {useGlobalStateStore} from "@/stores/globalState";
 import axios from "axios";
 import {Link, router, usePage} from '@inertiajs/vue3';
 import UserAvatarMenu from "../UserAvatarMenu.vue";
+import AddPeople from "@/Components/AddPeople.vue";
 const props = defineProps({
     search : String || null,
     users : Object || null,
@@ -49,52 +50,6 @@ const modalAddUserShow = ()=>{
     state.active =  !state.active
 }
 
-
-function submitInviteUser(userid:number){
-
-    console.log(userid + "/" + props.project_id);
-
-    axios.post("/api/users/invite",{
-        user_id : userid,
-        project_id : props.project_id
-    }).then((response)=>{
-        console.log(response)
-        state.user_invite_active = userid
-        notify("User invited successfully 👌 ! ");
-        console.log(state.user_invite_active)
-    }).catch((error)=>{
-        console.log(error)
-    })
-
-}
-
-
-let searchUsers = (event:any) => {
-    setTimeout(()=>{
-        axios.get('/api/users',{
-            params: {
-                search: state.inputSearchUser
-            }
-        })
-            .then((response) => {
-                //bouncing the
-                state.users = response.data
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-    },1000)
-
-
-
-
-
-}
-
-
-
-
-
 </script>
 
 <template>
@@ -110,50 +65,10 @@ let searchUsers = (event:any) => {
                 </div>
 
             </div>
-
-<!--            <v-avatar-->
-<!--                v-for="user in props.users" :key="user.id" :image="user.profile_cover" size="30"-->
-<!--                class="cursor-pointer"-->
-<!--                @click="openDialogUser(user)"-->
-<!--            >-->
-
-<!--            </v-avatar>-->
-
             <UserAvatarMenu
-                v-for="user in props.users" :key="user.id" :user="user" />
-
-
-
-            <div class="relative w-full">
-                <button @click="modalAddUserShow" class="rounded-full  w-8 h-8  hover:bg-gray-100 transition duration-200 ease-in">
-                    <i class="fa-solid fa-plus"></i>
-                </button>
-                <section  :class="state.active?'hidden':''" class="absolute transition duration-200 ease-in  rounded bg-white shadow">
-                    <div class="flex gap-2 align-center px-2 ">
-                        <input v-model="state.inputSearchUser" @input="searchUsers"  type="text" class="w-full focus:ring-0 rounded" placeholder="add users ... " />
-                    </div>
-                    <div class="list-users-found mx-2 z-50 bg-white">
-                      <ul class="gap-2 grid  my-3 " v-if="state.users">
-                          <li class="flex justify-space-between align-center gap-2" v-for="user in state.users " key="user.id">
-                              <v-avatar :image="user.profile_cover" size="30"></v-avatar>
-                              <p class="align-self-center h-full text-left mr-auto">
-                                  {{ user.full_name }}
-                              </p>
-                              <button  :class="state.user_invite_active === user.id ? 'bg-green' : 'bg-blue'"  class="transition all duration-200 ease-in text-sm   rounded py-1 px-2 hover:border-gray-300"
-                                       @click="submitInviteUser(user.id)"
-                              >
-                                  invite
-                                  <i class="fa-solid fa-plus"></i>
-                              </button>
-                          </li>
-                      </ul>
-                        <div v-else>
-
-                        </div>
-                    </div>
-                </section>
-            </div>
-
+                v-for="user in props.users" :key="user.id" :user="user"
+            />
+            <AddPeople />
         </div>
     </header>
 </template>
