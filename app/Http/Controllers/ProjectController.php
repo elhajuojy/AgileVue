@@ -60,7 +60,7 @@ class ProjectController extends Controller
         $issues = [];
 
         if (array_key_exists("sprint_id",\request()->all())){
-            $issues = Sprint::find(\request()->input("sprint_id"));
+            $issues = Sprint::find(\request()->input("sprint_id"))->issues;
 
         }
 
@@ -69,7 +69,7 @@ class ProjectController extends Controller
             "users"=>$project->users,
             "project"=>$project,
             "sprints"=>$project->sprints,
-            "issues"=>$issues->issues
+            "issues"=>$issues
 
         ]);
     }
