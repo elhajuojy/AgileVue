@@ -9,17 +9,19 @@ import Tasks from "@/Components/board/Tasks.vue";
 
 
 
+const props = defineProps({
+    issues : Array
+})
 
-const issuesStore = useIssueStore()
-
+console.log(props.issues)
 
 function log(evt:any){
     console.log(evt)
 }
 
 const add = ()=>{
-    tasks.push({
-        id: tasks.length+ 1,
+    state.tasks.push({
+        id: state.tasks.length+ 1,
         description: input.value    ,
         completed: true
     })
@@ -69,11 +71,6 @@ let tasks3 = reactive<Task[]>([
     },
 
 ])
-
-
-
-
-
 const input  = ref('')
 
 
@@ -81,7 +78,7 @@ const input  = ref('')
 
 const state = reactive<any>({
     drag: false,
-    tasks: issuesStore.issues,
+    tasks: props.issues,
     tasks2: tasks2,
     tasks3: tasks3,
 
@@ -109,7 +106,7 @@ const state = reactive<any>({
                         @change="log"
                         item-key="id"
                     >
-                        <template class="grid  cursor-pointer align-content-lg-space-between" #item="{element,index}" >
+                        <template class="grid  cursor-pointer align-content-lg-space-between" #item="{element , index}" >
 
                             <div :key="element.id" class="text-center w-full border rounded my-3 ">
                                 <v-card :text="element.description"   variant="outlined"></v-card>

@@ -3,7 +3,7 @@
 import TheProjectAside from "@/Components/TheProjectAside.vue";
 import HeaderBoard from "../../Components/board/HeaderBoard.vue";
 import Tasks from "../../Components/board/Tasks.vue";
-import { Head } from '@inertiajs/vue3';
+import {Head, router} from '@inertiajs/vue3';
 import  {ref } from "vue";
 import draggable from "vuedraggable";
 import {reactive} from "vue";
@@ -24,7 +24,8 @@ issueStore.showIssueDetails = false;
 const props = defineProps({
     users : Object || null,
     project: Object,
-    sprints : Array
+    sprints : Array,
+    issues : Array,
 })
 
 const projectStore = useProjectStore();
@@ -37,13 +38,18 @@ projectStore.project = props.project
 
 const changeTodo = (e:any)=>{
     console.log(e.target.value)
-    axios.get(`/sprints/${e.target.value}/issues`,).then((data)=>{
-        issueStore.issues = data.data
-        console.log(issueStore.issues)
+    // router.visit("")
+    router.visit(`/projects/${props.project.id}/board`,{
+        method:"get",
+        data:{
+            sprint_id : e.target.value
+        },
+        preserveScroll:true,
+    });
 
-    }).catch((err)=>{
-        console.log(err)
-    })
+    console.log(props.issues)
+
+
 }
 
 
@@ -90,7 +96,7 @@ export default {
                             }}
                         </option>
                     </select>
-                    <Tasks />
+                    <Tasks :issues="props.issues" />
                 </main>
 
             </section>

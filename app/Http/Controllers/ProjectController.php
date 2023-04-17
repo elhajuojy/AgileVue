@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Issue;
 use App\Models\Project;
+use App\Models\Sprint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -55,10 +57,20 @@ class ProjectController extends Controller
     }
 
     public function board(Project $project){
+        $issues = [];
+
+        if (array_key_exists("sprint_id",\request()->all())){
+            $issues = Sprint::find(\request()->input("sprint_id"));
+
+        }
+
+
         return Inertia::render('projects/board', [
             "users"=>$project->users,
             "project"=>$project,
-            "sprints"=>$project->sprints
+            "sprints"=>$project->sprints,
+            "issues"=>$issues->issues
+
         ]);
     }
 
