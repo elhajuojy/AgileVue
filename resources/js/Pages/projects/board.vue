@@ -9,10 +9,14 @@ import draggable from "vuedraggable";
 import {reactive} from "vue";
 import {useIssueStore} from "@/stores/issue";
 import {useProjectStore} from "@/stores/projectStore";
+import sprints from "@/Pages/projects/Sprints.vue";
+import axios from "axios";
 
 
 
 const issueStore = useIssueStore();
+
+
 
 issueStore.showIssueDetails = false;
 
@@ -20,6 +24,7 @@ issueStore.showIssueDetails = false;
 const props = defineProps({
     users : Object || null,
     project: Object,
+    sprints : Array
 })
 
 const projectStore = useProjectStore();
@@ -30,6 +35,17 @@ projectStore.project = props.project
 
 
 
+const changeTodo = (e:any)=>{
+    console.log(e.target.value)
+    axios.get(`/sprints/${e.target.value}/issues`,).then((data)=>{
+        issueStore.issues = data.data
+        console.log(issueStore.issues)
+
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
+
 
 
 interface Task {
@@ -37,12 +53,6 @@ interface Task {
     description: string;
     completed: boolean;
 }
-
-
-
-
-
-
 
 const input  = ref('')
 
@@ -69,13 +79,18 @@ export default {
                 <TheProjectAside :project="props.project" />
                 <main class="w-full   p-6 ">
                     <HeaderBoard :search="props.project?.name" :users="props.users" :project_id="props.project?.id" />
-                    <select id="sprint" class="bg-gray-50 border my-3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block min-w-[300px] p-2.5 ">
-                        <option selected>Choose a Sprint </option>
-                        <option value="US"> Adminstrator</option>
-                        <option value="CA">Developer</option>
-                        <option value="FR"> designer </option>
+                    <select
+                        @change="changeTodo"
+                        id="sprint" class="bg-gray-50 border my-3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block min-w-[300px] p-2.5 ">
+                        <option selected disabled>Choose a Sprint </option>
+                        <option
+                            v-for="sprint in props.sprints"  :key="sprint.id" :value ="sprint.id">
+                            {{
+                                sprint.name
+                            }}
+                        </option>
                     </select>
-                    <Tasks/>
+                    <Tasks />
                 </main>
 
             </section>

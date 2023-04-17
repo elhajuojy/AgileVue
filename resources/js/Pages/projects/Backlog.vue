@@ -78,15 +78,17 @@ export default {
 
                 <main class="overflow-y-auto board col-span-2 w-full grid p-6 ">
                     <HeaderBoard :users="projectStore.users" :search="backlogStore.project?.name" :project_id="backlogStore.project?.id" />
-                    <section class=" grid-cols-3 gap-2" :class="issueStore.showIssueDetails?'grid':''">
-                        <div class="col-span-2 overflow-y-scroll pr-6">
+                    <section class=" lg:grid-cols-3 gap-2 md:grid-cols-1 " :class="issueStore.showIssueDetails?'grid':''">
+                        <div class="col-span-2 overflow-y-scroll mb-6 pr-6">
                             <!--   💕 sprint Card start -->
                             <BacklogSprintCard v-for="sprint in props.sprints" key="sprint.id"  :sprint="sprint" />
                             <!--  😍 sprint Card end -->
                             <!-- add sprint or backlog issues  -->
                             <BacklogCreateCard  />
                         </div>
-                        <IssueDetailsCard  v-if="issueStore.showIssueDetails"  />
+                        <div class="w-full ">
+                            <IssueDetailsCard  v-if="issueStore.showIssueDetails"  />
+                        </div>
                     </section>
 
                 </main>

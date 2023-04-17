@@ -6,6 +6,8 @@ export const useIssueStore = defineStore('issue',{
         return {
             showIssueDetails : false,
             issue:Object,
+            issues : [
+            ],
             todos:Array,
             doing:Array,
             done:Array,

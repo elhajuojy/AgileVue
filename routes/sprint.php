@@ -21,6 +21,7 @@ Route::get("/sprint/{project}/delete/{sprint}", [SprintController::class, 'destr
     ->name("sprint.destroy");
 
 
+Route::get("/sprints/{sprint}/issues",[SprintController::class,'issues']);
 
 
 //"/api/sprints/" + props.sprint.id + "/issues/" + event.added.element.id

@@ -1,14 +1,20 @@
 <script lang="ts" setup>
 
 import { Head } from '@inertiajs/vue3';
-import  {ref } from "vue";
+import {ref, watch} from "vue";
 import draggable from "vuedraggable";
 import {reactive} from "vue";
+import {useIssueStore} from "@/stores/issue";
+import Tasks from "@/Components/board/Tasks.vue";
+
+
+
+
+const issuesStore = useIssueStore()
 
 
 function log(evt:any){
     console.log(evt)
-    console.log(tasks);
 }
 
 const add = ()=>{
@@ -28,33 +34,6 @@ interface Task {
 
 
 
-let tasks = reactive<Task[]>([
-    {
-        id: 1,
-        description: "Complete the coding challenge",
-        completed: false
-    },
-    {
-        id: 2,
-        description: "Attend the team meeting",
-        completed: true
-    },
-    {
-        id: 3,
-        description: "Reply to client emails",
-        completed: false
-    },
-    {
-        id: 4,
-        description: "Submit the monthly report",
-        completed: false
-    },
-    {
-        id: 5,
-        description: "Take a break and go for a walk",
-        completed: true
-    }
-])
 let tasks2 = reactive<Task[]>([
     {
         id: 1,
@@ -93,16 +72,26 @@ let tasks3 = reactive<Task[]>([
 
 
 
+
+
 const input  = ref('')
 
 
-const state = reactive({
+
+
+const state = reactive<any>({
     drag: false,
-    tasks: tasks,
+    tasks: issuesStore.issues,
     tasks2: tasks2,
     tasks3: tasks3,
 
 })
+
+
+
+
+
+
 
 </script  >
 <template>
@@ -113,6 +102,7 @@ const state = reactive({
                 <div class="px-3 mt-6  z-1 ">
                     <draggable
                         v-model="state.tasks"
+                        @updated="console.log('log log')"
                         group="tasks"
                         @start="state.drag=true"
                         @end="state.drag=false"

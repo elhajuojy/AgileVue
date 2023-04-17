@@ -6,6 +6,7 @@ use App\Models\Issue;
 use App\Models\Project;
 use App\Models\Sprint;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class SprintController extends Controller
@@ -40,7 +41,7 @@ class SprintController extends Controller
 
 
     public function issues(Sprint $sprint){
-        return $sprint->issues->toJson();
+        return $sprint->issues;
     }
 
     public function destroy($project,$sprint){

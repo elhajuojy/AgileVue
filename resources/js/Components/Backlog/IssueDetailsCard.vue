@@ -42,10 +42,6 @@ let comments = ref([])
 const addComment = (e) => {
 
     const formData = new FormData(e.target);
-
-
-
-
     formData.append('user_id', userStore.user.id);
     formData.append('issue_id', issueStore.issue.id);
     formData.append("body",formData.get("comment"));
@@ -110,7 +106,7 @@ function deleteComment(id) {
 <template>
     <section
         v-if="issueStore.showIssueDetails"
-        class="max-h-fit">
+        class="max-h-fit ">
         <div class=" flex mb-3 gap-2 justify-between mx-2 items-center">
             <div>
                 <h2 class="text-body-2">
@@ -141,7 +137,7 @@ function deleteComment(id) {
         </div>
         <div class="">
             <h1 contentEditable="true" class="text-3xl mb-3 ">
-               {{ issueStore.issue.description }}
+               {{ issueStore.issue.title }}
             </h1>
             <div class="flex mb-3 gap-2">
                 <IconButton>
@@ -157,6 +153,7 @@ function deleteComment(id) {
                     </div>
                 </IconButton>
             </div>
+
             <div class="flex gap-2 pr-3 ">
                 <sl-select
                     placeholder="Select an option..."
@@ -178,6 +175,30 @@ function deleteComment(id) {
                     <sl-option value="3">Option 3</sl-option>
                 </sl-select>
 
+            </div>
+            <div class="flex gap-3 mt-2">
+                <div>
+                    <p>
+                        Start Date
+                    </p>
+                    <div class="relative max-w-sm">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <input  type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 " placeholder="Select date">
+                    </div>
+                </div>
+                <div>
+                    <p>
+                        End Date
+                    </p>
+                    <div class="relative max-w-sm">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <input  type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 " placeholder="Select date">
+                    </div>
+                </div>
             </div>
             <div class="mt-3">
                 <h4 class="text-base">
