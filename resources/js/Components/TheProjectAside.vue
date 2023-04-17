@@ -10,10 +10,11 @@ const props = defineProps({
 })
 
 
+    // /projects/{project}/sprints
 const routes = {
     board : "/projects/"+props.project.id+"/board",
     backlog : "/projects/"+props.project.id+"/backlog",
-    sprint : "/projects/"+props.project.id+"/sprint",
+    sprint : "/projects/"+props.project.id+"/sprints",
 
 }
 
@@ -48,7 +49,7 @@ const active  = 'active  shadow bg-blue-300 text-white rounded-md p-2 transition
                             Backlog
                         </Link>
                     </li>
-                    <li :class="{active:$page.component === 'projects/sprint' }">
+                    <li :class="{active:$page.component === 'projects/Sprints' }">
                         <Link :href="routes.sprint" >
                             <i class="fa-solid fa-table"></i>
                             Sprints

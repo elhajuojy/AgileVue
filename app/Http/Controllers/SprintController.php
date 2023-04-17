@@ -3,13 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Issue;
+use App\Models\Project;
 use App\Models\Sprint;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class SprintController extends Controller
 {
     //
 
+    public function index(Project $project){
+
+        return Inertia::render("projects/Sprints",[
+           "sprints"=> $project->sprints
+        ]);
+    }
 
     public function store(Request $request){
         Sprint::create([

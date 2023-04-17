@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Route;
 Route::post("/sprint", [SprintController::class, 'store'])
     ->name("sprint.store");
 
+Route::get("/projects/{project}/sprints",[SprintController::class,"index"])->name("projects/sprints");
+
+
 
 
 
