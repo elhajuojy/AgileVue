@@ -35,3 +35,5 @@ Route::post("/projects/{project}/accept-invitation", [ProjectController::class, 
     ->name("projects.accept-invitation");
 
 
+Route::delete("/projects/{project}",[ProjectController::class,"destroy"]);
+

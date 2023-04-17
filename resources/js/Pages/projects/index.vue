@@ -20,7 +20,7 @@ const goTothisProject = (id) => {
 const createProject = (e) => {
     console.log('create project')
     console.log(e.target)
-    document.querySelector(".v-btn__content").click()
+    document.querySelector("#btn_close_project").click()
     router.post('/projects',e.target);
 
     setTimeout(()=>{
@@ -31,6 +31,7 @@ const createProject = (e) => {
             confirmButtonText: 'Cool'
         })
     },300);
+
 }
 
 </script>
@@ -87,6 +88,7 @@ const createProject = (e) => {
                                     <v-card-actions class="justify-end">
                                         <v-btn
                                             variant="text"
+                                            id="btn_close_project"
                                             @click="isActive.value = false"
                                         >Close</v-btn>
                                     </v-card-actions>
@@ -97,20 +99,20 @@ const createProject = (e) => {
                 </v-row>
                 <div class="project mt-6 w-full">
                     <v-table class="w-full overflow-auto">
-                        <thead class="mb-6 text-center">
+                        <thead class="mb-6 ">
                             <tr>
-                                <th class="px-6">Project Name</th>
-                                <th class="px-6">Project Description</th>
-                                <th class="px-6">Project cover</th>
-                                <th class="px-6">Project Created</th>
+                                <th class="px-auto">Project Name</th>
+                                <th class="px-auto">Project Description</th>
+                                <th class="px-auto">Project cover</th>
+                                <th class="px-auto">Project Created</th>
                             </tr>
                         </thead>
-                        <tbody class="mt-6">
+                        <tbody class="mt-6 ">
                             <tr @click="goTothisProject(project.id)" class=" rounded border-b-2 border-gray-200 hover:bg-gray-200 cursor-pointer" v-for="project in projects" :key="project.id">
                                 <td class="pl-2">{{ project.name }}</td>
                                 <td class="text-gray-500">{{ project.description.substring(1,60) }}...</td>
-                                <td><img :src="project.project_cover" class="w-10 m-auto my-2 h-10 rounded-full"></td>
-                                <td class="text-center">
+                                <td><img :src="project.project_cover" class="w-10  my-2 h-10 rounded-full"></td>
+                                <td class="">
                                     <sl-format-date month="long" day="numeric" year="numeric" :date="project.created_at" />
                                 </td>
                             </tr>

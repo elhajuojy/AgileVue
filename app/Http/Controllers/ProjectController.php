@@ -19,6 +19,12 @@ class ProjectController extends Controller
     }
 
 
+    public function destroy(Project $project){
+
+        $project->delete();
+        return redirect("/projects")->with("this project has been deleted successfully ");
+    }
+
     public function show(Project $project)
     {
         sleep(1);
@@ -56,7 +62,7 @@ class ProjectController extends Controller
     }
 
     public function backlog(Project $project){
-        
+
         return Inertia::render('projects/Backlog', [
             "sprints"=>$project->sprints,
             "project"=>$project

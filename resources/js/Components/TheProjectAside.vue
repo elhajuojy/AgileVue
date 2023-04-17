@@ -1,6 +1,8 @@
 
 <script setup>
 import { Link } from '@inertiajs/vue3'
+import SettingsMenu from "@/Components/Project/ProjectSettingsMenu.vue";
+import ProjectSettingsMenu from "@/Components/Project/ProjectSettingsMenu.vue";
 
 
 const props = defineProps({
@@ -64,12 +66,7 @@ const active  = 'active  shadow bg-blue-300 text-white rounded-md p-2 transition
                 <v-divider :thickness="3"  color="success" ></v-divider>
                 <h3 class="text-xl font-bold mb-6 mt-6">More Actions</h3>
 
-                <ul class="mt-auto">
-                    <li>
-                        <i class="fa-regular fa-gear"></i>
-                        <Link href="/sprints">Project Settings</Link>
-                    </li>
-                </ul>
+                <ProjectSettingsMenu/>
 
             </section>
 
@@ -78,7 +75,7 @@ const active  = 'active  shadow bg-blue-300 text-white rounded-md p-2 transition
 </template>
 
 
-<style scoped>
+<style >
 
 li{
     display: flex;

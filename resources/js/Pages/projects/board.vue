@@ -72,9 +72,8 @@ export default {
                 <TheProjectAside :project="props.project" />
                 <main class="w-full   p-6 ">
                     <HeaderBoard :search="props.project?.name" :users="props.users" :project_id="props.project?.id" />
-                    <label for="role" class="block mb-2 text-sm font-medium text-gray-900 ">Select a Role </label>
-                    <select id="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                        <option selected>Choose a Role </option>
+                    <select id="sprint" class="bg-gray-50 border my-3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block min-w-[300px] p-2.5 ">
+                        <option selected>Choose a Sprint </option>
                         <option value="US"> Adminstrator</option>
                         <option value="CA">Developer</option>
                         <option value="FR"> designer </option>
