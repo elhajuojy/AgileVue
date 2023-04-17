@@ -3,8 +3,12 @@
 import { Link } from '@inertiajs/vue3'
 import SettingsMenu from "@/Components/Project/ProjectSettingsMenu.vue";
 import ProjectSettingsMenu from "@/Components/Project/ProjectSettingsMenu.vue";
+import {reactive} from "vue";
 
 
+const state = reactive({
+    show : true
+})
 const props = defineProps({
     project : Object
 })
@@ -24,8 +28,8 @@ const active  = 'active  shadow bg-blue-300 text-white rounded-md p-2 transition
 
 </script>
 <template>
-    <div class="min-w-[15%] relative  max-w-[20%]">
-        <aside class="p-3 shadow aside fixed z-50   bg-white">
+    <div v-if="state.show" class="min-w-[15%] relative  max-w-[20%]">
+        <aside  class="p-3 shadow aside fixed z-40   bg-white">
             <header class="flex gap-3 m-auto">
                 <img :src="props.project.project_cover" class="w-8 m-auto my-2 h-8 rounded-full">
                 <div class="flex-grow-1">
@@ -70,9 +74,22 @@ const active  = 'active  shadow bg-blue-300 text-white rounded-md p-2 transition
                 <ProjectSettingsMenu/>
 
             </section>
-
         </aside>
+
+
     </div>
+    <div  class="fixed z-50 bottom-4  " :class="state.show ?'ml-36':'ml-10 '">
+        <v-btn
+            icon
+            variant="tonal"
+            size="small"
+            @click="state.show = !state.show"
+        >
+            <i v-if="!state.show" class="fa-solid fa-arrow-right"></i>
+            <i v-else class="fa-solid fa-arrow-left"></i>
+        </v-btn>
+    </div>
+
 </template>
 
 
