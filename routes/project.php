@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\UserProjectController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -37,3 +38,5 @@ Route::post("/projects/{project}/accept-invitation", [ProjectController::class, 
 
 Route::delete("/projects/{project}",[ProjectController::class,"depstroy"]);
 
+
+Route::delete("/api/user_project/remove",[UserProjectController::class,"destroy"]);

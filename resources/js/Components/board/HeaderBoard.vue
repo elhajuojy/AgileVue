@@ -68,7 +68,7 @@ const modalAddUserShow = ()=>{
             <UserAvatarMenu
                 v-for="user in props.users" :key="user.id" :user="user"
             />
-            <AddPeople />
+            <AddPeople :users="users" />
         </div>
     </header>
 </template>

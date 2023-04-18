@@ -3,6 +3,7 @@
 import {reactive} from "vue";
 import {useGlobalStateStore} from "@/stores/globalState";
 import axios from "axios";
+import {useProjectStore} from "@/stores/projectStore";
 
 const state = reactive({
     inputSearch: "",
@@ -16,14 +17,15 @@ const state = reactive({
 const globalStore = useGlobalStateStore()
 
 const user =globalStore.user;
+const projectStore = useProjectStore()
 
 function submitInviteUser(userid){
 
-    console.log(userid + "/" + props.project_id);
+    console.log(userid + "/" + projectStore.project.id);
 
     axios.post("/api/users/invite",{
         user_id : userid,
-        project_id : props.project_id
+        project_id : projectStore.project.id
     }).then((response)=>{
         console.log(response)
         state.user_invite_active = userid

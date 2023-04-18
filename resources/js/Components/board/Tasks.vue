@@ -14,11 +14,8 @@ const props = defineProps({
     issues : Array
 })
 
-console.log(props.issues)
 
-function log(evt:any){
-    console.log(evt)
-}
+
 
 const add = ()=>{
     state.tasks.push({
@@ -35,51 +32,13 @@ interface Task {
 }
 
 
-
-
-let tasks2 = reactive<Task[]>([
-    {
-        id: 1,
-        description: "Complete the coding challenge",
-        completed: false
-    },
-    {
-        id: 2,
-        description: "Attend the team meeting",
-        completed: true
-    },
-    {
-        id: 3,
-        description: "Reply to client emails",
-        completed: false
-    },
-    {
-        id: 4,
-        description: "Submit the monthly report",
-        completed: false
-    },
-    {
-        id: 5,
-        description: "Take a break and go for a walk",
-        completed: true
-    }
-])
-let tasks3 = reactive<Task[]>([
-    {
-        id: 1,
-        description: "Complete the coding challenge",
-        completed: false
-    },
-
-])
 const input  = ref('')
 
 
 const changeStatus = (event:any,myParam:string)=>{
     if (event.added) {
-        console.log(event.added.element.id)
-        console.log(myParam)
-        // I need to change the status new in the database using axois
+
+        //todo: I need to change the status new in the database using axois
 
         axios.patch(`/api/issues/${event.added.element.id}/status`,{
             status :myParam

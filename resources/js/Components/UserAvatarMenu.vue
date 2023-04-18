@@ -1,6 +1,9 @@
 <script setup>
 
 
+import {router} from "@inertiajs/vue3";
+import {useProjectStore} from "@/stores/projectStore";
+
 const data = defineProps({
     user : {
         type : Object,
@@ -8,6 +11,21 @@ const data = defineProps({
     },
 })
 
+const projectStore = useProjectStore();
+
+const removeUserFromPorject = ()=>{
+    // i need the user id and the project id and i need to go between
+    // table and delete record where id_user = this user
+    //and project_id = this project
+    router.visit("/api/user_project/remove",{
+        method:"delete",
+        data:{
+            user_id : data.user.id,
+            project_id :projectStore.project.id
+        },
+
+    })
+}
 
 
 </script>
@@ -74,6 +92,7 @@ const data = defineProps({
                                     rounded
                                     variant="text"
                                     size="small"
+                                    @click="removeUserFromPorject"
                                 >
                                     remove
                                 </v-btn>

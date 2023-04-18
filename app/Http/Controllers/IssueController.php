@@ -14,8 +14,6 @@ class IssueController extends Controller
     public function destroy(Issue $issue): RedirectResponse
     {
         $issue->delete();
-//        dd($issue);
-//        $issue->save();
         return redirect()->back()->with("success","Deleted");
     }
 
