@@ -63,7 +63,7 @@ const active  = 'active  shadow bg-blue-300 text-white rounded-md p-2 transition
                         <i class="fa-solid fa-clipboard-list-check"></i>
                         <Link href="/components" >components</Link>
                     </li>
-                    <li>
+                    <li :class="{active:$page.component === 'projects/Versions' }">
                         <i class="fa-solid fa-code-compare"></i>
                         <Link :href="routes.versions" >Versions</Link>
                     </li>

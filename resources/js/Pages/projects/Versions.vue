@@ -1,14 +1,12 @@
 
 <script setup lang="ts">
 
-import {Head , Link} from "@inertiajs/vue3";
-import Tasks from "@/Components/board/Tasks.vue";
-import HeaderBoard from "@/Components/board/HeaderBoard.vue";
+import {Head, Link, router} from "@inertiajs/vue3";
 import TheProjectAside from "@/Components/TheProjectAside.vue";
 import {useProjectStore} from "@/stores/projectStore";
-import {computed} from "vue";
+import {computed, reactive} from "vue";
 
-const props = defineProps({
+let props = defineProps({
     versions : Object,
 
 })
@@ -19,16 +17,34 @@ const goToSprint= ()=>{
     console.log("go to this sprint")
 }
 
+
+const state = reactive({
+    inputSearch: "",
+})
+
+
 const pageLinks = computed(() => {
     let links = []
-    for (let i = 1; i <= props.versions.last_page; i++) {
+    for (let i = 1; i <= props.versions?.last_page; i++) {
         links.push({
             label: i,
-            url: props.versions.path + '?page=' + i,
+            url: props.versions?.path + '?page=' + i,
         })
     }
     return links
 })
+
+
+const versionsSearch = () => {
+    console.log(state.inputSearch)
+    router.visit(props.versions?.path + '?search=' + state.inputSearch,{
+        preserveScroll: true,
+        preserveState: true,
+
+    });
+
+
+}
 
 </script>
 
@@ -44,6 +60,8 @@ export default {
 
 }
 
+
+
 </script>
 
 <template>
@@ -56,6 +74,17 @@ export default {
                     <h1 class="text-3xl">
                     Versions
                     </h1>
+                    <div class="w-full flex justify-between">
+                        <div class="border max-w-[250px] mt-3 rounded">
+                            <div class="flex gap-2 align-center px-2 ">
+                                <input v-model="state.inputSearch" @input="versionsSearch" type="text" class="w-full focus:ring-0 rounded" placeholder="search something .. " />
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                        </div>
+                        <button class="bg-blue-700 hover:bg-blue-900 text-sm text-white font-bold py-2 px-4 rounded mt-3">
+                            créer un version
+                        </button>
+                    </div>
                     <v-table >
                         <thead>
                         <tr>

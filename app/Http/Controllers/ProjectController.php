@@ -22,6 +22,20 @@ class ProjectController extends Controller
     }
 
     public function versions(Project $project){
+        if (request()->input("search")){
+            $versions = DB::table("versions")->where("project_id",$project->id)
+                ->where("name","like","%".request()->input("search")."%")
+                ->orWhere("description","like","%".request()->input("search")."%")
+                ->orWhere("type","like","%".request()->input("search")."%")
+                ->orWhere("status","like","%".request()->input("search")."%")
+                ->paginate(10);
+
+            return Inertia::render('projects/Versions', [
+                "versions"=>$versions
+            ]);
+        }
+
+
         $versions = DB::table("versions")->where("project_id",$project->id)->paginate(10);
         return Inertia::render('projects/Versions', [
             "versions"=>$versions
