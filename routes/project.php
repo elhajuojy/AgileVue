@@ -40,3 +40,7 @@ Route::delete("/projects/{project}",[ProjectController::class,"depstroy"]);
 
 
 Route::delete("/api/user_project/remove",[UserProjectController::class,"destroy"]);
+
+
+Route::get("/projects/{project}/versions", [ProjectController::class, 'versions'])
+    ->name("projects.versions");

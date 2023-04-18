@@ -19,7 +19,7 @@ const routes = {
     board : "/projects/"+props.project.id+"/board",
     backlog : "/projects/"+props.project.id+"/backlog",
     sprint : "/projects/"+props.project.id+"/sprints",
-
+    versions : "/projects/"+props.project.id+"/versions",
 }
 
 
@@ -65,7 +65,7 @@ const active  = 'active  shadow bg-blue-300 text-white rounded-md p-2 transition
                     </li>
                     <li>
                         <i class="fa-solid fa-code-compare"></i>
-                        <Link href="/versions" >Versions</Link>
+                        <Link :href="routes.versions" >Versions</Link>
                     </li>
                 </ul>
                 <v-divider :thickness="3"  color="success" ></v-divider>

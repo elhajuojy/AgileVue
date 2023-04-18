@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Issue;
 use App\Models\Project;
 use App\Models\Sprint;
+use Faker\Core\Version;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -18,6 +19,14 @@ class ProjectController extends Controller
         return Inertia::render('projects/index', [
             "projects"=>Project::where("user_id",auth()->user()->id)->get()
         ]);
+    }
+
+    public function versions(Project $project){
+        $versions = DB::table("versions")->where("project_id",$project->id)->paginate(10);
+        return Inertia::render('projects/Versions', [
+            "versions"=>$versions
+        ]);
+
     }
 
 
