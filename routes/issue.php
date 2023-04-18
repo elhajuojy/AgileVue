@@ -19,3 +19,7 @@ Route::get("/api/issues/{issue}/edit",[IssueController::class,"edit"])->name("ed
 Route::patch("/api/issues/{issue}/update",[IssueController::class,"update"])->name("updateIssue");
 Route::post("/api/issues/{project}/create",[IssueController::class,"store"])->name("createIssue");
 Route::get("/api/issues/{issue}/show",[IssueController::class,"show"])->name("showIssue");
+
+
+//change status
+Route::patch("/api/issues/{issue}/status",[IssueController::class,"IssueChangeStatus"]);

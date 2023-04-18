@@ -6,6 +6,7 @@ import draggable from "vuedraggable";
 import {reactive} from "vue";
 import {useIssueStore} from "@/stores/issue";
 import Tasks from "@/Components/board/Tasks.vue";
+import axios from "axios";
 
 
 
@@ -74,13 +75,32 @@ let tasks3 = reactive<Task[]>([
 const input  = ref('')
 
 
+const changeStatus = (event:any,myParam:string)=>{
+    if (event.added) {
+        console.log(event.added.element.id)
+        console.log(myParam)
+        // I need to change the status new in the database using axois
 
+        axios.patch(`/api/issues/${event.added.element.id}/status`,{
+            status :myParam
+        });
+
+    }
+
+
+}
 
 const state = reactive<any>({
     drag: false,
-    tasks: props.issues,
-    tasks2: tasks2,
-    tasks3: tasks3,
+    tasks: props.issues?.filter((issue)=>{
+        return issue?.status == "todo"
+    }),
+    tasks2:  props.issues?.filter((issue)=>{
+        return issue?.status == "in_progress"
+    }),
+    tasks3:  props.issues?.filter((issue)=>{
+        return issue?.status == "done"
+    }),
 
 })
 
@@ -99,11 +119,11 @@ const state = reactive<any>({
                 <div class="px-3 mt-6  z-1 ">
                     <draggable
                         v-model="state.tasks"
-                        @updated="console.log('log log')"
                         group="tasks"
                         @start="state.drag=true"
                         @end="state.drag=false"
-                        @change="log"
+                        @change="changeStatus($event,'todo')"
+
                         item-key="id"
                     >
                         <template class="grid  cursor-pointer align-content-lg-space-between" #item="{element , index}" >
@@ -132,7 +152,7 @@ const state = reactive<any>({
                         group="tasks"
                         @start="state.drag=true"
                         @end="state.drag=false"
-                        @change="log"
+                        @change="changeStatus($event,'in_progress')"
                         item-key="id"
                     >
                         <template class="grid  cursor-pointer align-content-lg-space-between" #item="{element,index}" >
@@ -152,7 +172,7 @@ const state = reactive<any>({
                         group="tasks"
                         @start="state.drag=true"
                         @end="state.drag=false"
-                        @change="log"
+                        @change="changeStatus($event,'done')"
                         item-key="id"
                     >
                         <template class="grid  cursor-pointer align-content-lg-space-between" #item="{element,index}" >

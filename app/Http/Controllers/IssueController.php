@@ -27,6 +27,12 @@ class IssueController extends Controller
         return redirect()->back()->with("success","Assigned");
     }
 
+
+    public function IssueChangeStatus(Issue $issue){
+        $issue->status = request()->input("status");
+        $issue->save();
+
+    }
     public function store(Project $project){
         //dd(request()->all());
        $attrs =  [
