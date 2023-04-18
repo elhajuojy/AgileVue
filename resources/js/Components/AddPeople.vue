@@ -85,6 +85,8 @@ export default {
                 <v-btn
                     variant="plain"
                     v-bind="props"
+                    icon
+                    size="small"
                 >
                     <i class="fa-solid fa-plus"></i>
                 </v-btn>

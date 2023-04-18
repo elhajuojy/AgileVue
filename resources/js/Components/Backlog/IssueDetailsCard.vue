@@ -98,6 +98,15 @@ function deleteComment(id) {
     issueStore.fetchComments();
 }
 
+const usercommentImage = (user_id )=>{
+    const user =  projectStore.users.filter((user)=>{
+        return user?.id === user_id
+    })
+
+    console.log(user[0].profile_image)
+    return user[0].profile_image || ''
+}
+
 // i want to call the change when the issueStore.issue change but it doesn't work
 
 </script>
@@ -266,7 +275,7 @@ function deleteComment(id) {
                        <div class="flex gap-3">
                            <v-avatar>
                                <v-img
-                                   src="https://api.dicebear.com/6.x/lorelei/svg?seed=nouhila"
+                                   :src="usercommentImage(comment.user_id)"
                                >
 
                                </v-img>

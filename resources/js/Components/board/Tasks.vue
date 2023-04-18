@@ -1,12 +1,13 @@
 <script lang="ts" setup>
 
-import { Head } from '@inertiajs/vue3';
+import {Head, router} from '@inertiajs/vue3';
 import {ref, watch} from "vue";
 import draggable from "vuedraggable";
 import {reactive} from "vue";
 import {useIssueStore} from "@/stores/issue";
 import Tasks from "@/Components/board/Tasks.vue";
 import axios from "axios";
+import {useProjectStore} from "@/stores/projectStore";
 
 
 
@@ -14,15 +15,29 @@ const props = defineProps({
     issues : Array
 })
 
+const projectStore = useProjectStore()
+
+
+const addIssue = (e:HTMLFormElement)=>{
+    //@ts-ignore
+    console.log(e)
+    router.visit(`/api/issues/${projectStore.project?.id}/create`,{
+        // title : e.target[0].value
+        method :"post",
+        data :  {
+            title : input.value,
+            //@ts-ignore
+            sprint_id : props.issues[0].sprint_id,
+            //@ts-ignore
+            project_id : projectStore.project.id
+        },
+        preserveScroll: true,
+    });
 
 
 
-const add = ()=>{
-    state.tasks.push({
-        id: state.tasks.length+ 1,
-        description: input.value    ,
-        completed: true
-    })
+
+
 }
 
 interface Task {
@@ -48,6 +63,8 @@ const changeStatus = (event:any,myParam:string)=>{
 
 
 }
+
+
 
 const state = reactive<any>({
     drag: false,
@@ -88,15 +105,23 @@ const state = reactive<any>({
                         <template class="grid  cursor-pointer align-content-lg-space-between" #item="{element , index}" >
 
                             <div :key="element.id" class="text-center w-full border rounded my-3 ">
-                                <v-card :text="element.description"   variant="outlined"></v-card>
+                                <v-card :text="element.title"   variant="outlined"></v-card>
                             </div>
                         </template>
                         <template #header>
                             <div class="input flex mb-3 align-center   border-gray-300 px-3 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm bg-white">
-                                <input v-model="input" type="text" class="w-full focus:ring-0 rounded" placeholder="Add something .. " />
-                                <button @click="add" type="submit" class="rounded hover:bg-blue-400 p-1 cursor-pointer">
-                                    <i class="fa-solid fa-plus"></i>
-                                </button>
+                               <form
+                                   @submit.prevent="addIssue"
+                               class="flex align-center "
+                               >
+                                   <input v-model="input" type="text" class="w-full focus:ring-0 rounded" placeholder="Add something .. " />
+                                   <v-btn
+                                       variant="text"
+                                       size="small"
+                                       @click="addIssue" type="submit" class="ml-auto">
+                                       <i class="fa-solid fa-plus"></i>
+                                   </v-btn>
+                               </form>
                             </div>
                         </template>
                     </draggable>
@@ -116,7 +141,7 @@ const state = reactive<any>({
                     >
                         <template class="grid  cursor-pointer align-content-lg-space-between" #item="{element,index}" >
                             <div :key="element.id" class="text-center w-full border rounded my-3">
-                                <v-card :text="element.description"   variant="outlined"></v-card>
+                                <v-card :text="element.title"   variant="outlined"></v-card>
                             </div>
                         </template>
                     </draggable>
@@ -136,7 +161,7 @@ const state = reactive<any>({
                     >
                         <template class="grid  cursor-pointer align-content-lg-space-between" #item="{element,index}" >
                             <div :key="element.id" class="text-center w-full border rounded my-3">
-                                <v-card :text="element.description"   variant="outlined"></v-card>
+                                <v-card :text="element.title"   variant="outlined"></v-card>
                             </div>
                         </template>
                     </draggable>

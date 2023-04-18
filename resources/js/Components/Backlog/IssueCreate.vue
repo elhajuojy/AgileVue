@@ -39,8 +39,6 @@ const addIssue = (e:HTMLFormElement)=>{
     });
 
     // fetch issue again on parent by emitting the fetchIssue in the parent component
-
-
     emits("getIssues")
 
 
