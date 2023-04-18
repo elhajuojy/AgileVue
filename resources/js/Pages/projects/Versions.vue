@@ -5,6 +5,7 @@ import {Head, Link, router} from "@inertiajs/vue3";
 import TheProjectAside from "@/Components/TheProjectAside.vue";
 import {useProjectStore} from "@/stores/projectStore";
 import {computed, reactive} from "vue";
+import CreateVersionDialog from "@/Components/versions/CreateVersionDialog.vue";
 
 let props = defineProps({
     versions : Object,
@@ -81,9 +82,8 @@ export default {
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </div>
                         </div>
-                        <button class="bg-blue-700 hover:bg-blue-900 text-sm text-white font-bold py-2 px-4 rounded mt-3">
-                            créer un version
-                        </button>
+                        <!-- todo : 😍 //create new version-->
+                        <CreateVersionDialog />
                     </div>
                     <v-table >
                         <thead>
@@ -116,19 +116,13 @@ export default {
                             <td>{{ item.name }}</td>
                             <td>{{ item.description.substring(0, 30) }}</td>
                             <td>
-                                {{
-                                    item.start_date
-                                }}
+                                {{item.start_date}}
                             </td>
                             <td>
-                                {{
-                                    item.type
-                                }}
+                                {{ item.type }}
                             </td>
                             <td>
-                                {{
-                                    item.status
-                                }}
+                                {{ item.status }}
                             </td>
                         </tr>
 

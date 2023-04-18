@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserProjectController;
+use App\Http\Controllers\VersionController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -42,5 +43,7 @@ Route::delete("/projects/{project}",[ProjectController::class,"depstroy"]);
 Route::delete("/api/user_project/remove",[UserProjectController::class,"destroy"]);
 
 
-Route::get("/projects/{project}/versions", [ProjectController::class, 'versions'])
+Route::get("/projects/{project}/versions", [VersionController::class, 'versions'])
+    ->name("projects.versions");
+Route::post("/projects/{project}/versions", [VersionController::class, 'store'])
     ->name("projects.versions");

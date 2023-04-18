@@ -83,14 +83,17 @@ const state = reactive({
 
                 <template #header >
                     <div  class="flex align-center   justify-space-between">
-                        <div class="flex gap-3 cursor-pointer ">
-                           <div class="cursor-pointer" @click="state.showSprintIssues = !state.showSprintIssues">
+                        <div class="flex align-center gap-3 cursor-pointer ">
+                           <v-btn
+                               icon
+                               size="x-small"
+                               variant="text"
+                               class="cursor-pointer" @click="state.showSprintIssues = !state.showSprintIssues">
                                <i v-if="!state.showSprintIssues" class="fa-duotone fa-angle-down"></i>
                                <i v-else class="fa-duotone fa-angle-right"></i>
-                           </div>
+                           </v-btn>
                             <p>
                                 {{ props.sprint.project_key }}
-                                <span>sprint 1</span>
                             </p>
                             <div class="sprint-action flex">
                                 <i class="fa-regular fa-pen"></i>

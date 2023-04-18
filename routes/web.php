@@ -33,18 +33,8 @@ Route::get('/inbox', function () {
 });
 
 Route::get('/dashboard', function () {
-
-
-
-
-    return Inertia::render('Dashboard',[
-        "sharedProjects"=>auth()->user()->projects
-
-
-    ]);
-})
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+    return Inertia::render('Dashboard',["sharedProjects"=>auth()->user()->projects]);
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {

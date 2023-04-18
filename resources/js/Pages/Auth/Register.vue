@@ -6,6 +6,10 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
+const props = defineProps({
+    image_cover: String,
+});
+
 const form = useForm({
     name: '',
     email: '',
@@ -13,6 +17,12 @@ const form = useForm({
     password_confirmation: '',
     terms: false,
 });
+
+const backgroundImage = "" +
+    "background-image: url(" + props.image_cover + ");" +
+    "background-repeat: no-repeat;" +
+    "background-attachment: fixed;" +
+    "background-size: cover;";
 
 const submit = () => {
     form.post(route('register'), {
@@ -22,8 +32,16 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
+
         <Head title="Register" />
+    <div class="min-h-screen guest flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100"
+         :style="backgroundImage"
+    >
+
+
+        <div
+            class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white overflow-hidden sm:rounded-lg"
+        >
 
         <form @submit.prevent="submit">
             <div>
@@ -86,19 +104,42 @@ const submit = () => {
 
                 <InputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <Link
-                    :href="route('login')"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
+            <v-btn
+                type="submit"
+                color="bg-blue"
+                variant="tonal"
+                class="w-full mt-6 bg-blue text-center" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
+            >
+                Register
+            </v-btn>
+            <div class="text-center mt-3">
+                <p>
                     Already registered?
-                </Link>
+                    <Link
+                        :href="route('login')"
+                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                       Login
+                    </Link>
+                </p>
+                <v-divider color="success"
+                           class="my-3"  :thickness="4"
+                ></v-divider>
+                <p>
 
-                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
-                </PrimaryButton>
+                    Create account for Agile  and <span
+                    class="text-blue"
+                >
+                    more.
+                </span>
+                </p>
+                <p class="mt-6">
+                    Privacy Policy | Terms of Service
+                </p>
+
             </div>
         </form>
-    </GuestLayout>
+    </div>
+</div>
+
 </template>
