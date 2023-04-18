@@ -51,6 +51,7 @@ const state = reactive({
     DeleteDialog : false,
     EditDialog : false,
     startSprint : false,
+    showSprintIssues : false,
 
 })
 
@@ -79,17 +80,14 @@ const state = reactive({
                 @change="changeIssueSprintId"
                 item-key="id"
             >
-                <template class="grid  border-dotted border-gray-700 cursor-pointer border-3  align-content-lg-space-between" #item="{element,index}" >
 
-                    <div :key="element.id" class="text-center  w-full  rounded my-3 ">
-                        <IssueCard :issue="element" />
-
-                    </div>
-                </template>
-                <template #header>
-                    <div class="flex align-center   justify-space-between">
-                        <div class="flex gap-3 ">
-                            <i class="fa-duotone fa-angle-down"></i>
+                <template #header >
+                    <div  class="flex align-center   justify-space-between">
+                        <div class="flex gap-3 cursor-pointer ">
+                           <div class="cursor-pointer" @click="state.showSprintIssues = !state.showSprintIssues">
+                               <i v-if="!state.showSprintIssues" class="fa-duotone fa-angle-down"></i>
+                               <i v-else class="fa-duotone fa-angle-right"></i>
+                           </div>
                             <p>
                                 {{ props.sprint.project_key }}
                                 <span>sprint 1</span>
@@ -110,6 +108,11 @@ const state = reactive({
                             <SprintCardMenu :project="props.sprint" />
                         </div>
 
+                    </div>
+                </template>
+                <template class="grid   border-dotted border-gray-700 cursor-pointer border-3  align-content-lg-space-between" #item="{element,index}" >
+                    <div  :class="state.showSprintIssues?'hidden':''" :key="element.id" class="text-center   w-full  rounded my-3 ">
+                        <IssueCard :issue="element" />
                     </div>
                 </template>
                 <template #footer class="my-auto">
