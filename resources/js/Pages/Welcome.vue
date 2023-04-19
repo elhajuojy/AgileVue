@@ -2,6 +2,10 @@
 import { Head, Link } from "@inertiajs/vue3";
 import slBadge from "@shoelace-style/shoelace/dist/components/badge/badge.js";
 import { computed, onUpdated, reactive, ref } from "vue";
+import TheFooter from "@/Components/Welcome/TheFooter.vue";
+import TheInfo from "@/Components/Welcome/TheInfo.vue";
+import AboutUsCard from "@/Components/Welcome/AboutUsCard.vue";
+import ThePricing from "@/Components/Welcome/ThePricing.vue";
 
 defineProps({
   canLogin: Boolean,
@@ -55,19 +59,20 @@ const show = ref(false);
         >
       </template>
     </div>
-    <Header class="Home-Header">
-        <div class="content m-auto">
+    <Header class="Home-Header w-[95%] m-auto min-h-[500px] ">
+        <div class="content  m-auto">
             <h1 class="
             text-5xl text-primary-Variant font-bold mb-6
+            lg:text-7xl
             ">Agile Vue </h1>
-            <p class="text-2xl mb-2 text-gray-800">Move fast, stay aligned, and build better - together</p>
+            <p class="text-2xl  lg:text-4xl mb-2 text-gray-800">Move fast, stay aligned, and build better - together</p>
             <p class="mb-6">The #1 software development tool used by agile teams</p>
-            <button class="bg-primary text-white px-4 py-2 rounded hover:bg-Primary-Variant ease-in transition-all 0.3s">
+            <button class="bg-blue-700 hover:bg-blue-900 shadow text-white px-4 py-2 rounded hover:scale-95 ease-in transition-all 0.3s">
                 Get Started for free
                 <i class="fa-solid fa-arrow-right"></i>
             </button>
         </div>
-        <img :src="cover" class="m-auto" alt="Agile Vue cover image">
+        <img :src="cover" class="m-auto  max-h-[400px] max-w-[500px] " alt="Agile Vue cover image">
     </Header>
     <section class="text-center mt-12 p-12 bg-light-blue">
         <h2 class="text-4xl  mb-6 ">All from a single source of truth</h2>
@@ -79,10 +84,14 @@ const show = ref(false);
             <v-chip  >Automate</v-chip>
         </div>
     </section>
+      <AboutUsCard/>
+
     <section>
         <img :src="main_image" class="w-full" alt="">
     </section>
-
+      <TheInfo/>
+      <ThePricing />
+      <TheFooter />
   </div>
 </template>
 
@@ -100,6 +109,7 @@ const show = ref(false);
 
 .Home-Header{
     display: grid;
+    gap: 1rem;
     grid-template-columns: 1fr 1fr;
 }
 

@@ -49,9 +49,9 @@ const submit = () => {
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>
-        <h1 class="text-3xl text-center">
-            Login in to continue
-        </h1>
+            <h1 class="text-2xl font-bold text-grey-darken-3 text-center">
+                Login to continue
+            </h1>
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="email" value="Email" />

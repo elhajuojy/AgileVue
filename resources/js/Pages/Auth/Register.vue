@@ -44,6 +44,10 @@ const submit = () => {
         >
 
         <form @submit.prevent="submit">
+            <h1 class="text-2xl font-bold text-grey-darken-3 text-center">
+                Register to continue
+            </h1>
+
             <div>
                 <InputLabel for="name" value="Name" />
 
