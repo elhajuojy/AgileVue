@@ -4,6 +4,7 @@ import {reactive} from "vue";
 import {useGlobalStateStore} from "@/stores/globalState";
 import axios from "axios";
 import {useProjectStore} from "@/stores/projectStore";
+import {useForm} from "@inertiajs/vue3";
 
 const state = reactive({
     inputSearch: "",
@@ -12,29 +13,50 @@ const state = reactive({
     user_invite_active : 0,
     inputSearchUser : "",
     dialog: false,
+    menu : false,
 })
 
 const globalStore = useGlobalStateStore()
 
 const user =globalStore.user;
 const projectStore = useProjectStore()
+console.log(projectStore.users);
 
 function submitInviteUser(userid){
 
-    console.log(userid + "/" + projectStore.project.id);
+    // console.log(userid + "/" + projectStore.project.id);
+    console.log(form);
 
-    axios.post("/api/users/invite",{
-        user_id : userid,
-        project_id : projectStore.project.id
-    }).then((response)=>{
-        console.log(response)
-        state.user_invite_active = userid
-        console.log(state.user_invite_active)
-    }).catch((error)=>{
-        console.log(error)
+
+    form.post("/api/users/invite",{
+        onSuccess: (response) => {
+            console.log(response)
+            state.user_invite_active = userid
+            console.log(state.user_invite_active)
+            state.menu = false
+        },
+        onError: (error) => {
+            console.log(error)
+        }
     })
 
 }
+
+const form = useForm({
+    user_id : "",
+    project_id : projectStore.project.id,
+    role : "",
+});
+
+const filterUsers = (users) => {
+    return users.filter((user) => {
+        //do another loop to check if the user is already in the project
+        return !projectStore.users.some((userProject) => {
+            return user.id === userProject.id
+        })
+    })
+}
+
 let searchUsers = (event) => {
     setTimeout(()=>{
         axios.get('/api/users',{
@@ -44,16 +66,12 @@ let searchUsers = (event) => {
         })
             .then((response) => {
                 //bouncing the
-                state.users = response.data
+                state.users = filterUsers(response.data)
             })
             .catch((error) => {
                 console.log(error)
             })
-    },1000)
-
-
-
-
+    },400)
 
 }
 
@@ -67,7 +85,6 @@ export default {
     components: {InputLabel},
     data: () => ({
         fav: true,
-        menu: false,
         message: false,
         hints: true,
     }),
@@ -77,7 +94,7 @@ export default {
 <template>
     <div class="text-center">
         <v-menu
-            v-model="menu"
+            v-model="state.menu"
             :close-on-content-click="false"
             location="end"
         >
@@ -110,10 +127,11 @@ export default {
                                         {{ user.full_name }}
                                     </p>
                                     <button  :class="state.user_invite_active === user.id ? 'bg-green' : 'bg-blue'"  class="transition all duration-200 ease-in text-sm   rounded py-1 px-2 hover:border-gray-300"
-                                             @click="submitInviteUser(user.id)"
+                                             @click="state.user_invite_active = user.id; form.user_id= user.id"
                                     >
-                                        invite
-                                        <i class="fa-solid fa-plus"></i>
+                                        Select
+                                        <i v-if="state.user_invite_active !== user.id" class="fa-solid fa-plus"></i>
+                                        <i v-else class="fa-solid fa-check"></i>
                                     </button>
                                 </li>
                             </ul>
@@ -124,11 +142,13 @@ export default {
 
                     <v-list-item>
                         <label for="role" class="block mb-2 text-sm font-medium text-gray-900 ">Select a Role </label>
-                        <select id="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                            <option selected>Choose a Role </option>
-                            <option value="US"> Adminstrator</option>
-                            <option value="CA">Developer</option>
-                            <option value="FR"> designer </option>
+                        <select
+                            v-model="form.role"
+                            id="role" name="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                            <option disabled value="" >Choose a Role </option>
+                            <option value="Administrator"> Administrator </option>
+                            <option value="Developer">Developer</option>
+                            <option value="Designer"> Designer </option>
                         </select>
                     </v-list-item>
                 </v-list>
@@ -138,14 +158,16 @@ export default {
 
                     <v-btn
                         variant="text"
-                        @click="menu = false"
+                        @click="state.menu = false"
                     >
                         Cancel
                     </v-btn>
                     <v-btn
                         color="primary"
                         variant="tonal"
-                        @click="menu = false"
+                        type=""
+                        @click="submitInviteUser"
+
                     >
                         Add
                     </v-btn>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\IssueController;
 use App\Http\Controllers\SprintController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use App\Models\UserProject;
 use Illuminate\Http\Request;
@@ -35,15 +36,7 @@ Route::get('/users', function (Request $request) {
 });
 
 
-Route::post("/users/invite",function (Request $request){
-
-    UserProject::create([
-        "user_id" => $request->input("user_id"),
-        "project_id" => $request->input("project_id"),
-        "role" => "member"
-    ]);
-    return response()->json(["message"=>"Invitation sent successfully"]);
-});
+Route::post("/users/invite",[UserController::class,"inviteToProject"])->name("users.invite");
 
 
 
