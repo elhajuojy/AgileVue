@@ -31,6 +31,13 @@ const removeProject = ()=>{
     })
 }
 
+
+const editProject = ()=>{
+    console.log("edit project")
+    menu.value = false
+    router.visit("/projects/"+projectStore.project.id+"/edit")
+}
+
 </script>
 <script lang="ts">
 
@@ -59,16 +66,31 @@ export default {
                 Project Settings
                </button>
             </template>
+
             <v-card>
-                <v-btn
+                <button
                     @click="removeProject"
+                    class="flex items-center w-full px-4 py-2 text-sm font-medium leading-5 text-left text-red-600 rounded-lg focus:outline-none focus:bg-gray-100 transition ease-in-out duration-150"
                 >
                    <span class="text-red mr-3">
                         <i class="fa-solid fa-trash"></i>
                    </span>
                     Remove project
-                </v-btn>
+                </button>
+                <button
+                    @click="editProject"
+                    class="flex items-center w-full px-4 py-2 text-sm font-medium leading-5 text-left  rounded-lg focus:outline-none focus:bg-gray-100 transition ease-in-out duration-150"
+                >
+                   <span class="text-red mr-3">
+                        <i class="fa-solid fa-edit"></i>
+                   </span>
+                    Edit project
+                </button>
+
+
             </v-card>
+
+
 
         </v-menu>
 

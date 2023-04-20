@@ -2,7 +2,6 @@
     <div>
         <h1>Settings</h1>
         <ul>
-
         </ul>
     </div>
 </template>

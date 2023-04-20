@@ -17,6 +17,8 @@ Route::post("/projects", [ProjectController::class, 'store'])
 
 Route::get("/projects/create", [ProjectController::class, 'create'])
     ->name("projects.create");
+Route::get("/projects/{project}/edit", [ProjectController::class, 'edit'])
+    ->name("projects.edit");
 
 
 
@@ -47,3 +49,5 @@ Route::get("/projects/{project}/versions", [VersionController::class, 'versions'
     ->name("projects.versions");
 Route::post("/projects/{project}/versions", [VersionController::class, 'store'])
     ->name("projects.versions");
+
+

@@ -11,6 +11,9 @@ const data = defineProps({
     },
 })
 
+
+console.log(data.user)
+
 const projectStore = useProjectStore();
 
 const removeUserFromPorject = ()=>{
@@ -73,9 +76,18 @@ const removeUserFromPorject = ()=>{
                                         <img :src="data.user.profile_image" class="w-full">
                                     </span>
                                 </v-avatar>
+                                <v-divider class="my-3"></v-divider>
+                                <v-chip
+                                    variant="outlined"
+                                    size="small"
+                                    class="mb-3"
+                                >
+                                    {{ data.user.pivot.role }}
+                                </v-chip>
                                 <h3>
                                     {{ data.user.full_name }}
                                 </h3>
+
                                 <p class="text-caption mt-1">
                                     {{ data.user.email }}
                                 </p>
@@ -91,6 +103,7 @@ const removeUserFromPorject = ()=>{
                                 <v-btn
                                     rounded
                                     variant="text"
+
                                     size="small"
                                     @click="removeUserFromPorject"
                                 >

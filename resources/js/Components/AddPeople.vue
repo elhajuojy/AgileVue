@@ -20,12 +20,8 @@ const globalStore = useGlobalStateStore()
 
 const user =globalStore.user;
 const projectStore = useProjectStore()
-console.log(projectStore.users);
 
 function submitInviteUser(userid){
-
-    // console.log(userid + "/" + projectStore.project.id);
-    console.log(form);
 
 
     form.post("/api/users/invite",{

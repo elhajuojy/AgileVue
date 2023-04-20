@@ -22,6 +22,13 @@ class ProjectController extends Controller
     }
 
 
+    public function edit(Project $project){
+        return Inertia::render('projects/Edit', [
+            "project"=>$project
+        ]);
+    }
+
+
 
 
     public function destroy(Project $project){
