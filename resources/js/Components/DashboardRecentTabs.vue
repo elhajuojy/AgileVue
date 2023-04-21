@@ -1,9 +1,14 @@
 
 <script setup>
 
-import { ref } from 'vue'
+import {onMounted, ref, reactive} from 'vue'
+import axios from "axios";
+import AssginedToMePreviewTable from "@/Components/Project/AssginedToMePreviewTable.vue";
 
 const tab = ref('one')
+
+
+
 
 </script>
 <template>
@@ -16,26 +21,30 @@ const tab = ref('one')
         >
             <v-tab
                 value="one"
-                rounded
                 size="x-small"
 
-            >Worked on</v-tab>
+            >
+                Assigned to me
+            </v-tab>
             <v-tab value="two"
                    size="x-small"
-                   rounded
             >Viewed</v-tab>
             <v-tab value="three"
-                   rounded
                    size="x-small"
             >
-                Invited
+               Worked on
+            </v-tab>
+            <v-tab value="four"
+                   size="x-small"
+            >
+                Started
             </v-tab>
         </v-tabs>
 
         <v-card-text>
             <v-window v-model="tab">
                 <v-window-item value="one">
-                    One
+                    <AssginedToMePreviewTable />
                 </v-window-item>
 
                 <v-window-item value="two">
@@ -45,6 +54,10 @@ const tab = ref('one')
                 <v-window-item value="three">
                     Three
                 </v-window-item>
+                <v-window-item value="four">
+                    four
+                </v-window-item>
+
             </v-window>
         </v-card-text>
     </v-card>

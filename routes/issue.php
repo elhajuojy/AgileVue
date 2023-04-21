@@ -20,6 +20,8 @@ Route::patch("/api/issues/{issue}/update",[IssueController::class,"update"])->na
 Route::post("/api/issues/{project}/create",[IssueController::class,"store"])->name("createIssue");
 Route::get("/api/issues/{issue}/show",[IssueController::class,"show"])->name("showIssue");
 
+//get all issues assigned to this user
+Route::get("/api/issues/assigned",[IssueController::class,"assignedIssues"])->name("assignedIssues");
 
 //change status
 Route::patch("/api/issues/{issue}/status",[IssueController::class,"IssueChangeStatus"]);

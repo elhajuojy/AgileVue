@@ -17,6 +17,11 @@ class IssueController extends Controller
         return redirect()->back()->with("success","Deleted");
     }
 
+    public function assignedIssues(){
+        $issues = Issue::where("assigned_id",auth()->user()->id)->get();
+        return $issues;
+    }
+
 
     public function assignIssue(){
         $issue = Issue::find(request()->input("issue_id"));
