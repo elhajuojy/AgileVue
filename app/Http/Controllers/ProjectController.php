@@ -14,15 +14,35 @@ class ProjectController extends Controller
 {
     //
 
-    public function index()
+    public function index(): \Inertia\Response
     {
         return Inertia::render('projects/index', [
             "projects"=>Project::where("user_id",auth()->user()->id)->get()
         ]);
     }
 
+    public function update(Project $project): \Illuminate\Http\RedirectResponse
+    {
+        $attrs =  \request()->validate([
+            "name"=>["required", "min:3", "max:255"],
+            "description"=>["required", "min:3", "max:255"],
+            "project_key"=>["required", "min:3", "max:20"],
+            "project_lead"=>["required", "min:3", "max:255"],
+        ]);
 
-    public function edit(Project $project){
+//        if (array_key_exists("project_cover",\request()->all())){
+//            $attrs['project_cover'] = \request()->file("project_cover")->store("covers");
+//        }
+
+
+
+        $project->update($attrs);
+
+        return redirect()->back()->with("success","Project updated successfully");
+    }
+
+
+    public function edit(Project $project): \Inertia\Response{
         return Inertia::render('projects/Edit', [
             "project"=>$project
         ]);
@@ -31,13 +51,13 @@ class ProjectController extends Controller
 
 
 
-    public function destroy(Project $project){
+    public function destroy(Project $project): \Illuminate\Http\RedirectResponse{
 
         $project->delete();
         return redirect("/projects")->with("this project has been deleted successfully ");
     }
 
-    public function show(Project $project)
+    public function show(Project $project): \Inertia\Response
     {
         sleep(1);
         return Inertia::render('projects/show', [
@@ -46,7 +66,7 @@ class ProjectController extends Controller
     }
 
 
-    public function store()
+    public function store(): \Illuminate\Http\RedirectResponse
     {
        $attrs =  \request()->validate([
             "name"=>["required", "min:3", "max:255"],
@@ -66,7 +86,7 @@ class ProjectController extends Controller
         return redirect()->back()->with("success","Project added successfully");
     }
 
-    public function board(Project $project){
+    public function board(Project $project): \Inertia\Response{
         $issues = [];
 
         if (array_key_exists("sprint_id",\request()->all())){
@@ -84,7 +104,7 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function backlog(Project $project){
+    public function backlog(Project $project): \Inertia\Response{
 
         return Inertia::render('projects/Backlog', [
             "sprints"=>$project->sprints,
@@ -92,7 +112,7 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function declineInvitation(Project $project){
+    public function declineInvitation(Project $project): \Illuminate\Http\RedirectResponse{
 
             $project->users()->updateExistingPivot(auth()->user()->id,[
                 "invitation_status"=>"declined"
@@ -101,7 +121,7 @@ class ProjectController extends Controller
             return redirect()->back()->with("success","Invitation declined successfully");
     }
 
-    public function acceptInvitation(Project $project){
+    public function acceptInvitation(Project $project): \Illuminate\Http\RedirectResponse{
 
 
 
