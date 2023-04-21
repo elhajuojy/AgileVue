@@ -6,13 +6,14 @@ export const useIssueStore = defineStore('issue',{
         return {
             showIssueDetails : false,
             issue:Object,
+            attachments : Array,
+            comments : Array,
             issues : [
             ],
             todos:Array,
             doing:Array,
             done:Array,
-            backlog:[Object],
-            comments : Array
+            backlog:[Object]
         }
     },
     actions:{
@@ -26,6 +27,16 @@ export const useIssueStore = defineStore('issue',{
             const url  = `/api/issues/${ this.issue.id }/comments`
             axios.get(url).then((data)=>{
                 this.comments = data.data
+            }).catch((error)=>{
+                console.error(error)
+            })
+        },
+        fetchAttaches () {
+            // @ts-ignore
+            const url  = `/api/issues/${ this.issue.id }/attaches`
+            axios.get(url).then((data)=>{
+                this.attachments = data.data
+                console.log("attachements",this.attachments)
             }).catch((error)=>{
                 console.error(error)
             })

@@ -4,15 +4,21 @@
 import {useIssueStore} from "@/stores/issue";
 import IconButton from "@/Components/IconButton.vue";
 import {useGlobalStateStore} from "@/stores/globalState";
-import axios from "axios";
-import { router } from '@inertiajs/vue3'
+import {router, useForm,Link} from '@inertiajs/vue3'
 const issueStore = useIssueStore();
 const userStore = useGlobalStateStore();
-import {onUpdated, ref} from "vue";
+import {onUpdated, reactive, ref} from "vue";
 import {useProjectStore} from "@/stores/projectStore";
 
 let commentarea = ref("")
 const projectStore  = useProjectStore();
+
+
+
+
+const state = reactive({
+    showAttachment : true,
+});
 
 
 
@@ -75,7 +81,11 @@ const addComment = (e) => {
 
 }
 
+
+
 issueStore.fetchComments();
+issueStore.fetchAttaches();
+
 
 
 function deleteComment(id) {
@@ -107,6 +117,35 @@ const usercommentImage = (user_id )=>{
     return user[0].profile_image || ''
 }
 
+
+const form = useForm({
+    attachment : null,
+    issue_id : issueStore.issue.id ,
+})
+
+const openInputFile = () =>{
+    const input = document.querySelector('#attache');
+    input.click();
+}
+
+function addAttachment(e ){
+
+    form.attachment = e.target.files[0];
+    console.log(form );
+
+    form.post('/api/issues/add-attachment', {
+        onSuccess: () => {
+            console.log('success')
+            issueStore.fetchAttaches()
+        },
+        onError: () => {
+            console.log('error')
+        },
+        preserveScroll: true,
+    })
+
+
+}
 // i want to call the change when the issueStore.issue change but it doesn't work
 
 </script>
@@ -116,7 +155,7 @@ const usercommentImage = (user_id )=>{
     <section
         v-if="issueStore.showIssueDetails"
         class="max-h-fit ">
-        <div class=" flex mb-3 gap-2 justify-between mx-2 items-center">
+        <div class=" flex  mb-3 gap-2 justify-between mx-2 items-center">
             <div>
                 <h2 class="text-body-2">
                     Action
@@ -149,12 +188,18 @@ const usercommentImage = (user_id )=>{
                {{ issueStore.issue.title }}
             </h1>
             <div class="flex mb-3 gap-2">
-                <IconButton>
-                    <div class="flex gap-2">
+                    <div class=""
+                    @click="openInputFile"
+                    >
+                <IconButton
+                    class="flex gap-2"
+
+                >
                         <i class="fa-solid fa-paperclip"></i>
                         <p>Attach</p>
-                    </div>
+                        <input @input="addAttachment" id="attache" name="attache" class="hidden" type="file">
                 </IconButton>
+                    </div>
                 <IconButton>
                     <div class="flex gap-2">
                         <i class="fa-solid fa-link"></i>
@@ -207,6 +252,44 @@ const usercommentImage = (user_id )=>{
                         </div>
                         <input  type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 " placeholder="Select date">
                     </div>
+                </div>
+            </div>
+<!--                attachments start here  -->
+            <div>
+               <div class="flex mt-6 justify-space-between">
+
+                   <h4>
+                       <v-btn
+                           icon
+                           size="x-small"
+                           variant="text"
+                           class="cursor-pointer" @click="state.showAttachment = !state.showAttachment">
+                           <i v-if="!state.showAttachment" class="fa-duotone fa-angle-down"></i>
+                           <i v-else class="fa-duotone fa-angle-right"></i>
+                       </v-btn>
+                       Attachments
+                   </h4>
+                   <div class="cursor-pointer">
+                       <i class="fa-regular fa-ellipsis"></i>
+                       <span class="ml-3">
+                           <i class="fa-solid fa-plus"></i>
+                       </span>
+                   </div>
+               </div>
+                <div :class="state.showAttachment ? 'hidden':''" class=" flex w-full mt-6 m-auto flex-wrap  gap-2 ">
+                    <v-card v-for="attache in issueStore.attachments"  class="min-w-[70px] " key="attache.id">
+                        <a :href="'\thttp://127.0.0.1:8000/storage/'+attache.src"
+                           target="_blank"
+                        >
+                            <embed :src="'\thttp://127.0.0.1:8000/storage/'+attache.src" height="100px"  class="object-cover min-w-[100px] max-w-[250px]"/>
+                        <v-card-actions
+                            class="text-sm"
+                        >
+                            <sl-format-date month="long" day="numeric" year="numeric" :date=" attache.created_at" />
+                        </v-card-actions>
+                            </a>
+                    </v-card>
+
                 </div>
             </div>
             <div class="mt-3">

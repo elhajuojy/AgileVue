@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attachment;
 use App\Models\Comment;
 use App\Models\Issue;
 use App\Models\Project;
@@ -17,9 +18,28 @@ class IssueController extends Controller
         return redirect()->back()->with("success","Deleted");
     }
 
+
+
+    public function issueAttaches(Issue $issue){
+        return $issue->attachments;
+    }
+
+
+    public function addAttachment(): RedirectResponse{
+        $issue = Issue::find(request()->input("issue_id"));
+
+        if (request()->hasFile('attachment')) {
+            $file = request()->file('attachment')->store("attachments/{$issue->id}");
+            Attachment::create([
+                "issue_id" => $issue->id,
+                "src" => $file,
+            ]);
+        }
+        return redirect()->back()->with("success","Added");
+    }
+
     public function assignedIssues(){
-        $issues = Issue::where("assigned_id",auth()->user()->id)->get();
-        return $issues;
+        return  Issue::where("assigned_id",auth()->user()->id)->get();
     }
 
 

@@ -23,5 +23,8 @@ Route::get("/api/issues/{issue}/show",[IssueController::class,"show"])->name("sh
 //get all issues assigned to this user
 Route::get("/api/issues/assigned",[IssueController::class,"assignedIssues"])->name("assignedIssues");
 
+
+Route::post("/api/issues/add-attachment",[IssueController::class,"addAttachment"])->name("addAttachment");
+Route::get("/api/issues/{issue}/attaches",[IssueController::class,"issueAttaches"])->name("issueAttaches");
 //change status
 Route::patch("/api/issues/{issue}/status",[IssueController::class,"IssueChangeStatus"]);
