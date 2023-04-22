@@ -1,6 +1,6 @@
 
 <script lang="ts" setup>
-import {Head, Link} from "@inertiajs/vue3";
+import {Head, Link, router} from "@inertiajs/vue3";
 import TheProjectAside from "@/Components/TheProjectAside.vue";
 import {defineProps, reactive, ref} from "vue";
 import draggable from "vuedraggable";
@@ -49,7 +49,12 @@ const state = reactive({
 })
 
 
+function updateCardTitle(){
+    console.log("update card title")
+    // i want to force this component to rerender
+    console.log("update card title 2")
 
+}
 
 </script>
 
@@ -65,6 +70,7 @@ export default {
     layout: AuthenticatedLayout,
 
 }
+
 
 
 </script>
@@ -87,7 +93,7 @@ export default {
                             <BacklogCreateCard  />
                         </div>
                         <div class="w-full ">
-                            <IssueDetailsCard  v-if="issueStore.showIssueDetails"  />
+                            <IssueDetailsCard @update-title="updateCardTitle"  v-if="issueStore.showIssueDetails"  />
                         </div>
                     </section>
 

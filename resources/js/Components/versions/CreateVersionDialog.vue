@@ -9,6 +9,7 @@ const projectStore = useProjectStore()
 
 
 const createVersion = (e:any) => {
+    //@ts-ignore
     router.visit(`/projects/${projectStore.project?.id}/versions`, {
         method: 'post',
         data: new FormData(e.target),

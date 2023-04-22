@@ -13,12 +13,13 @@ import contenteditable from 'vue-contenteditable'; // Not needed it registered g
 let commentarea = ref("")
 const projectStore  = useProjectStore();
 
+const emit = defineEmits(["updateTitle"]);
 
 
 
 const state = reactive({
     showAttachment : true,
-    title : issueStore.issue.title,
+    title : '',
     description : "",
     priority : "",
     status : "",
@@ -28,6 +29,8 @@ const state = reactive({
     sprint : "",
     comments : [],
 });
+
+state.title = issueStore.issue.title;
 
 
 
@@ -165,7 +168,7 @@ const updatedTitleForm = useForm({
 });
 const enterPressed = (e) => {
 
-    console.log(e)
+        console.log(e)
         updatedTitleForm.title = e
         console.log("enter pressed")
         updatedTitleForm.post("/issues/update-title",{
@@ -177,6 +180,10 @@ const enterPressed = (e) => {
             },
             preserveScroll: true,
         })
+
+        emit('updateTitle');
+
+
 
 
 }
@@ -217,7 +224,7 @@ const enterPressed = (e) => {
 
         </div>
         <div class="">
-            <contenteditable tag="h1" class="text-3xl mb-3 " :contenteditable="true" v-model="state.title" :no-nl="true" :no-html="true" @returned="enterPressed" />
+            <contenteditable tag="h1" class="text-3xl mb-3 " :contenteditable="true" v-model="issueStore.issue.title" :no-nl="true" :no-html="true" @returned="enterPressed" />
             <div v-if="updatedTitleForm.errors.title" class="text-red-500 mb-3 mt-1 text-sm">
                 {{ updatedTitleForm.errors.title }}
             </div>

@@ -24,6 +24,7 @@ const removeProject = ()=>{
         if (result.isConfirmed) {
            //seend request to delete this project
             //i need just the project Id
+            // @ts-ignore
             router.visit("/projects/"+projectStore.project.id,{
                 method:"delete"
             })
@@ -35,6 +36,7 @@ const removeProject = ()=>{
 const editProject = ()=>{
     console.log("edit project")
     menu.value = false
+    // @ts-ignore
     router.visit("/projects/"+projectStore.project.id+"/edit")
 }
 
