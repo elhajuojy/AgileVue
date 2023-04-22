@@ -94,6 +94,7 @@ const state = reactive({
                            </v-btn>
                             <p>
                                 {{ props.sprint.project_key }}
+
                             </p>
                             <div class="sprint-action flex">
                                 <i class="fa-regular fa-pen"></i>
