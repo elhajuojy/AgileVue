@@ -19,6 +19,18 @@ class IssueController extends Controller
     }
 
 
+    public function updateTitle(){
+       $attrs = request()->validate([
+            "title"=>"required",
+            "issue_id"=>"required"
+        ]);
+        $issue = Issue::find($attrs["issue_id"]);
+        $issue->title = $attrs["title"];
+        $issue->save();
+        return redirect()->back()->with("success","Updated");
+    }
+
+
 
     public function issueAttaches(Issue $issue){
         return $issue->attachments;

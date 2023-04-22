@@ -15,6 +15,7 @@ const props = defineProps({
 const issueStore = useIssueStore();
 const projectStore = useProjectStore()
 
+
 let assigneeUser =projectStore.users.filter((user)=>{
     //@ts-ignore
     return user.id == issueStore.issue.assigned_id
@@ -25,6 +26,7 @@ const issueClick  = ()=>{
     //@ts-ignore
     issueStore.issue=props.issue
     issueStore.fetchComments()
+    issueStore.fetchAttaches();
 }
 </script>
 

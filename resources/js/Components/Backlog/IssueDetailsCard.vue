@@ -9,7 +9,7 @@ const issueStore = useIssueStore();
 const userStore = useGlobalStateStore();
 import {onUpdated, reactive, ref} from "vue";
 import {useProjectStore} from "@/stores/projectStore";
-
+import contenteditable from 'vue-contenteditable'; // Not needed it registered globally
 let commentarea = ref("")
 const projectStore  = useProjectStore();
 
@@ -18,6 +18,15 @@ const projectStore  = useProjectStore();
 
 const state = reactive({
     showAttachment : true,
+    title : issueStore.issue.title,
+    description : "",
+    priority : "",
+    status : "",
+    type : "",
+    assignee : "",
+    reporter : "",
+    sprint : "",
+    comments : [],
 });
 
 
@@ -146,7 +155,31 @@ function addAttachment(e ){
 
 
 }
-// i want to call the change when the issueStore.issue change but it doesn't work
+
+
+
+const updatedTitleForm = useForm({
+    title : state.title,
+    issue_id : issueStore.issue.id
+
+});
+const enterPressed = (e) => {
+
+    console.log(e)
+        updatedTitleForm.title = e
+        console.log("enter pressed")
+        updatedTitleForm.post("/issues/update-title",{
+            onSuccess: () => {
+                console.log('success')
+            },
+            onError: () => {
+                console.log('error')
+            },
+            preserveScroll: true,
+        })
+
+
+}
 
 </script>
 
@@ -184,9 +217,10 @@ function addAttachment(e ){
 
         </div>
         <div class="">
-            <h1 contentEditable="true" class="text-3xl mb-3 ">
-               {{ issueStore.issue.title }}
-            </h1>
+            <contenteditable tag="h1" class="text-3xl mb-3 " :contenteditable="true" v-model="state.title" :no-nl="true" :no-html="true" @returned="enterPressed" />
+            <div v-if="updatedTitleForm.errors.title" class="text-red-500 mb-3 mt-1 text-sm">
+                {{ updatedTitleForm.errors.title }}
+            </div>
             <div class="flex mb-3 gap-2">
                     <div class=""
                     @click="openInputFile"

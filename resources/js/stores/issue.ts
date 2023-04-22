@@ -8,8 +8,7 @@ export const useIssueStore = defineStore('issue',{
             issue:Object,
             attachments : Array,
             comments : Array,
-            issues : [
-            ],
+            issues : [],
             todos:Array,
             doing:Array,
             done:Array,
@@ -31,12 +30,21 @@ export const useIssueStore = defineStore('issue',{
                 console.error(error)
             })
         },
+         fetchSprintIssues(id:number){
+            //@ts-ignore
+            axios.get("/api/sprints/" + id+ "/issues").then((response)=>{
+                this.issues = response.data
+            })
+
+        },
         fetchAttaches () {
+            // @ts-ignore
+            console.log("fetchAttaches",this.issue.id)
             // @ts-ignore
             const url  = `/api/issues/${ this.issue.id }/attaches`
             axios.get(url).then((data)=>{
                 this.attachments = data.data
-                console.log("attachements",this.attachments)
+                console.log("attachements",data.data)
             }).catch((error)=>{
                 console.error(error)
             })

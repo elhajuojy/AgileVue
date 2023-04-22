@@ -8,23 +8,19 @@ use Illuminate\Support\Facades\Route;
 Route::post("/api/issues/add-comment",[IssueController::class,"addComment"])->name("addComment");
 Route::get("/api/issues/{issue}/comments",[IssueController::class,"issueComments"])->name("issueComments");
 Route::delete("/api/issues/{issue}/comments/{comment}",[IssueController::class,"deleteComment"])->name("deleteComment");
-///api/issues/remove-comment/
 Route::delete("/api/issues/remove-comment/{comment}",[IssueController::class,"deleteComment"])->name("deleteComment");
 
-//http://127.0.0.1:8000/api/issues/assigne-issue
-Route::patch("/api/issues/assign-issue" , [IssueController::class,"assignIssue"])->name("assignIssue");
 
+Route::patch("/api/issues/assign-issue" , [IssueController::class,"assignIssue"])->name("assignIssue");
 Route::delete("/api/issues/{issue}/delete",[IssueController::class,"destroy"])->name("deleteIssue");
 Route::get("/api/issues/{issue}/edit",[IssueController::class,"edit"])->name("editIssue");
 Route::patch("/api/issues/{issue}/update",[IssueController::class,"update"])->name("updateIssue");
 Route::post("/api/issues/{project}/create",[IssueController::class,"store"])->name("createIssue");
 Route::get("/api/issues/{issue}/show",[IssueController::class,"show"])->name("showIssue");
-
-//get all issues assigned to this user
 Route::get("/api/issues/assigned",[IssueController::class,"assignedIssues"])->name("assignedIssues");
-
-
 Route::post("/api/issues/add-attachment",[IssueController::class,"addAttachment"])->name("addAttachment");
 Route::get("/api/issues/{issue}/attaches",[IssueController::class,"issueAttaches"])->name("issueAttaches");
 //change status
 Route::patch("/api/issues/{issue}/status",[IssueController::class,"IssueChangeStatus"]);
+
+Route::post("/issues/update-title",[IssueController::class,"updateTitle"])->name("updateTitle");

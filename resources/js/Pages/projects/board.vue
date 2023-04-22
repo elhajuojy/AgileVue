@@ -6,12 +6,8 @@ import Tasks from "../../Components/board/Tasks.vue";
 import {Head, router} from '@inertiajs/vue3';
 import  {ref } from "vue";
 import draggable from "vuedraggable";
-import {reactive} from "vue";
 import {useIssueStore} from "@/stores/issue";
 import {useProjectStore} from "@/stores/projectStore";
-import sprints from "@/Pages/projects/Sprints.vue";
-import axios from "axios";
-
 
 
 const issueStore = useIssueStore();
@@ -39,6 +35,7 @@ projectStore.project = props.project
 const changeTodo = (e:any)=>{
     console.log(e.target.value)
     // router.visit("")
+    //@ts-ignore
     router.visit(`/projects/${props.project.id}/board`,{
         method:"get",
         data:{
@@ -48,7 +45,6 @@ const changeTodo = (e:any)=>{
     });
 
     console.log(props.issues)
-
 
 }
 
@@ -88,9 +84,11 @@ export default {
                     <select
                         @change="changeTodo"
                         id="sprint" class="bg-gray-50 border my-3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block min-w-[300px] p-2.5 ">
-                        <option selected disabled>Choose a Sprint </option>
+                        <option selected  disabled>Choose a Sprint </option>
                         <option
-                            v-for="sprint in props.sprints"  :key="sprint.id" :value ="sprint.id">
+                            v-for="sprint in props.sprints"  :key="sprint.id" :value="sprint.id"
+                            :selected="!sprint.id === $page.props.sprint_id"
+                        >
                             {{
                                 sprint.name
                             }}
